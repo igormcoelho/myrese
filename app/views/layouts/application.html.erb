@@ -7,8 +7,25 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <center>
+    <h2>Myrese -- A distributed research management system</h2>
+  </center>
 
-<%= yield %>
+  <%= link_to "config visibility", visibilities_path %>
+  <%= link_to "config group", groups_path %>
+  
+  <hr>
+  
+  <% flash.each do |name, msg| %>
+    <%= content_tag(:div, msg, class: "alert alert-info") %>
+  <% end %>
 
+  <%= yield %>
+
+  <hr>
+
+  <center>
+    Copyleft 2016 - AGPLv3 - <%= link_to "Contribute", "https://github.com/igormcoelho/myrese", :target => '_blank' %>
+  </center>
 </body>
 </html>
