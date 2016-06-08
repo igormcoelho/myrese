@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Publication:</strong>
+  <%= @pauthor.publication %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @pauthor.user %>
+</p>
+
+<%= link_to 'Edit', edit_pauthor_path(@pauthor) %> |
+<%= link_to 'Back', pauthors_path %>

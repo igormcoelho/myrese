@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Gfiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Size</th>
+      <th>Infohash</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @gfiles.each do |gfile| %>
+      <tr>
+        <td><%= gfile.name %></td>
+        <td><%= gfile.description %></td>
+        <td><%= gfile.size %></td>
+        <td><%= gfile.infohash %></td>
+        <td><%= link_to 'Show', gfile %></td>
+        <td><%= link_to 'Edit', edit_gfile_path(gfile) %></td>
+        <td><%= link_to 'Destroy', gfile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Gfile', new_gfile_path %>

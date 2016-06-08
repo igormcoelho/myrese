@@ -1,0 +1,25 @@
+<%= form_for(@inforelation) do |f| %>
+  <% if @inforelation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@inforelation.errors.count, "error") %> prohibited this inforelation from being saved:</h2>
+
+      <ul>
+      <% @inforelation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :infohash1 %><br>
+    <%= f.number_field :infohash1 %>
+  </div>
+  <div class="field">
+    <%= f.label :infohash2 %><br>
+    <%= f.number_field :infohash2 %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

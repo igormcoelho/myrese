@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  infohash1: 1
+  infohash2: 1
+
+two:
+  infohash1: 1
+  infohash2: 1

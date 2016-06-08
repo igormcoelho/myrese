@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  resources :instances
+  resources :tags
+  resources :inforelations
+  resources :pkeywords
+  resources :gfiles
+  resources :members
+  resources :pauthors
+  resources :publications
+  resources :projects
+  resources :infohashes
   resources :groups
   devise_for :users
   root to: "mainpage#index"

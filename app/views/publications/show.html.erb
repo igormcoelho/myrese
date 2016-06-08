@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ptype:</strong>
+  <%= @publication.ptype %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @publication.title %>
+</p>
+
+<p>
+  <strong>Journal:</strong>
+  <%= @publication.journal %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @publication.year %>
+</p>
+
+<p>
+  <strong>Doi:</strong>
+  <%= @publication.doi %>
+</p>
+
+<p>
+  <strong>Infohash:</strong>
+  <%= @publication.infohash %>
+</p>
+
+<%= link_to 'Edit', edit_publication_path(@publication) %> |
+<%= link_to 'Back', publications_path %>

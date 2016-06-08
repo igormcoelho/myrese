@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @gfile.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @gfile.description %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @gfile.size %>
+</p>
+
+<p>
+  <strong>Infohash:</strong>
+  <%= @gfile.infohash %>
+</p>
+
+<%= link_to 'Edit', edit_gfile_path(@gfile) %> |
+<%= link_to 'Back', gfiles_path %>

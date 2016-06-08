@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Publication:</strong>
+  <%= @pkeyword.publication %>
+</p>
+
+<p>
+  <strong>Infohash:</strong>
+  <%= @pkeyword.infohash %>
+</p>
+
+<p>
+  <strong>Keyword:</strong>
+  <%= @pkeyword.keyword %>
+</p>
+
+<%= link_to 'Edit', edit_pkeyword_path(@pkeyword) %> |
+<%= link_to 'Back', pkeywords_path %>

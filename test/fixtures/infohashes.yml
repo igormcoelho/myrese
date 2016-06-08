@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  visibility_id: 
+  user_id: 
+  group_id: 
+
+two:
+  code: MyString
+  visibility_id: 
+  user_id: 
+  group_id: 

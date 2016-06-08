@@ -1,3 +1,3 @@
 class Visibility < ActiveRecord::Base
-    self.inheritance_column = nil
+    self.inheritance_column = nil # because of field 'type', which should be reserved...
 end

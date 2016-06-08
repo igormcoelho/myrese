@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @instance.name %>
+</p>
+
+<p>
+  <strong>Pubkey:</strong>
+  <%= @instance.pubKey %>
+</p>
+
+<p>
+  <strong>Pubkeyexpiration:</strong>
+  <%= @instance.pubKeyExpiration %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @instance.address %>
+</p>
+
+<p>
+  <strong>Allowautomaticpull:</strong>
+  <%= @instance.allowAutomaticPull %>
+</p>
+
+<p>
+  <strong>Allowpull:</strong>
+  <%= @instance.allowPull %>
+</p>
+
+<%= link_to 'Edit', edit_instance_path(@instance) %> |
+<%= link_to 'Back', instances_path %>

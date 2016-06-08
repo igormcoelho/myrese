@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Inforelations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Infohash1</th>
+      <th>Infohash2</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inforelations.each do |inforelation| %>
+      <tr>
+        <td><%= inforelation.infohash1 %></td>
+        <td><%= inforelation.infohash2 %></td>
+        <td><%= link_to 'Show', inforelation %></td>
+        <td><%= link_to 'Edit', edit_inforelation_path(inforelation) %></td>
+        <td><%= link_to 'Destroy', inforelation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Inforelation', new_inforelation_path %>

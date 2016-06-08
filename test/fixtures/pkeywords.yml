@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  publication_id: 
+  infohash_id: 
+  keyword: MyString
+
+two:
+  publication_id: 
+  infohash_id: 
+  keyword: MyString

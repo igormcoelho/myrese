@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  pubKey: MyString
+  pubKeyExpiration: 2016-06-08 02:18:59
+  address: MyString
+  allowAutomaticPull: false
+  allowPull: false
+
+two:
+  name: MyString
+  pubKey: MyString
+  pubKeyExpiration: 2016-06-08 02:18:59
+  address: MyString
+  allowAutomaticPull: false
+  allowPull: false

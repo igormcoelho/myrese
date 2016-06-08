@@ -1,0 +1,33 @@
+<%= form_for(@gfile) do |f| %>
+  <% if @gfile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gfile.errors.count, "error") %> prohibited this gfile from being saved:</h2>
+
+      <ul>
+      <% @gfile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :size %><br>
+    <%= f.number_field :size %>
+  </div>
+  <div class="field">
+    <%= f.label :infohash_id %><br>
+    <%= f.text_field :infohash_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

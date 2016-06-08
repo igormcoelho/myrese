@@ -1,0 +1,41 @@
+<%= form_for(@instance) do |f| %>
+  <% if @instance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@instance.errors.count, "error") %> prohibited this instance from being saved:</h2>
+
+      <ul>
+      <% @instance.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :pubKey %><br>
+    <%= f.text_field :pubKey %>
+  </div>
+  <div class="field">
+    <%= f.label :pubKeyExpiration %><br>
+    <%= f.datetime_select :pubKeyExpiration %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :allowAutomaticPull %><br>
+    <%= f.check_box :allowAutomaticPull %>
+  </div>
+  <div class="field">
+    <%= f.label :allowPull %><br>
+    <%= f.check_box :allowPull %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

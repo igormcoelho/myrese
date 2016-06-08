@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ptype: 1
+  title: MyString
+  journal: MyString
+  year: 1
+  doi: MyString
+  infohash_id: 
+
+two:
+  ptype: 1
+  title: MyString
+  journal: MyString
+  year: 1
+  doi: MyString
+  infohash_id: 
