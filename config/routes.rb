@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :htypes
   resources :instances
   resources :tags
   resources :inforelations

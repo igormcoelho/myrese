@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608023850) do
+ActiveRecord::Schema.define(version: 20160612194721) do
 
   create_table "gfiles", force: :cascade do |t|
     t.string   "name"
@@ -31,17 +31,24 @@ ActiveRecord::Schema.define(version: 20160608023850) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "htypes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "infohashes", force: :cascade do |t|
     t.string   "code"
     t.integer  "visibility_id"
     t.integer  "user_id"
     t.integer  "group_id"
+    t.integer  "htype_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.integer  "htype"
   end
 
   add_index "infohashes", ["group_id"], name: "index_infohashes_on_group_id"
+  add_index "infohashes", ["htype_id"], name: "index_infohashes_on_htype_id"
   add_index "infohashes", ["user_id"], name: "index_infohashes_on_user_id"
   add_index "infohashes", ["visibility_id"], name: "index_infohashes_on_visibility_id"
 
@@ -110,10 +117,10 @@ ActiveRecord::Schema.define(version: 20160608023850) do
     t.string   "journal"
     t.integer  "year"
     t.string   "doi"
+    t.text     "other"
     t.integer  "infohash_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.text     "other"
   end
 
   add_index "publications", ["infohash_id"], name: "index_publications_on_infohash_id"

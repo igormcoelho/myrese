@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Htypes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @htypes.each do |htype| %>
+      <tr>
+        <td><%= htype.name %></td>
+        <td><%= link_to 'Show', htype %></td>
+        <td><%= link_to 'Edit', edit_htype_path(htype) %></td>
+        <td><%= link_to 'Destroy', htype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Htype', new_htype_path %>

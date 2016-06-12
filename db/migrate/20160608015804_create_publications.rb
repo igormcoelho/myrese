@@ -6,6 +6,7 @@ class CreatePublications < ActiveRecord::Migration
       t.string :journal
       t.integer :year
       t.string :doi
+      t.text :other
       t.references :infohash, index: true, foreign_key: true
 
       t.timestamps null: false
