@@ -1,4 +1,7 @@
 class Pkeyword < ActiveRecord::Base
   belongs_to :publication
-  belongs_to :infohash
+  has_one :infohash
+  validates_presence_of :infohash
+  validates_presence_of :publication
+  validates_presence_of :keyword
 end

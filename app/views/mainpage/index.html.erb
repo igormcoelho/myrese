@@ -2,3 +2,32 @@
 
 <h1>Welcome!</h1>
 
+<% if user_signed_in? %>
+   Welcome <% c = User.find(current_user) %>
+   <%= c.email %><br>
+   <b>Publications:</b><br>
+   <% #i = Infohash.where(:htype => 1, :user_id => current_user.id) #look for publications %>
+   <% #pub = Publication.joins(:infohash).where("infohashes.id = publications.infohash_id") %>
+   <% pub = Publication.joins(:infohash).where("infohashes.user_id" => current_user.id) %>
+   
+    <% pub.each do |p| %>
+        <%= "#" + p.id.to_s + " t=" + p.ptype.to_s %>
+        <%= p.title %><br>
+    <% end %>
+
+   <b>Files:</b><br>
+   <% #i = Infohash.where(:htype => 2, :user_id => current_user.id) #look for files %>
+   <% #fil = Gfile.select("gfiles.infohash_id, infohashes.id").include(:infohash).where("infohashes.id = gfiles.infohash_id") %>
+   <% #fil = Infohash.joins(:gfiles).where(gfiles: {size: 10})  %>
+   <% fil = Gfile.joins(:infohash).where("infohashes.user_id" => current_user.id) %>
+   
+    <% fil.each do |f| %>
+        <%= "#" + f.id.to_s %>
+        <%= f.name %><br>
+    <% end %>
+    
+    
+<% else %>
+   <%= "No authenticated user!" %>
+<% end %>
+

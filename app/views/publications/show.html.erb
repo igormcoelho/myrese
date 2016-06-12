@@ -27,7 +27,7 @@
 
 <p>
   <strong>Infohash:</strong>
-  <%= @publication.infohash %>
+  <%= Infohash.find(@publication.infohash_id).code %>
 </p>
 
 <%= link_to 'Edit', edit_publication_path(@publication) %> |

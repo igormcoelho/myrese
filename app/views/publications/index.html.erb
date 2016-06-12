@@ -23,7 +23,7 @@
         <td><%= publication.journal %></td>
         <td><%= publication.year %></td>
         <td><%= publication.doi %></td>
-        <td><%= publication.infohash %></td>
+        <td><%= Infohash.find(publication.infohash_id).code %> </td>
         <td><%= link_to 'Show', publication %></td>
         <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
         <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>

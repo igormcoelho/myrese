@@ -17,9 +17,9 @@
     <% @infohashes.each do |infohash| %>
       <tr>
         <td><%= infohash.code %></td>
-        <td><%= infohash.visibility %></td>
-        <td><%= infohash.user %></td>
-        <td><%= infohash.group %></td>
+        <td><%= infohash.visibility.type %></td>
+        <td><%= infohash.user.email %></td>
+        <td><%= infohash.group.name %></td>
         <td><%= link_to 'Show', infohash %></td>
         <td><%= link_to 'Edit', edit_infohash_path(infohash) %></td>
         <td><%= link_to 'Destroy', infohash, method: :delete, data: { confirm: 'Are you sure?' } %></td>

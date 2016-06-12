@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608022307) do
+ActiveRecord::Schema.define(version: 20160608023850) do
 
   create_table "gfiles", force: :cascade do |t|
     t.string   "name"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20160608022307) do
     t.integer  "group_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "htype"
   end
 
   add_index "infohashes", ["group_id"], name: "index_infohashes_on_group_id"
