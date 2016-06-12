@@ -5,11 +5,5 @@ class CreateHtypes < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    
-    Htype.create :name => "Publication"
-    Htype.create :name => "Gfile"
-    Htype.create :name => "Pkeyword"
-    Htype.create :name => "Tag"
-    Htype.create :name => "Project"
   end
 end

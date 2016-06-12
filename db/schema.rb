@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160612194721) do
+ActiveRecord::Schema.define(version: 20160612224805) do
 
   create_table "gfiles", force: :cascade do |t|
     t.string   "name"
@@ -53,10 +53,10 @@ ActiveRecord::Schema.define(version: 20160612194721) do
   add_index "infohashes", ["visibility_id"], name: "index_infohashes_on_visibility_id"
 
   create_table "inforelations", force: :cascade do |t|
-    t.integer  "infohash1"
-    t.integer  "infohash2"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "infohash1_id"
+    t.integer  "infohash2_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "instances", force: :cascade do |t|
@@ -79,6 +79,16 @@ ActiveRecord::Schema.define(version: 20160612194721) do
 
   add_index "members", ["infohash_id"], name: "index_members_on_infohash_id"
   add_index "members", ["user_id"], name: "index_members_on_user_id"
+
+  create_table "news", force: :cascade do |t|
+    t.integer  "infohash_id"
+    t.string   "subject"
+    t.text     "message"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "news", ["infohash_id"], name: "index_news_on_infohash_id"
 
   create_table "pauthors", force: :cascade do |t|
     t.integer  "publication_id"
@@ -126,7 +136,6 @@ ActiveRecord::Schema.define(version: 20160612194721) do
   add_index "publications", ["infohash_id"], name: "index_publications_on_infohash_id"
 
   create_table "tags", force: :cascade do |t|
-    t.integer  "user_id"
     t.string   "tagname"
     t.integer  "infohash_id"
     t.datetime "created_at",  null: false
@@ -134,7 +143,6 @@ ActiveRecord::Schema.define(version: 20160612194721) do
   end
 
   add_index "tags", ["infohash_id"], name: "index_tags_on_infohash_id"
-  add_index "tags", ["user_id"], name: "index_tags_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
