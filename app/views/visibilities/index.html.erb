@@ -13,7 +13,7 @@
   <tbody>
     <% @visibilities.each do |visibility| %>
       <tr>
-        <td><%= visibility.type %></td>
+        <td><%= visibility.vtype %></td>
         <td><%= link_to 'Show', visibility %></td>
         <td><%= link_to 'Edit', edit_visibility_path(visibility) %></td>
         <td><%= link_to 'Destroy', visibility, method: :delete, data: { confirm: 'Are you sure?' } %></td>
