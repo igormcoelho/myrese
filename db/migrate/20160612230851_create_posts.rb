@@ -1,6 +1,6 @@
-class CreateNews < ActiveRecord::Migration
+class CreatePosts < ActiveRecord::Migration
   def change
-    create_table :news do |t|
+    create_table :posts do |t|
       t.references :infohash, index: true, foreign_key: true
       t.string :subject
       t.text :message

@@ -1,10 +1,10 @@
-<%= form_for(@news) do |f| %>
-  <% if @news.errors.any? %>
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@news.errors.count, "error") %> prohibited this news from being saved:</h2>
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
       <ul>
-      <% @news.errors.full_messages.each do |message| %>
+      <% @post.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
+    <%= f.label :infohash_id %><br>
+    <%= f.text_field :infohash_id %>
   </div>
   <div class="field">
     <%= f.label :subject %><br>

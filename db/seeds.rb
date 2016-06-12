@@ -17,4 +17,5 @@ Htype.create :name => "Gfile"
 Htype.create :name => "Pkeyword"
 Htype.create :name => "Tag"
 Htype.create :name => "Project"
+Htype.create :name => "Post"
 
