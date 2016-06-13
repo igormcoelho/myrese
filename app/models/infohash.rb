@@ -5,7 +5,7 @@ class Infohash < ActiveRecord::Base
   
   has_many :members
   
-  validates_presence_of :htype
+  validates_presence_of :htype_id
   
   has_one :publication  # one or zero: creates Publication.infohash_id
   has_one :gfile        # one or zero: creates Gfile.infohash_id

@@ -14,7 +14,11 @@ class PublicationsController < ApplicationController
 
   # GET /publications/new
   def new
+    #@infohash    = Infohash.new
+    #@infohash.visibility_id = 1
+    #@infohash.user = current_user
     @publication = Publication.new
+    #@publication.infohash = @infohash
   end
 
   # GET /publications/1/edit
@@ -25,6 +29,14 @@ class PublicationsController < ApplicationController
   # POST /publications.json
   def create
     @publication = Publication.new(publication_params)
+    @infohash    = Infohash.new
+    @infohash.visibility_id = 1      # default is private! receive as parameter...
+    @infohash.user = current_user
+    @infohash.group_id = 1
+    @infohash.htype_id = 1           # PUBLICATION
+    @infohash.code     = "pub" + Publication.count.to_s
+    @infohash.save
+    @publication.infohash = @infohash
 
     respond_to do |format|
       if @publication.save
@@ -69,6 +81,6 @@ class PublicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def publication_params
-      params.require(:publication).permit(:ptype, :title, :journal, :year, :doi, :infohash_id)
+      params.require(:publication).permit(:ptype, :title, :journal, :year, :doi)
     end
 end
