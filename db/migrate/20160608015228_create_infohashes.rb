@@ -1,7 +1,10 @@
 class CreateInfohashes < ActiveRecord::Migration
   def change
     create_table :infohashes do |t|
-      t.string :code
+      t.string :code        # resource name, if empty it is 'htype.name + id', ex: pub1, file1005, ..
+      t.string :title       # general title
+      t.text   :description # general description
+      
       t.references :visibility, index: true, foreign_key: true
       t.references :user, index: true, foreign_key: true
       t.references :group, index: true, foreign_key: true

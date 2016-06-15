@@ -1,8 +1,9 @@
 class CreateTags < ActiveRecord::Migration
   def change
     create_table :tags do |t|
-      t.string :tagname
-      t.references :infohash, index: true, foreign_key: true
+      t.references :user, index:true, foreign_key: true       # owner
+      t.string :tagname                                       # information
+      t.references :infohash, index: true, foreign_key: true  # resource
 
       t.timestamps null: false
     end

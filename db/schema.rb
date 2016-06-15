@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160612230851) do
+ActiveRecord::Schema.define(version: 20160615233622) do
 
   create_table "gfiles", force: :cascade do |t|
     t.string   "name"
-    t.text     "description"
     t.integer  "size"
     t.integer  "infohash_id"
     t.datetime "created_at",  null: false
@@ -26,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160612230851) do
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
+    t.string   "title"
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -33,12 +33,15 @@ ActiveRecord::Schema.define(version: 20160612230851) do
 
   create_table "htypes", force: :cascade do |t|
     t.string   "name"
+    t.string   "shortname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "infohashes", force: :cascade do |t|
     t.string   "code"
+    t.string   "title"
+    t.text     "description"
     t.integer  "visibility_id"
     t.integer  "user_id"
     t.integer  "group_id"
@@ -112,8 +115,9 @@ ActiveRecord::Schema.define(version: 20160612230851) do
   add_index "posts", ["infohash_id"], name: "index_posts_on_infohash_id"
 
   create_table "projects", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
+    t.string   "name"
+    t.text     "abstract"
+    t.string   "keywords"
     t.integer  "infohash_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -122,11 +126,13 @@ ActiveRecord::Schema.define(version: 20160612230851) do
   add_index "projects", ["infohash_id"], name: "index_projects_on_infohash_id"
 
   create_table "publications", force: :cascade do |t|
-    t.integer  "ptype"
+    t.integer  "pubtype_id"
     t.string   "title"
     t.string   "journal"
     t.integer  "year"
     t.string   "doi"
+    t.string   "authors"
+    t.string   "keywords"
     t.text     "other"
     t.integer  "infohash_id"
     t.datetime "created_at",  null: false
@@ -134,8 +140,25 @@ ActiveRecord::Schema.define(version: 20160612230851) do
   end
 
   add_index "publications", ["infohash_id"], name: "index_publications_on_infohash_id"
+  add_index "publications", ["pubtype_id"], name: "index_publications_on_pubtype_id"
+
+  create_table "pubtypes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reminders", force: :cascade do |t|
+    t.datetime "dtime"
+    t.integer  "infohash_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "reminders", ["infohash_id"], name: "index_reminders_on_infohash_id"
 
   create_table "tags", force: :cascade do |t|
+    t.integer  "user_id"
     t.string   "tagname"
     t.integer  "infohash_id"
     t.datetime "created_at",  null: false
@@ -143,6 +166,7 @@ ActiveRecord::Schema.define(version: 20160612230851) do
   end
 
   add_index "tags", ["infohash_id"], name: "index_tags_on_infohash_id"
+  add_index "tags", ["user_id"], name: "index_tags_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

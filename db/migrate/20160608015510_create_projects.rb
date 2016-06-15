@@ -1,8 +1,10 @@
 class CreateProjects < ActiveRecord::Migration
   def change
     create_table :projects do |t|
-      t.string :title
-      t.text :description
+      t.string :name
+      t.text   :abstract
+      t.string :keywords    # all keywords together
+      
       t.references :infohash, index: true, foreign_key: true
 
       t.timestamps null: false

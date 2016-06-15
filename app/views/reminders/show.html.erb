@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Dtime:</strong>
+  <%= @reminder.dtime %>
+</p>
+
+<p>
+  <strong>Infohash:</strong>
+  <%= @reminder.infohash %>
+</p>
+
+<%= link_to 'Edit', edit_reminder_path(@reminder) %> |
+<%= link_to 'Back', reminders_path %>

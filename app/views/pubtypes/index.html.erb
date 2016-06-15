@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Pubtypes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pubtypes.each do |pubtype| %>
+      <tr>
+        <td><%= pubtype.name %></td>
+        <td><%= link_to 'Show', pubtype %></td>
+        <td><%= link_to 'Edit', edit_pubtype_path(pubtype) %></td>
+        <td><%= link_to 'Destroy', pubtype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pubtype', new_pubtype_path %>

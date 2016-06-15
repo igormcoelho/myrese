@@ -5,14 +5,16 @@ class Infohash < ActiveRecord::Base
   
   has_many :members
   
+  validates_presence_of :title
+  validates_presence_of :description
+  
   validates_presence_of :htype_id
   
   has_one :publication  # one or zero: creates Publication.infohash_id
   has_one :gfile        # one or zero: creates Gfile.infohash_id
-  has_one :pkeyword     # one or zero: creates Pkeyword.infohash_id
-  has_one :tag          # one or zero: creates Tag.infohash_id
   has_one :project      # one or zero: creates Project.infohash_id
   has_one :post         # one or zero: creates Post.infohash_id
+  has_one :reminder     # one or zero: creates Reminder.infohash_id
   
   validates_presence_of :visibility
   validates_presence_of :user

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :pubtypes
+  resources :reminders
   resources :posts
   resources :news
   resources :htypes
