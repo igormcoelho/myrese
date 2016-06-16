@@ -1,11 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Publications</h1>
+<h1>Publications</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Ptype</th>
+      <th>General title</th>
+      <th>General description</th>
+      <th>Publication type</th>
       <th>Title</th>
       <th>Journal</th>
       <th>Year</th>
@@ -18,12 +20,14 @@
   <tbody>
     <% @publications.each do |publication| %>
       <tr>
-        <td><%= publication.ptype %></td>
+        <td><%= publication.infohash.title %></td>
+        <td><%= publication.infohash.description %></td>
+        <td><%= publication.pubtype.name %></td>
         <td><%= publication.title %></td>
         <td><%= publication.journal %></td>
         <td><%= publication.year %></td>
         <td><%= publication.doi %></td>
-        <td><%= Infohash.find(publication.infohash_id).code %> </td>
+        <td><%= publication.infohash.code %> </td>
         <td><%= link_to 'Show', publication %></td>
         <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
         <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>

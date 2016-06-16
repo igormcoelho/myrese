@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
   before_action :set_group, only: [:show, :edit, :update, :destroy]
 
   # GET /groups
@@ -27,7 +28,7 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
 
     respond_to do |format|
-      if @group.save
+      if @group.save and Groupmember.create(:user => current_user, :group => @group)
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
       else
@@ -69,6 +70,6 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:name, :description)
+      params.require(:group).permit(:name, :title, :description)
     end
 end

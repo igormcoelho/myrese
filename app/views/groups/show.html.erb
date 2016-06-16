@@ -6,8 +6,20 @@
 </p>
 
 <p>
+  <strong>Title:</strong>
+  <%= @group.name %>
+</p>
+
+<p>
   <strong>Description:</strong>
   <%= @group.description %>
+</p>
+
+<p>
+  <strong>Members:</strong>
+  <% @group.users.each do |u|%>
+  <%= u.email %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_group_path(@group) %> |

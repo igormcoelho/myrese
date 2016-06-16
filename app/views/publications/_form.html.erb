@@ -12,13 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :ptype %><br>
-    <%= f.number_field :ptype %>
+    <%= f.label "General title" %><br>
+    <%= f.text_field :gtitle %>
   </div>
+
+<div class="field">
+  <%= f.label :pubtype %><br />
+  <%= f.select :pubtype_id, options_for_select(Pubtype.all.map{|p|[p.name, p.id]}) %>
+</div>
+
+
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+  
   <div class="field">
     <%= f.label :journal %><br>
     <%= f.text_field :journal %>

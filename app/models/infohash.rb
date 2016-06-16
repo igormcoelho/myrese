@@ -1,13 +1,15 @@
 class Infohash < ActiveRecord::Base
-  belongs_to :visibility
-  belongs_to :user
-  belongs_to :group
+  belongs_to :visibility, dependent: :destroy
+  belongs_to :user      , dependent: :destroy
+  belongs_to :group     , dependent: :destroy
+  
+  belongs_to :htype     , dependent: :destroy
   
   has_many :members
   has_many :tags
   
-  validates_presence_of :title
-  validates_presence_of :description
+  validates_presence_of :gtitle       # general title 
+  validates_presence_of :gdescription # general description
   
   validates_presence_of :htype_id
   

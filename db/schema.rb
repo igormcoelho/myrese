@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 20160616004046) do
 
   create_table "infohashes", force: :cascade do |t|
     t.string   "code"
-    t.string   "title"
-    t.text     "description"
+    t.string   "gtitle"
+    t.text     "gdescription"
     t.integer  "visibility_id"
     t.integer  "user_id"
     t.integer  "group_id"

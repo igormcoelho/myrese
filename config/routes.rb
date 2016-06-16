@@ -1,21 +1,23 @@
 Rails.application.routes.draw do
-  resources :groupmembers
-  resources :pubtypes
   resources :reminders
   resources :posts
-  resources :news
   resources :htypes
   resources :instances
   resources :tags
   resources :inforelations
-  resources :pkeywords
   resources :gfiles
-  resources :members
-  resources :pauthors
+  resources :pubtypes
   resources :publications
   resources :projects
-  resources :infohashes
-  resources :groups
+  
+  resources :infohashes do
+    resources :members
+  end
+  
+  resources :groups do
+      resources :groupmembers
+  end
+  
   devise_for :users
   root to: "mainpage#index"
   
