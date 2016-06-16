@@ -1,8 +1,14 @@
 class Publication < ActiveRecord::Base
   belongs_to :infohash  , dependent: :destroy
-  has_one :user         , through: :infohash
-  #has_many :gtitle, :through => :infohash, :source => :publication
-  #has_one :gdescription , through: :infohash
+  #belongs_to :user         , through: :infohash
+  delegate :user         , to: :infohash # belongs_to through (doesn't exist!)
+  
+  delegate :gtitle       , to: :infohash
+  delegate :gdescription , to: :infohash
+  delegate :visibility   , to: :infohash
+  delegate :visibility_id   , to: :infohash
+  delegate :group   , to: :infohash
+  delegate :group_id        , to: :infohash
   
   belongs_to :pubtype
   #has_many :pauthors
@@ -11,9 +17,10 @@ class Publication < ActiveRecord::Base
   validates_presence_of :infohash
   validates_presence_of :pubtype
   
+  validates_presence_of :gtitle
+  validates_presence_of :gdescription
   validates_presence_of :title
   validates_presence_of :year
-  validates_presence_of :ptype
   validates_presence_of :authors
   validates_presence_of :keywords
 end

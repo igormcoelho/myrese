@@ -1,5 +1,5 @@
 class Group < ActiveRecord::Base
-    has_many :infohashes
+    has_many :infohashes,   dependent: :destroy
     has_many :groupmembers
     has_many :users, through: :groupmembers
     

@@ -1,7 +1,7 @@
 class Reminder < ActiveRecord::Base
   belongs_to :infohash
   
-  has_one :user, through: :infohash
+  delegate :user, to: :infohash
   
   validates_presence_of :dtime
 end

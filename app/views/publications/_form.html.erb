@@ -12,15 +12,30 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :visibility %><br />
+    <%= f.select :visibility_id, options_for_select(Visibility.all.map{|p|[p.vtype, p.id]}) %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :group %><br />
+    <%= f.select :group_id, options_for_select(Group.all.map{|p|[p.name, p.id]}) %>
+  </div>
+
+
+  <div class="field">
     <%= f.label "General title" %><br>
     <%= f.text_field :gtitle %>
   </div>
 
-<div class="field">
-  <%= f.label :pubtype %><br />
-  <%= f.select :pubtype_id, options_for_select(Pubtype.all.map{|p|[p.name, p.id]}) %>
-</div>
+  <div class="field">
+    <%= f.label "General description" %><br>
+    <%= f.text_area :gdescription %>
+  </div>
 
+  <div class="field">
+    <%= f.label :pubtype %><br />
+    <%= f.select :pubtype_id, options_for_select(Pubtype.all.map{|p|[p.name, p.id]}) %>
+  </div>
 
   <div class="field">
     <%= f.label :title %><br>
