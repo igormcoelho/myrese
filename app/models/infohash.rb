@@ -4,6 +4,7 @@ class Infohash < ActiveRecord::Base
   belongs_to :group
   
   has_many :members
+  has_many :tags
   
   validates_presence_of :title
   validates_presence_of :description

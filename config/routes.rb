@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :groupmembers
   resources :pubtypes
   resources :reminders
   resources :posts

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615233622) do
+ActiveRecord::Schema.define(version: 20160616004046) do
 
   create_table "gfiles", force: :cascade do |t|
     t.string   "name"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 20160615233622) do
   end
 
   add_index "gfiles", ["infohash_id"], name: "index_gfiles_on_infohash_id"
+
+  create_table "groupmembers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "groupmembers", ["group_id"], name: "index_groupmembers_on_group_id"
+  add_index "groupmembers", ["user_id"], name: "index_groupmembers_on_user_id"
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
