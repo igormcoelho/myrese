@@ -25,6 +25,7 @@ class InfohashesController < ApplicationController
   # POST /infohashes.json
   def create
     @infohash = Infohash.new(infohash_params)
+    @infohash.user = current_user
 
     respond_to do |format|
       if @infohash.save
@@ -69,6 +70,6 @@ class InfohashesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def infohash_params
-      params.require(:infohash).permit(:code, :visibility_id, :user_id, :group_id, :htype)
+      params.require(:infohash).permit(:code, :visibility_id, :user_id, :group_id, :htype_id, :gtitle, :gdescription)
     end
 end

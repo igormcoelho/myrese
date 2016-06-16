@@ -1,15 +1,18 @@
 <%= form_for(@publication) do |f| %>
-  <% if @publication.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@publication.errors.count, "error") %> prohibited this publication from being saved:</h2>
+
+  <% if @infohash.errors.any? or @publication.errors.any? %>
+  <div id="error_explanation">
+      <% error_list  = @infohash.errors.full_messages + @publication.errors.full_messages %>
+      <h2><%= pluralize(error_list.count, "error") %> prohibited this publication from being saved:</h2>
 
       <ul>
-      <% @publication.errors.full_messages.each do |message| %>
+      <% error_list.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
-    </div>
+  </div>
   <% end %>
+
 
   <div class="field">
     <%= f.label :visibility %><br />
@@ -43,6 +46,11 @@
   </div>
   
   <div class="field">
+    <%= f.label :authors %><br>
+    <%= f.text_field :authors %>
+  </div>
+  
+  <div class="field">
     <%= f.label :journal %><br>
     <%= f.text_field :journal %>
   </div>
@@ -53,6 +61,10 @@
   <div class="field">
     <%= f.label :doi %><br>
     <%= f.text_field :doi %>
+  </div>
+  <div class="field">
+    <%= f.label :keywords %><br>
+    <%= f.text_field :keywords %>
   </div>
   <div class="field">
     <%= f.label :other %><br>

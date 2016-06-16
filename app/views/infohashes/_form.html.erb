@@ -15,22 +15,33 @@
     <%= f.label :code %><br>
     <%= f.text_field :code %>
   </div>
+
   <div class="field">
-    <%= f.label :visibility_id %><br>
-    <%= f.text_field :visibility_id %>
+    <%= f.label :gtitle %><br>
+    <%= f.text_field :gtitle %>
   </div>
+  
   <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
+    <%= f.label :gdescription %><br>
+    <%= f.text_area :gdescription %>
   </div>
+  
   <div class="field">
-    <%= f.label :group_id %><br>
-    <%= f.text_field :group_id %>
+    <%= f.label :visibility %><br />
+    <%= f.select :visibility_id, options_for_select(Visibility.all.map{|p|[p.vtype, p.id]}) %>
   </div>
+  
   <div class="field">
-    <%= f.label :htype %><br>
-    <%= f.text_field :htype %>
+    <%= f.label :group %><br />
+    <%= f.select :group_id, options_for_select(Group.all.map{|p|[p.name, p.id]}) %>
   </div>
+  
+  <div class="field">
+    <%= f.label :htype %><br />
+    <%= f.select :htype_id, options_for_select(Htype.all.map{|p|[p.name, p.id]}) %>
+  </div>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>

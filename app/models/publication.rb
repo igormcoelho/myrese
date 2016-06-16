@@ -16,9 +16,6 @@ class Publication < ActiveRecord::Base
   
   validates_presence_of :infohash
   validates_presence_of :pubtype
-  
-  validates_presence_of :gtitle
-  validates_presence_of :gdescription
   validates_presence_of :title
   validates_presence_of :year
   validates_presence_of :authors
