@@ -2,7 +2,7 @@
 
 <p>
   <strong>Ptype:</strong>
-  <%= @publication.ptype %>
+  <%= @publication.pubtype %>
 </p>
 
 <p>
@@ -26,9 +26,10 @@
 </p>
 
 <p>
-  <strong>Infohash:</strong>
+  <strong>Infohash code:</strong>
   <%= Infohash.find(@publication.infohash_id).code %>
 </p>
+
 
 <%= link_to 'Edit', edit_publication_path(@publication) %> |
 <%= link_to 'Back', publications_path %>

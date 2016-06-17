@@ -4,6 +4,9 @@ class PublicationsController < ApplicationController
   # GET /publications
   # GET /publications.json
   def index
+    #ms = Member.includes(:infohash).where("user = "+current_user.id.to_s+" AND infohash.htype = 1")
+    #@publications = Publication.joins(:members).includes(:infohash).where("member.user_id = "+current_user.id.to_s).where("infohash.htype = 1")
+    # TODO filter user in members of publication.infohash
     @publications = Publication.all
   end
 
@@ -41,6 +44,20 @@ class PublicationsController < ApplicationController
         format.json { render json: @infohash.errors, status: :unprocessable_entity }
       elsif @publication.save
         @infohash.save
+        Member.create(:user => current_user, :infohash => @infohash)
+        
+        # get hashtags
+        lhash  = @infohash.gtitle.scan(/\B#\w+/) #scan(/#\S+/)
+        lhash += @infohash.gdescription.scan(/\B#\w+/) #scan(/#\S+/)
+        lhash = lhash.uniq
+        
+        # insert only unique
+        ActiveRecord::Base.transaction do
+          lhash.each do |h|
+            Tag.create(:tagname => h.downcase, :infohash => @infohash)
+          end
+        end
+        
         format.html { redirect_to @publication, notice: 'Publication was successfully created.' }
         format.json { render :show, status: :created, location: @publication }
       else
@@ -82,7 +99,7 @@ class PublicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def publication_params
-      params.require(:publication).permit(:pubtype_id, :title, :journal, :year, :doi, :other)
+      params.require(:publication).permit(:pubtype_id, :title, :journal, :year, :doi, :other, :authors, :keywords)
     end
     def infohash_params
       params.require(:publication).permit(:gtitle, :gdescription, :visibility_id, :group_id)

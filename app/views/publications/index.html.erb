@@ -9,10 +9,15 @@
       <th>General description</th>
       <th>Publication type</th>
       <th>Title</th>
+      <th>Authors</th>
       <th>Journal</th>
       <th>Year</th>
       <th>Doi</th>
-      <th>Infohash</th>
+      <th>Other</th>
+      <th>Keywords</th>
+      <th>Infohash code</th>
+      <th>Members</th>
+      <th>Tags</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,14 +25,27 @@
   <tbody>
     <% @publications.each do |publication| %>
       <tr>
-        <td><%= publication.infohash.title %></td>
-        <td><%= publication.infohash.description %></td>
+        <td><%= publication.infohash.gtitle %></td>
+        <td><%= publication.infohash.gdescription %></td>
         <td><%= publication.pubtype.name %></td>
         <td><%= publication.title %></td>
+        <td><%= publication.authors %></td>
         <td><%= publication.journal %></td>
         <td><%= publication.year %></td>
         <td><%= publication.doi %></td>
+        <td><%= publication.other %></td>
+        <td><%= publication.keywords %></td>
         <td><%= publication.infohash.code %> </td>
+        <td>
+          <% publication.infohash.members.each do |m| %> 
+          <%= m.user.email %>
+          <% end %>
+        </td>
+        <td>
+          <% publication.infohash.tags.each do |t| %> 
+          <%= t.tagname %>
+          <% end %>
+        </td>
         <td><%= link_to 'Show', publication %></td>
         <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
         <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
