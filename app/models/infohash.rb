@@ -1,11 +1,16 @@
 class Infohash < ActiveRecord::Base
   belongs_to :visibility
-  belongs_to :user      
-  belongs_to :group     
+  belongs_to :user          #owner
+  #belongs_to :group
+  #has_and_belongs_to_many :groups   # deprecated
+  has_many :group_infohashes
+  has_many :groups, through: :group_infohashes   #HMT is more flexible!
   
   belongs_to :htype     
   
-  has_many :members , dependent: :destroy
+  #has_many :members , dependent: :destroy   # members => infohash_users
+  has_many :infohash_users
+  has_many :users, through: :infohash_users
   has_many :tags    , dependent: :destroy
   
   validates_presence_of :gtitle       # general title 

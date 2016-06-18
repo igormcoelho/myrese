@@ -11,7 +11,7 @@
    <% pub = Publication.joins(:infohash).where("infohashes.user_id" => current_user.id) %>
    
     <% pub.each do |p| %>
-        <%= "#" + p.id.to_s + " t=" + p.ptype.to_s %>
+        <%= "#" + p.id.to_s + " t=" + p.pubtype.name %>
         <%= p.title %><br>
     <% end %>
 

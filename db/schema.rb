@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616004046) do
+ActiveRecord::Schema.define(version: 20160618195119) do
 
   create_table "gfiles", force: :cascade do |t|
     t.string   "name"
@@ -22,6 +22,26 @@ ActiveRecord::Schema.define(version: 20160616004046) do
   end
 
   add_index "gfiles", ["infohash_id"], name: "index_gfiles_on_infohash_id"
+
+  create_table "group_infohashes", force: :cascade do |t|
+    t.integer  "group_id"
+    t.integer  "infohash_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "group_infohashes", ["group_id"], name: "index_group_infohashes_on_group_id"
+  add_index "group_infohashes", ["infohash_id"], name: "index_group_infohashes_on_infohash_id"
+
+  create_table "group_users", force: :cascade do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "group_users", ["group_id"], name: "index_group_users_on_group_id"
+  add_index "group_users", ["user_id"], name: "index_group_users_on_user_id"
 
   create_table "groupmembers", force: :cascade do |t|
     t.integer  "user_id"
@@ -37,6 +57,7 @@ ActiveRecord::Schema.define(version: 20160616004046) do
     t.string   "name"
     t.string   "title"
     t.text     "description"
+    t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -48,19 +69,27 @@ ActiveRecord::Schema.define(version: 20160616004046) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "infohash_users", force: :cascade do |t|
+    t.integer  "infohash_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "infohash_users", ["infohash_id"], name: "index_infohash_users_on_infohash_id"
+  add_index "infohash_users", ["user_id"], name: "index_infohash_users_on_user_id"
+
   create_table "infohashes", force: :cascade do |t|
     t.string   "code"
     t.string   "gtitle"
     t.text     "gdescription"
     t.integer  "visibility_id"
     t.integer  "user_id"
-    t.integer  "group_id"
     t.integer  "htype_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
 
-  add_index "infohashes", ["group_id"], name: "index_infohashes_on_group_id"
   add_index "infohashes", ["htype_id"], name: "index_infohashes_on_htype_id"
   add_index "infohashes", ["user_id"], name: "index_infohashes_on_user_id"
   add_index "infohashes", ["visibility_id"], name: "index_infohashes_on_visibility_id"

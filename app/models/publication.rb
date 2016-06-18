@@ -6,9 +6,9 @@ class Publication < ActiveRecord::Base
   delegate :gtitle       , to: :infohash
   delegate :gdescription , to: :infohash
   delegate :visibility   , to: :infohash
-  delegate :visibility_id   , to: :infohash
-  delegate :group   , to: :infohash
-  delegate :group_id        , to: :infohash
+  delegate :visibility_id, to: :infohash
+  delegate :group        , to: :infohash
+  delegate :group_id     , to: :infohash
   
   belongs_to :pubtype
   #has_many :pauthors
