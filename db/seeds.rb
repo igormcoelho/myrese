@@ -6,9 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Visibility.create :vtype => "private"
-Visibility.create :vtype => "members"
-Visibility.create :vtype => "group"
+##Visibility.create :vtype => "private" 
+##Visibility.create :vtype => "group"
+Visibility.create :vtype => "members"  # the first three now are 'members' (private, group, and old members)
 Visibility.create :vtype => "instance"
 Visibility.create :vtype => "public"
 
