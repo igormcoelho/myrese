@@ -49,6 +49,13 @@ class User < ActiveRecord::Base
     end
   end
   
+  has_one :profile
+  
+  after_create :create_bars
+  def create_bars 
+    self.profile = Profile.create(:fullname => :username, :user => self)
+  end
+  
   #has_many :groupmembers
   #has_many :groups      , through: :groupmembers
   has_many :owner_groups, dependent: :destroy, source: :groups

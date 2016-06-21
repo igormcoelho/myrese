@@ -14,14 +14,14 @@ class Publication < ActiveRecord::Base
   #has_many :pauthors
   #has_many :pkeywords
   
-  validates_presence_of :gtitle
-  validates_presence_of :gdescription
-  validates_presence_of :visibility
+  validates_presence_of :gtitle        , message: "General title is missing"
+  validates_presence_of :gdescription  , message: "General description is missing"
+  validates_presence_of :visibility    , message: "Visibility is missing"
   
-  validates_presence_of :infohash
-  validates_presence_of :pubtype
-  validates_presence_of :title
-  validates_presence_of :year
-  validates_presence_of :authors
+  validates_presence_of :infohash      , message: "Infohash reference is missing"
+  validates_presence_of :pubtype       , message: "Publication type is missing"
+  validates_presence_of :title         , message: "Publication title is missing"
+  validates_presence_of :year          , message: "Publication year is missing"
+  validates_presence_of :authors       , message: "Authors list is missing"
 
 end
