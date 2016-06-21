@@ -26,5 +26,5 @@ class Infohash < ActiveRecord::Base
   
   validates_presence_of :visibility_id
   validates_presence_of :user_id
-  validates_presence_of :group_id
+  ###validates_presence_of :group_id
 end

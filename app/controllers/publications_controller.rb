@@ -44,12 +44,12 @@ class PublicationsController < ApplicationController
         format.json { render json: @infohash.errors, status: :unprocessable_entity }
       elsif @publication.save
         @infohash.save
-        Member.create(:user => current_user, :infohash => @infohash)
+        InfohashUser.create(:user => current_user, :infohash => @infohash)
         
         # get hashtags
         lhash  = @infohash.gtitle.scan(/\B#\w+/) #scan(/#\S+/)
         lhash += @infohash.gdescription.scan(/\B#\w+/) #scan(/#\S+/)
-        lhash = lhash.uniq
+        lhash = lhash.uniq     # remove repetitions
         
         # insert only unique
         ActiveRecord::Base.transaction do
@@ -102,6 +102,6 @@ class PublicationsController < ApplicationController
       params.require(:publication).permit(:pubtype_id, :title, :journal, :year, :doi, :other, :authors, :keywords)
     end
     def infohash_params
-      params.require(:publication).permit(:gtitle, :gdescription, :visibility_id, :group_id)
+      params.require(:publication).permit(:gtitle, :gdescription, :visibility_id)
     end
 end

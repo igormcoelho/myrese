@@ -20,14 +20,8 @@
   </div>
   
   <div class="field">
-    <%= f.label :group %><br />
-    <%= f.select :group_id, options_for_select(Group.all.map{|p|[p.name, p.id]}) %>
-  </div>
-
-
-  <div class="field">
     <%= f.label "General title" %><br>
-    <%= f.text_field :gtitle %>
+    <%= f.text_field(:gtitle) %>
   </div>
 
   <div class="field">
