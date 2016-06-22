@@ -39,8 +39,15 @@
         <td><%= publication.infohash.code %> </td>
         <td><%= publication.infohash.user.username %> </td>
         <td>
-          <% publication.infohash.users.each do |u| %> 
-          <%= u.username %>
+          <% publication.infohash.infohash_users.each do |u| %> 
+            <%= u.user.username %>
+            <% if current_user == publication.user #owner %>
+              <%= link_to "(delete)", [publication.infohash, u] ,method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+            <br>
+          <% end %>
+          <% if current_user == publication.user #owner %>
+              <%= link_to "New member", new_infohash_infohash_user_path(publication.infohash) %>
           <% end %>
         </td>
         <td>
@@ -49,8 +56,12 @@
           <% end %>
         </td>
         <td><%= link_to 'Show', publication %></td>
+        
+        <% if current_user == publication.user %>
         <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
         <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+
       </tr>
     <% end %>
   </tbody>

@@ -7,7 +7,8 @@ class PublicationsController < ApplicationController
     #ms = Member.includes(:infohash).where("user = "+current_user.id.to_s+" AND infohash.htype = 1")
     #@publications = Publication.joins(:members).includes(:infohash).where("member.user_id = "+current_user.id.to_s).where("infohash.htype = 1")
     # TODO filter user in members of publication.infohash
-    @publications = Publication.all
+    #@publications = Publication.all
+    @publications = Publication.joins(:infohash_users).where("infohash_users.user_id = ?", current_user.id)
   end
 
   # GET /publications/1

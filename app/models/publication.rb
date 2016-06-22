@@ -2,6 +2,8 @@ class Publication < ActiveRecord::Base
   belongs_to :infohash  , dependent: :destroy
   #belongs_to :user         , through: :infohash
   delegate :user         , to: :infohash # belongs_to through (doesn't exist!)
+  delegate :users       , to: :infohash
+  has_many :infohash_users  , through: :infohash
   
   delegate :gtitle       , to: :infohash
   delegate :gdescription , to: :infohash

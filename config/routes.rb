@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :infohash_users
   resources :profiles
   resources :reminders
   resources :posts
@@ -12,11 +13,11 @@ Rails.application.routes.draw do
   resources :projects
   
   resources :infohashes do
-    resources :members
+    resources :infohash_users
   end
   
   resources :groups do
-      resources :groupmembers
+      resources :group_users
   end
   
   devise_for :users
