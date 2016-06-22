@@ -8,6 +8,7 @@
       <th>Name</th>
       <th>Title</th>
       <th>Description</th>
+      <th>Owner</th>
       <th>Group Members</th>
       <th colspan="3"></th>
     </tr>
@@ -19,14 +20,23 @@
         <td><%= group.name %></td>
         <td><%= group.title %></td>
         <td><%= group.description %></td>
+        <td><%= group.user.username %></td>
         <td>
           <% group.users.each do |u| %>
           <%= u.email+" " %>
           <% end %>
         </td>
         <td><%= link_to 'Show', group %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        
+        <% if current_user == group.user %>
+        <td>
+          <%= link_to 'Edit', edit_group_path(group) %>
+        </td>
+        <td>
+          <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+        <% end %>
+          
       </tr>
     <% end %>
   </tbody>

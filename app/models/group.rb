@@ -2,6 +2,7 @@ class Group < ActiveRecord::Base
     #has_many :infohashes,   dependent: :destroy # (expects belongs_to on the other side... not this case anymore!)
     
     belongs_to :user   #group owner
+    validates_presence_of :user
     
     #has_and_belongs_to_many :infohashes, dependent: :destroy #HABTM
     has_many :group_infohashes, dependent: :destroy 
@@ -13,4 +14,8 @@ class Group < ActiveRecord::Base
     #has_and_belongs_to_many :users, dependent: :destroy      #HABTM
     
     validates_presence_of :name
+    validates_format_of   :name, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+    
+    validates_presence_of :title
+    validates_presence_of :description
 end

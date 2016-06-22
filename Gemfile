@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# https://github.com/Eric-Guo/where-or
+gem 'where-or' # backport from Rails 5 to Rails 4.2
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'

@@ -24,7 +24,7 @@ class Infohash < ActiveRecord::Base
   has_one :post         , dependent: :destroy # one or zero: creates Post.infohash_id
   has_one :reminder     , dependent: :destroy # one or zero: creates Reminder.infohash_id
   
-  validates_presence_of :visibility_id
-  validates_presence_of :user_id
+  validates_presence_of :visibility
+  validates_presence_of :user
   ###validates_presence_of :group_id
 end
