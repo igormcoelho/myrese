@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :publication_profiles
   resources :infohash_users
   resources :profiles
   resources :reminders
@@ -9,8 +10,11 @@ Rails.application.routes.draw do
   resources :inforelations
   resources :gfiles
   resources :pubtypes
-  resources :publications
   resources :projects
+  
+  resources :publications do
+    resources :publication_profiles
+  end
   
   resources :infohashes do
     resources :infohash_users

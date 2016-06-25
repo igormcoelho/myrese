@@ -6,7 +6,6 @@ class CreatePublications < ActiveRecord::Migration
       t.string :journal
       t.integer :year
       t.string :doi
-      t.string :authors     # all authors together
       t.string :keywords    # all keywords together
       t.text :other
       t.references :infohash, index: true, foreign_key: true

@@ -1,17 +1,18 @@
 <%= form_for(@publication) do |f| %>
 
-  <% if @infohash.errors.any? or @publication.errors.any? %>
-  <div id="error_explanation">
-      <% error_list  = @infohash.errors.full_messages + @publication.errors.full_messages %>
-      <h2><%= pluralize(error_list.count, "error") %> prohibited this publication from being saved:</h2>
+  <h2>General information</h2>
+  <% if @infohash.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@infohash.errors.count, "error") %> prohibited this profile from being saved:</h2>
 
       <ul>
-      <% error_list.each do |message| %>
+      <% @infohash.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
-  </div>
+    </div>
   <% end %>
+
 
 
   <div class="field">
@@ -29,6 +30,20 @@
     <%= f.text_area :gdescription %>
   </div>
 
+  <h2>Publication information</h2>
+  
+  <% if @publication.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@publication.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% @publication.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= f.label :pubtype %><br />
     <%= f.select :pubtype_id, options_for_select(Pubtype.all.map{|p|[p.name, p.id]}) %>
@@ -39,11 +54,8 @@
     <%= f.text_field :title %>
   </div>
   
-  <div class="field">
-    <%= f.label :authors %><br>
-    <%= f.text_field :authors %>
-  </div>
-  
+  <p>You will be added as the first author, the others can be added later</p>
+
   <div class="field">
     <%= f.label :journal %><br>
     <%= f.text_field :journal %>
@@ -64,6 +76,7 @@
     <%= f.label :other %><br>
     <%= f.text_area :other %>
   </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -33,6 +33,8 @@ class PublicationsController < ApplicationController
     #@publication = Publication.new(publication_params)
     @infohash    = Infohash.new(infohash_params)
     @publication = @infohash.build_publication(publication_params)
+    
+    #@mainauthor = params.require(:publication).permit(:mainauthor)
 
     @infohash.user = current_user
     @infohash.htype_id = 1           # PUBLICATION
@@ -46,6 +48,7 @@ class PublicationsController < ApplicationController
       elsif @publication.save
         @infohash.save
         InfohashUser.create(:user => current_user, :infohash => @infohash)
+        PublicationProfile.create(:profile => current_user.profile, :author => current_user.profile.citation, :publication => @publication)
         
         # get hashtags
         lhash  = @infohash.gtitle.scan(/\B#\w+/) #scan(/#\S+/)
@@ -100,8 +103,9 @@ class PublicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def publication_params
-      params.require(:publication).permit(:pubtype_id, :title, :journal, :year, :doi, :other, :authors, :keywords)
+      params.require(:publication).permit(:pubtype_id, :title, :journal, :year, :doi, :other, :keywords)
     end
+    
     def infohash_params
       params.require(:publication).permit(:gtitle, :gdescription, :visibility_id)
     end

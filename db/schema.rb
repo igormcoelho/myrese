@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160621032356) do
+ActiveRecord::Schema.define(version: 20160625192140) do
 
   create_table "gfiles", force: :cascade do |t|
     t.string   "name"
@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(version: 20160621032356) do
 
   create_table "profiles", force: :cascade do |t|
     t.string   "fullname"
+    t.string   "citation"
     t.text     "shortbio"
     t.integer  "user_id"
     t.datetime "created_at", null: false
@@ -174,13 +175,23 @@ ActiveRecord::Schema.define(version: 20160621032356) do
 
   add_index "projects", ["infohash_id"], name: "index_projects_on_infohash_id"
 
+  create_table "publication_profiles", force: :cascade do |t|
+    t.integer  "publication_id"
+    t.string   "author"
+    t.integer  "profile_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "publication_profiles", ["profile_id"], name: "index_publication_profiles_on_profile_id"
+  add_index "publication_profiles", ["publication_id"], name: "index_publication_profiles_on_publication_id"
+
   create_table "publications", force: :cascade do |t|
     t.integer  "pubtype_id"
     t.string   "title"
     t.string   "journal"
     t.integer  "year"
     t.string   "doi"
-    t.string   "authors"
     t.string   "keywords"
     t.text     "other"
     t.integer  "infohash_id"

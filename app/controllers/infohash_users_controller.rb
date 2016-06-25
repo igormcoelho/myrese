@@ -52,7 +52,7 @@ class InfohashUsersController < ApplicationController
     @infohash_user.destroy
     
     respond_to do |format|
-      #todo fix
+      #todo fxi
       @publication = Publication.where(:infohash => @infohash).first
       format.html { redirect_to @publication, notice: 'Infohash user was successfully destroyed.' }
       format.json { head :no_content }

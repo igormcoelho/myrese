@@ -19,6 +19,7 @@
       <th>Owner</th>
       <th>Members</th>
       <th>Tags</th>
+      <th>Visibility</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -30,7 +31,21 @@
         <td><%= publication.infohash.gdescription %></td>
         <td><%= publication.pubtype.name %></td>
         <td><%= publication.title %></td>
-        <td><%= publication.authors %></td>
+        <td>
+          <% publication.publication_profiles.each do |pp| %>
+            <% if pp.profile %>
+              <%= link_to pp.author, pp.profile %>
+            <% else %>
+              <%= pp.author %>
+            <% end %>
+            <% if (current_user == publication.user) %>
+              <%= link_to "(delete)", [publication, pp] ,method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+            <% if current_user == publication.user #owner %>
+              <%= link_to "New author", new_publication_publication_profile_path(publication) %>
+          <% end %>
+          <% end %>
+        </td>
         <td><%= publication.journal %></td>
         <td><%= publication.year %></td>
         <td><%= publication.doi %></td>
@@ -41,7 +56,7 @@
         <td>
           <% publication.infohash.infohash_users.each do |u| %> 
             <%= u.user.username %>
-            <% if current_user == publication.user #owner %>
+            <% if (current_user == publication.user) and (current_user != u.user) %>
               <%= link_to "(delete)", [publication.infohash, u] ,method: :delete, data: { confirm: 'Are you sure?' } %>
             <% end %>
             <br>
@@ -52,9 +67,11 @@
         </td>
         <td>
           <% publication.infohash.tags.each do |t| %> 
-          <%= t.tagname %>
+            <%= t.tagname %>
           <% end %>
         </td>
+        <td><%= publication.visibility.vtype %></td>
+        
         <td><%= link_to 'Show', publication %></td>
         
         <% if current_user == publication.user %>
