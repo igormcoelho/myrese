@@ -10,11 +10,7 @@
       <th>Publication type</th>
       <th>Title</th>
       <th>Authors</th>
-      <th>Journal</th>
       <th>Year</th>
-      <th>Doi</th>
-      <th>Other</th>
-      <th>Keywords</th>
       <th>Infohash code</th>
       <th>Owner</th>
       <th>Members</th>
@@ -46,11 +42,7 @@
           <% end %>
           <% end %>
         </td>
-        <td><%= publication.journal %></td>
         <td><%= publication.year %></td>
-        <td><%= publication.doi %></td>
-        <td><%= publication.other %></td>
-        <td><%= publication.keywords %></td>
         <td><%= publication.infohash.code %> </td>
         <td><%= publication.infohash.user.username %> </td>
         <td>

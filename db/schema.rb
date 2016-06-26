@@ -189,14 +189,25 @@ ActiveRecord::Schema.define(version: 20160625192140) do
   create_table "publications", force: :cascade do |t|
     t.integer  "pubtype_id"
     t.string   "title"
-    t.string   "journal"
     t.integer  "year"
+    t.string   "ctitle"
+    t.string   "editor"
+    t.string   "publisher"
+    t.string   "organization"
+    t.string   "address"
+    t.string   "month"
+    t.integer  "volume"
+    t.integer  "number"
+    t.string   "series"
+    t.integer  "page_begin"
+    t.integer  "page_end"
+    t.string   "howpublished"
     t.string   "doi"
     t.string   "keywords"
     t.text     "other"
     t.integer  "infohash_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "publications", ["infohash_id"], name: "index_publications_on_infohash_id"

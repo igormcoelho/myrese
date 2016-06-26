@@ -103,7 +103,7 @@ class PublicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def publication_params
-      params.require(:publication).permit(:pubtype_id, :title, :journal, :year, :doi, :other, :keywords)
+      params.require(:publication).permit(:pubtype_id, :title, :year, :ctitle, :editor, :publisher, :organization, :address, :month, :volume, :number, :series, :page_begin, :page_end, :howpublished, :doi, :keywords, :other)
     end
     
     def infohash_params

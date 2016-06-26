@@ -43,27 +43,87 @@
       </ul>
     </div>
   <% end %>
-
+  
+  <p>(*) Mandatory fields</p>
+  <p>(**)Mandatory only for journals, books, chapters, proceedings or inproceedings (conference papers)</p>
+  
   <div class="field">
-    <%= f.label :pubtype %><br />
+    <%= f.label "Publication Type (*)" %><br />
     <%= f.select :pubtype_id, options_for_select(Pubtype.all.map{|p|[p.name, p.id]}) %>
   </div>
 
+  <p>You will be added as the first author, the others can be added later</p>
+  
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label "Title (*)" %><br>
     <%= f.text_field :title %>
   </div>
   
-  <p>You will be added as the first author, the others can be added later</p>
-
   <div class="field">
-    <%= f.label :journal %><br>
-    <%= f.text_field :journal %>
-  </div>
-  <div class="field">
-    <%= f.label :year %><br>
+    <%= f.label "Year (*)" %><br>
     <%= f.number_field :year %>
   </div>
+
+  <div class="field">
+    <%= f.label "Journal/Book/Collection Title (**)" %><br>
+    <%= f.text_field :ctitle %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :editor %><br>
+    <%= f.text_field :editor %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :publisher %><br>
+    <%= f.text_field :publisher %>
+  </div>
+
+  <div class="field">
+    <%= f.label :organization %><br>
+    <%= f.text_field :organization %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :month %><br>
+    <%= f.text_field :month %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :volume %><br>
+    <%= f.number_field :volume %>
+  </div>
+
+  <div class="field">
+    <%= f.label :number %><br>
+    <%= f.number_field :number %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :series %><br>
+    <%= f.text_field :series %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "Initial Page" %><br>
+    <%= f.number_field :page_begin %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "Final Page" %><br>
+    <%= f.number_field :page_end %>
+  </div>
+ 
+  <div class="field">
+    <%= f.label :howpublished %><br>
+    <%= f.text_field :howpublished %>
+  </div> 
+
   <div class="field">
     <%= f.label :doi %><br>
     <%= f.text_field :doi %>

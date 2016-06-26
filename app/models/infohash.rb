@@ -12,8 +12,8 @@ class Infohash < ActiveRecord::Base
   has_many :members           , through: :infohash_users, source: :user
   has_many :tags              , dependent: :delete_all
   
-  validates_presence_of :gtitle       # general title 
-  validates_presence_of :gdescription # general description
+  validates_presence_of :gtitle       , message: "General Title is missing"
+  validates_presence_of :gdescription , message: "General Description is missing"
   
   validates_presence_of :htype_id
   
