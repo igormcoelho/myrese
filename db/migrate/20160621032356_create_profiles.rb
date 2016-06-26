@@ -5,6 +5,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :citation  
       t.text :shortbio
       t.references :user, index: true, foreign_key: true
+      t.references :visibility, index: true, foreign_key: true
 
       t.timestamps null: false
     end

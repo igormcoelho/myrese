@@ -1,16 +1,28 @@
 Rails.application.routes.draw do
-  resources :publication_profiles
-  resources :infohash_users
+  resources :weblinks
+  resources :grants
+  resources :activities
+  resources :positions
+  resources :institutions
+  root to: "mainpage#index"
+  
+  devise_for :users
+
+  #resources :publication_profiles
+  #resources :infohash_users
   resources :profiles
   resources :reminders
   resources :posts
-  resources :htypes
+  #resources :htypes
   resources :instances
   resources :tags
-  resources :inforelations
+  #resources :inforelations
   resources :gfiles
-  resources :pubtypes
-  resources :projects
+  #resources :pubtypes
+  
+  resources :projects do
+    resources :project_profiles
+  end
   
   resources :publications do
     resources :publication_profiles
@@ -24,8 +36,6 @@ Rails.application.routes.draw do
       resources :group_users
   end
   
-  devise_for :users
-  root to: "mainpage#index"
   
   resources :visibilities
   # The priority is based upon order of creation: first created -> highest priority.

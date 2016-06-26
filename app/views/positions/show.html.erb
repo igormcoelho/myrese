@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @position.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @position.description %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @position.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @position.end_date %>
+</p>
+
+<p>
+  <strong>Profile:</strong>
+  <%= @position.profile %>
+</p>
+
+<p>
+  <strong>Institution:</strong>
+  <%= @position.institution %>
+</p>
+
+<%= link_to 'Edit', edit_position_path(@position) %> |
+<%= link_to 'Back', positions_path %>

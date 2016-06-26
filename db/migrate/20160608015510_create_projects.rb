@@ -5,6 +5,7 @@ class CreateProjects < ActiveRecord::Migration
       t.text   :abstract
       t.string :keywords    # all keywords together
       
+      t.references :profile, index: true, foreign_key: true
       t.references :infohash, index: true, foreign_key: true
 
       t.timestamps null: false

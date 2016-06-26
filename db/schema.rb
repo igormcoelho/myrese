@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160626020200) do
+ActiveRecord::Schema.define(version: 20160626234157) do
+
+  create_table "activities", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "position_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "activities", ["position_id"], name: "index_activities_on_position_id"
 
   create_table "gfiles", force: :cascade do |t|
     t.string   "name"
@@ -22,6 +34,22 @@ ActiveRecord::Schema.define(version: 20160626020200) do
   end
 
   add_index "gfiles", ["infohash_id"], name: "index_gfiles_on_infohash_id"
+
+  create_table "grants", force: :cascade do |t|
+    t.string   "name"
+    t.string   "number"
+    t.text     "description"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "funding_agency"
+    t.integer  "project_id"
+    t.integer  "profile_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "grants", ["profile_id"], name: "index_grants_on_profile_id"
+  add_index "grants", ["project_id"], name: "index_grants_on_project_id"
 
   create_table "group_infohashes", force: :cascade do |t|
     t.integer  "group_id"
@@ -112,6 +140,16 @@ ActiveRecord::Schema.define(version: 20160626020200) do
     t.datetime "updated_at",         null: false
   end
 
+  create_table "institutions", force: :cascade do |t|
+    t.string   "name"
+    t.string   "website"
+    t.string   "logo"
+    t.string   "address"
+    t.string   "itype"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "members", force: :cascade do |t|
     t.integer  "infohash_id"
     t.integer  "user_id"
@@ -143,6 +181,20 @@ ActiveRecord::Schema.define(version: 20160626020200) do
   add_index "pkeywords", ["infohash_id"], name: "index_pkeywords_on_infohash_id"
   add_index "pkeywords", ["publication_id"], name: "index_pkeywords_on_publication_id"
 
+  create_table "positions", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "profile_id"
+    t.integer  "institution_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "positions", ["institution_id"], name: "index_positions_on_institution_id"
+  add_index "positions", ["profile_id"], name: "index_positions_on_profile_id"
+
   create_table "posts", force: :cascade do |t|
     t.integer  "infohash_id"
     t.string   "subject"
@@ -163,6 +215,17 @@ ActiveRecord::Schema.define(version: 20160626020200) do
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
+
+  create_table "project_profiles", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "profile_id"
+    t.string   "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "project_profiles", ["profile_id"], name: "index_project_profiles_on_profile_id"
+  add_index "project_profiles", ["project_id"], name: "index_project_profiles_on_project_id"
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -290,5 +353,14 @@ ActiveRecord::Schema.define(version: 20160626020200) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "weblinks", force: :cascade do |t|
+    t.integer  "infohash_id"
+    t.string   "link"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "weblinks", ["infohash_id"], name: "index_weblinks_on_infohash_id"
 
 end

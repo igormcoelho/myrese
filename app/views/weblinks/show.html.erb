@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Infohash:</strong>
+  <%= @weblink.infohash %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @weblink.link %>
+</p>
+
+<%= link_to 'Edit', edit_weblink_path(@weblink) %> |
+<%= link_to 'Back', weblinks_path %>

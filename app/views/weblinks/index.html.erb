@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Weblinks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Infohash</th>
+      <th>Link</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @weblinks.each do |weblink| %>
+      <tr>
+        <td><%= weblink.infohash %></td>
+        <td><%= weblink.link %></td>
+        <td><%= link_to 'Show', weblink %></td>
+        <td><%= link_to 'Edit', edit_weblink_path(weblink) %></td>
+        <td><%= link_to 'Destroy', weblink, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Weblink', new_weblink_path %>

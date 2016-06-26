@@ -22,6 +22,7 @@ class Infohash < ActiveRecord::Base
   has_one :project      , dependent: :destroy # one or zero: creates Project.infohash_id
   has_one :post         , dependent: :destroy # one or zero: creates Post.infohash_id
   has_one :reminder     , dependent: :destroy # one or zero: creates Reminder.infohash_id
+  has_one :weblink      , dependent: :destroy # one or zero: creates Weblink.infohash_id
   
   validates_presence_of :visibility
   validates_presence_of :user
