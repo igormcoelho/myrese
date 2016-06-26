@@ -7,18 +7,21 @@
 
 <p>
   <strong>Visibility:</strong>
-  <%= @infohash.visibility %>
+  <%= @infohash.visibility.vtype %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @infohash.user %>
+  <strong>Owner:</strong>
+  <%= @infohash.user.username %>
 </p>
 
 <p>
-  <strong>Group:</strong>
-  <%= @infohash.group %>
+  <strong>Members:</strong>
+  <% @infohash.infohash_users.each do |u| %> 
+    <%= u.user.username %>
+  <% end %>
 </p>
+
 
 <%= link_to 'Edit', edit_infohash_path(@infohash) %> |
 <%= link_to 'Back', infohashes_path %>

@@ -31,7 +31,7 @@ class PostsController < ApplicationController
     @post        = @infohash.build_post(post_params)
 
     @infohash.user = current_user
-    @infohash.htype_id = 2           # POST
+    @infohash.htype_id = 4           # POST
     @infohash.code     = "post" + Post.count.to_s
           
     respond_to do |format|

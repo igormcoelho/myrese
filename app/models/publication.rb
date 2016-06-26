@@ -1,5 +1,5 @@
 class Publication < ActiveRecord::Base
-  belongs_to :infohash   , dependent: :destroy
+  belongs_to :infohash   #, dependent: :destroy
   ##after_destroy :destroy_infohash
   
   delegate :user         , to: :infohash # belongs_to through (doesn't exist!)

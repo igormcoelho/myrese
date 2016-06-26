@@ -14,9 +14,10 @@ class InfohashUsersController < ApplicationController
   #end
 
   # GET /infohash_users/new
-  #def new
-  #  @infohash_user = InfohashUser.new(:infohash => @infohash)
-  #end
+  def new
+    @infohash_user = InfohashUser.new(:infohash => @infohash)
+    #@infohash.infohash_users.build
+  end
 
   # GET /infohash_users/1/edit
   #def edit
@@ -31,9 +32,10 @@ class InfohashUsersController < ApplicationController
     respond_to do |format|
       if @infohash_user.save
         if @infohash.htype_id == 1
-          @publication = Publication.where(:infohash => @infohash).first
-          format.html { redirect_to @publication, notice: 'Infohash user was successfully created.' }
-        else
+          format.html { redirect_to @infohash.publication, notice: 'Infohash user was successfully created.' }
+        elsif @infohash.htype_id == 4
+          format.html { redirect_to @infohash.post, notice: 'Infohash user was successfully created.' }
+        elsif  
           format.html { redirect_to @infohash, notice: 'Infohash user was successfully created.' }
         end
           format.json { render :show, status: :created, location: @infohash }
