@@ -30,7 +30,7 @@
         <td>
           <% publication.publication_profiles.each do |pp| %>
             <% if pp.profile %>
-              <%= link_to pp.author, pp.profile %>
+              <%= link_to pp.profile.citation, pp.profile %>
             <% else %>
               <%= pp.author %>
             <% end %>

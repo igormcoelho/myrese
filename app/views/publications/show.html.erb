@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Ptype:</strong>
-  <%= @publication.pubtype %>
+  <strong>Publication Type:</strong>
+  <%= @publication.pubtype.name %>
 </p>
 
 <p>
@@ -11,23 +11,33 @@
 </p>
 
 <p>
-  <strong>Journal:</strong>
-  <%= @publication.journal %>
-</p>
-
-<p>
   <strong>Year:</strong>
   <%= @publication.year %>
 </p>
 
 <p>
-  <strong>Doi:</strong>
+  <strong>Journal/Book/Collection title:</strong>
+  <%= @publication.ctitle %>
+</p>
+
+<p>
+  <strong>ISSN:</strong>
+  <%= @publication.issn %>
+</p>
+
+<p>
+  <strong>ISBN:</strong>
+  <%= @publication.isbn %>
+</p>
+
+<p>
+  <strong>DOI:</strong>
   <%= @publication.doi %>
 </p>
 
 <p>
   <strong>Infohash code:</strong>
-  <%= Infohash.find(@publication.infohash_id).code %>
+  <%= @publication.infohash.code %>
 </p>
 
 

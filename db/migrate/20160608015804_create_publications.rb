@@ -5,6 +5,8 @@ class CreatePublications < ActiveRecord::Migration
       t.string :title
       t.integer :year
       t.string :ctitle      #collection title {journal name, book title when chapters, conference proceedings}
+      t.string :issn
+      t.string :isbn
       t.string :editor
       t.string :publisher
       t.string :organization

@@ -191,6 +191,8 @@ ActiveRecord::Schema.define(version: 20160625192140) do
     t.string   "title"
     t.integer  "year"
     t.string   "ctitle"
+    t.string   "issn"
+    t.string   "isbn"
     t.string   "editor"
     t.string   "publisher"
     t.string   "organization"
