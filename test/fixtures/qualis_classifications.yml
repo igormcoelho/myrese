@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  classification: MyString
+  qualis_area_id: 
+  qualis_journal_id: 
+
+two:
+  classification: MyString
+  qualis_area_id: 
+  qualis_journal_id: 

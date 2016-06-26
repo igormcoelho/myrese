@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160625192140) do
+ActiveRecord::Schema.define(version: 20160626020200) do
 
   create_table "gfiles", force: :cascade do |t|
     t.string   "name"
@@ -217,6 +217,30 @@ ActiveRecord::Schema.define(version: 20160625192140) do
 
   create_table "pubtypes", force: :cascade do |t|
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "qualis_areas", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "qualis_classifications", force: :cascade do |t|
+    t.string   "classification"
+    t.integer  "qualis_area_id"
+    t.integer  "qualis_journal_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "qualis_classifications", ["qualis_area_id"], name: "index_qualis_classifications_on_qualis_area_id"
+  add_index "qualis_classifications", ["qualis_journal_id"], name: "index_qualis_classifications_on_qualis_journal_id"
+
+  create_table "qualis_journals", force: :cascade do |t|
+    t.string   "journal"
+    t.string   "issn"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
