@@ -1,5 +1,6 @@
 class Profile < ActiveRecord::Base
   belongs_to :user
+  belongs_to :visibility
   
   has_many :publications, through: :publication_profiles
   

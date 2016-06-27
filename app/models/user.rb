@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   
   after_create :create_bars
   def create_bars 
-    self.profile = Profile.create(:fullname => :username, :citation => :username, :user => self)
+    self.profile = Profile.create(:fullname => :username, :citation => :username, :visibility_id => 3, :user => self)
   end
   
   #has_many :groupmembers

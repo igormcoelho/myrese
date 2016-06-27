@@ -210,11 +210,13 @@ ActiveRecord::Schema.define(version: 20160626234157) do
     t.string   "citation"
     t.text     "shortbio"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "visibility_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
+  add_index "profiles", ["visibility_id"], name: "index_profiles_on_visibility_id"
 
   create_table "project_profiles", force: :cascade do |t|
     t.integer  "project_id"
@@ -231,12 +233,14 @@ ActiveRecord::Schema.define(version: 20160626234157) do
     t.string   "name"
     t.text     "abstract"
     t.string   "keywords"
+    t.integer  "profile_id"
     t.integer  "infohash_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   add_index "projects", ["infohash_id"], name: "index_projects_on_infohash_id"
+  add_index "projects", ["profile_id"], name: "index_projects_on_profile_id"
 
   create_table "publication_profiles", force: :cascade do |t|
     t.integer  "publication_id"
