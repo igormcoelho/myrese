@@ -26,6 +26,8 @@ QualisJournal.create :journal => "Applied Energy"                               
 apen = QualisJournal.where(:issn => "0306-2619").first
 QualisJournal.create :journal => "International Journal of Production Research"   , :issn => "0020-7543"
 ijpr = QualisJournal.where(:issn => "0020-7543").first
+QualisJournal.create :journal => "Evolutionary Computation                    "   , :issn => "1063-6560"
+evco = QualisJournal.where(:issn => "1063-6560").first
 
 
 QualisClassification.create :classification => "A1", :qualis_area => cc, :qualis_journal => ejor
@@ -49,4 +51,11 @@ QualisClassification.create :classification => "B2", :qualis_area => e3, :qualis
 QualisClassification.create :classification => "A2", :qualis_area => cc, :qualis_journal => ijpr
 QualisClassification.create :classification => "A2", :qualis_area => e3, :qualis_journal => ijpr 
 QualisClassification.create :classification => "A2", :qualis_area => ii, :qualis_journal => ijpr
+
+QualisClassification.create :classification => "B1", :qualis_area => e4, :qualis_journal => evco 
+QualisClassification.create :classification => "B1", :qualis_area => ii, :qualis_journal => evco
+
+QualisClassification.create :classification => "A1", :qualis_area => e1, :qualis_journal => apen 
+QualisClassification.create :classification => "A1", :qualis_area => e3, :qualis_journal => apen 
+QualisClassification.create :classification => "A1", :qualis_area => ii, :qualis_journal => apen
 
