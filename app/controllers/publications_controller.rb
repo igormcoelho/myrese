@@ -34,6 +34,7 @@ class PublicationsController < ApplicationController
 
   # GET /publications/1/edit
   def edit
+    @infohash = @publication.infohash
   end
 
   # POST /publications

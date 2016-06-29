@@ -23,7 +23,7 @@ Htype.create :name => "Reminder"   , :shortname => "rem"   , :id => 5
 Htype.create :name => "Weblink"    , :shortname => "link"  , :id => 6
 
 
-Pubtype.create :name => "article"        , :id => 1
+Pubtype.create :name => "article"        , :id => 1 
 Pubtype.create :name => "book"           , :id => 2
 Pubtype.create :name => "proceedings"    , :id => 3
 Pubtype.create :name => "chapter"        , :id => 4
