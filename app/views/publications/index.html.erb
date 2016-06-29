@@ -15,7 +15,7 @@
       <th>Members</th>
       <th>Tags</th>
       <th>Visibility</th>
-      <th colspan="3">Actions</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -65,12 +65,16 @@
         </td>
         <td><%= publication.visibility.vtype %></td>
         
-        <td><%= link_to 'Show', publication %></td>
+        <td> <div class="btn-group" role="group" aria-label="...">
+          <%= link_to 'Show', publication, class: 'btn btn-default' %>
         
         <% if current_user == publication.user %>
-        <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
-        <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_publication_path(publication), class: 'btn' %></td>
+        <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn' %></td>
         <% end %>
+        
+        </div>
+        </td>
 
       </tr>
     <% end %>
@@ -79,4 +83,4 @@
 
 <br>
 
-<%= link_to 'New Publication', new_publication_path %>
+<%= link_to 'New Publication', new_publication_path, class: 'btn btn-default' %>

@@ -2,5 +2,7 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @publication %> |
-<%= link_to 'Back', publications_path %>
+<div class="btn-group " role="group" aria-label="...">
+    <%= link_to 'Show', @publication, class: 'btn btn-default' %>
+    <%= link_to 'Back', publications_path, class: 'btn' %>
+</div>
