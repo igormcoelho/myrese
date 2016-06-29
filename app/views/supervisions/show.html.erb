@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @supervision.user %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @supervision.title %>
+</p>
+
+<p>
+  <strong>Suptype:</strong>
+  <%= @supervision.suptype %>
+</p>
+
+<p>
+  <strong>Mainsup:</strong>
+  <%= @supervision.mainsup %>
+</p>
+
+<p>
+  <strong>Profile:</strong>
+  <%= @supervision.profile %>
+</p>
+
+<p>
+  <strong>Date begin:</strong>
+  <%= @supervision.date_begin %>
+</p>
+
+<p>
+  <strong>Date end:</strong>
+  <%= @supervision.date_end %>
+</p>
+
+<%= link_to 'Edit', edit_supervision_path(@supervision) %> |
+<%= link_to 'Back', supervisions_path %>

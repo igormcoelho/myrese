@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160629032245) do
+ActiveRecord::Schema.define(version: 20160629195633) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "title"
@@ -342,6 +342,21 @@ ActiveRecord::Schema.define(version: 20160629032245) do
   end
 
   add_index "reminders", ["infohash_id"], name: "index_reminders_on_infohash_id"
+
+  create_table "supervisions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.string   "suptype"
+    t.boolean  "mainsup"
+    t.integer  "profile_id"
+    t.date     "date_begin"
+    t.date     "date_end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "supervisions", ["profile_id"], name: "index_supervisions_on_profile_id"
+  add_index "supervisions", ["user_id"], name: "index_supervisions_on_user_id"
 
   create_table "tags", force: :cascade do |t|
     t.integer  "user_id"

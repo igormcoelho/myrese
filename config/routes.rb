@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :supervisions
   resources :qualis_evaluate_journals
   resources :evaluations
   resources :weblinks

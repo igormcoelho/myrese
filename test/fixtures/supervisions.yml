@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  title: MyString
+  suptype: MyString
+  mainsup: 
+  profile_id: 
+  date_begin: 2016-06-29
+  date_end: 2016-06-29
+
+two:
+  user_id: 
+  title: MyString
+  suptype: MyString
+  mainsup: 
+  profile_id: 
+  date_begin: 2016-06-29
+  date_end: 2016-06-29

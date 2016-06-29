@@ -1,0 +1,46 @@
+<%= form_for(@supervision) do |f| %>
+  <% if @supervision.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@supervision.errors.count, "error") %> prohibited this supervision from being saved:</h2>
+
+      <ul>
+      <% @supervision.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :suptype %><br>
+    <%= f.text_field :suptype %>
+  </div>
+  <div class="field">
+    <%= "Main Supervisor" %><br>
+    <%= f.check_box :mainsup, :checked => true %>
+  </div>
+  <div class="field">
+    <%= "Student name (TODO)" %><br>
+    <%= f.text_field :suptype %>
+  </div>
+  <div class="field">
+    <%= f.label :profile %><br />
+    <% plist = [["empty", 0]] %>
+    <%= f.select :profile_id, options_for_select(plist + Profile.all.order(:citation).map{|p|[p.citation, p.id]}, 0) %>
+  </div>
+  <div class="field">
+    <%= f.label :date_begin %><br>
+    <%= f.date_select :date_begin %>
+  </div>
+  <div class="field">
+    <%= f.label :date_end %><br>
+    <%= f.date_select :date_end, :include_blank => true , :value => nil%>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
