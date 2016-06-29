@@ -14,7 +14,7 @@ class PublicationsController < ApplicationController
     
     @publications = Publication.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ?", current_user.id).or(
                     Publication.joins(:infohash_users).joins(:infohash).where("infohashes.user_id = ?", current_user.id)
-    )
+    ).uniq
     # SELECT "publications".* FROM "publications" INNER JOIN "infohashes" ON "infohashes"."id" = "publications"."infohash_id" 
     # INNER JOIN "infohash_users" ON "infohash_users"."infohash_id" = "infohashes"."id" INNER JOIN "infohashes" "infohashes_publications" ON "infohashes_publications"."id" = "publications"."infohash_id" 
     # WHERE ((infohash_users.user_id = 1) OR (infohashes.user_id = 1))
@@ -34,7 +34,7 @@ class PublicationsController < ApplicationController
 
   # GET /publications/1/edit
   def edit
-    @infohash = @publication.infohash
+    @infohash = @publication.infohahs
   end
 
   # POST /publications
