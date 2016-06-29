@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160626234157) do
+ActiveRecord::Schema.define(version: 20160629032245) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "title"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 20160626234157) do
   end
 
   add_index "activities", ["position_id"], name: "index_activities_on_position_id"
+
+  create_table "evaluations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "evaluations", ["user_id"], name: "index_evaluations_on_user_id"
 
   create_table "gfiles", force: :cascade do |t|
     t.string   "name"
@@ -304,6 +313,19 @@ ActiveRecord::Schema.define(version: 20160626234157) do
 
   add_index "qualis_classifications", ["qualis_area_id"], name: "index_qualis_classifications_on_qualis_area_id"
   add_index "qualis_classifications", ["qualis_journal_id"], name: "index_qualis_classifications_on_qualis_journal_id"
+
+  create_table "qualis_evaluate_journals", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "year_begin"
+    t.integer  "year_end"
+    t.integer  "evaluation_id"
+    t.string   "target_qualis"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "qualis_evaluate_journals", ["evaluation_id"], name: "index_qualis_evaluate_journals_on_evaluation_id"
+  add_index "qualis_evaluate_journals", ["profile_id"], name: "index_qualis_evaluate_journals_on_profile_id"
 
   create_table "qualis_journals", force: :cascade do |t|
     t.string   "journal"

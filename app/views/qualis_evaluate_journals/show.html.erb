@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Profile:</strong>
+  <%= @qualis_evaluate_journal.profile %>
+</p>
+
+<p>
+  <strong>Year begin:</strong>
+  <%= @qualis_evaluate_journal.year_begin %>
+</p>
+
+<p>
+  <strong>Year end:</strong>
+  <%= @qualis_evaluate_journal.year_end %>
+</p>
+
+<p>
+  <strong>Evaluation:</strong>
+  <%= @qualis_evaluate_journal.evaluation %>
+</p>
+
+<p>
+  <strong>Target qualis:</strong>
+  <%= @qualis_evaluate_journal.target_qualis %>
+</p>
+
+<%= link_to 'Edit', edit_qualis_evaluate_journal_path(@qualis_evaluate_journal) %> |
+<%= link_to 'Back', qualis_evaluate_journals_path %>

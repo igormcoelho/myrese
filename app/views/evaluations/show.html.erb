@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @evaluation.user %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @evaluation.name %>
+</p>
+
+<%= link_to 'Edit', edit_evaluation_path(@evaluation) %> |
+<%= link_to 'Back', evaluations_path %>

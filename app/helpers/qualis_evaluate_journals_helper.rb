@@ -1,0 +1,2 @@
+module QualisEvaluateJournalsHelper
+end

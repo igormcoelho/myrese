@@ -1,0 +1,37 @@
+<%= form_for(@qualis_evaluate_journal) do |f| %>
+  <% if @qualis_evaluate_journal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@qualis_evaluate_journal.errors.count, "error") %> prohibited this qualis_evaluate_journal from being saved:</h2>
+
+      <ul>
+      <% @qualis_evaluate_journal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :profile_id %><br>
+    <%= f.select :profile_id, options_for_select(Profile.all.map{|p|[p.citation, p.id]}) %>
+  </div>
+  <div class="field">
+    <%= f.label :year_begin %><br>
+    <%= f.number_field :year_begin %>
+  </div>
+  <div class="field">
+    <%= f.label :year_end %><br>
+    <%= f.number_field :year_end %>
+  </div>
+  <div class="field">
+    <%= "Available Evaluations" %><br />
+    <%= f.select :evaluation_id, options_for_select(Evaluation.all.map{|p|[p.name, p.id]}) %>
+  </div>
+  <div class="field">
+    <%= "Target Qualis values, separated by semi-comma. Example: A1;A2;B1" %><br>
+    <%= f.text_field :target_qualis %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

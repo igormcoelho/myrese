@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  profile_id: 
+  year_begin: 1
+  year_end: 1
+  evaluation_id: 
+  target_qualis: MyString
+
+two:
+  profile_id: 
+  year_begin: 1
+  year_end: 1
+  evaluation_id: 
+  target_qualis: MyString

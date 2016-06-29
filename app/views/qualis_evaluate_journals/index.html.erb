@@ -1,0 +1,72 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Qualis Evaluate Journals</h1>
+
+<% @qualis_evaluate_journals.each do |qej| %>
+<hr>
+<table>
+  <thead>
+    <tr>
+      <th>Profile</th>
+      <th>Year begin</th>
+      <th>Year end</th>
+      <th>Evaluation</th>
+      <th>Target qualis</th>
+      <th>Qualis Area</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td><%= qej.profile.citation %></td>
+        <td><%= qej.year_begin %></td>
+        <td><%= qej.year_end %></td>
+        <td><%= link_to qej.evaluation.name, qej.evaluation %></td>
+        <td><%= qej.target_qualis %></td>
+        <td><%= "INTERDISCIPLINAR (hardcoded)" %></td>
+        <td><%= link_to 'Show', qej %></td>
+        <td><%= link_to 'Edit', edit_qualis_evaluate_journal_path(qej) %></td>
+        <td><%= link_to 'Destroy', qej, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  </tbody>
+</table>
+
+<% qlist = qej.target_qualis.split(/\s*[,;]\s*/) %>
+<b><%= "Target QUALIS: " + qlist.to_s %></b><br>
+
+<% res = Publication.where("0") %>
+
+<% qlist.each do |q| %>
+  <%# TODO: UNSAFE SQL, FIX IT IN THE FUTURE! %>
+  <% res += Publication.find_by_sql("
+  SELECT p.* 
+  FROM 
+  publications as p, qualis_classifications as qc,
+  qualis_journals as qj, publication_profiles as pp
+  WHERE
+  qj.id = qc.qualis_journal_id AND
+  qc.qualis_area_id = 6 AND
+  pp.publication_id = p.id AND
+  pp.profile_id = '"+ qej.profile.id.to_s + "' AND
+  p.issn = qj.issn AND
+  qc.classification = '"+ q + "' AND
+  p.year >= '" + (qej.year_begin.to_s) +"' AND
+  p.year <= '" + (qej.year_end.to_s) +"'  "
+  ) 
+%>
+
+<% end %>
+
+<%= res.count.to_s + " results!" %>
+<% res.each do |article| %>
+  <br>
+  <%= article.format_as_article %>
+<% end %>
+
+<br>
+<% end %>
+ 
+<br><br>
+
+<%= link_to 'New Qualis evaluate journal', new_qualis_evaluate_journal_path %>

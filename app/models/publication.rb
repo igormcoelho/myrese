@@ -41,6 +41,28 @@ class Publication < ActiveRecord::Base
     end
   end
   
+  def format_as_article
+    ret = ""
+    authors.each_with_index do |a, index|
+      ret += a.citation
+      if index == authors.size - 1
+        ret += " "
+      else
+        ret += "; "
+      end
+    end
+    ret += title + ". "
+    ret += ctitle + ", "
+    if !volume.blank?
+      ret += "v. " + volume.to_s + ", "
+    end
+    if (!page_begin.blank?) && (!page_end.blank?)
+      ret += "p. " + page_begin.to_s + "-" + page_end.to_s + ", "
+    end
+    ret += year.to_s + "."
+    return ret
+  end
+  
       #t.string :ctitle      #collection title {journal name, book title when chapters, conference proceedings}
       #t.string :editor
       #t.string :publisher
