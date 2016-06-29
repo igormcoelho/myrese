@@ -12,6 +12,7 @@
       <div class="container ">
         <div id="logo" class="navbar-brand"><%= link_to "Myrese -- A distributed research management system", root_path %></div>
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
+          <% if user_signed_in? %>
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "config groups", groups_path %></li>
           <li><%# link_to "infohashes", infohashes_path %></li>
@@ -25,7 +26,6 @@
           <li><%= link_to "evaluations", evaluations_path %></li>
           <li><%= link_to "evaluations qualis plugin", qualis_evaluate_journals_path %></li>
         </ul>
-      <% if user_signed_in? %>
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "Edit Account", edit_user_registration_path %>
           </li>
