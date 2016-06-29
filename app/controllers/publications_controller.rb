@@ -7,8 +7,17 @@ class PublicationsController < ApplicationController
     #ms = Member.includes(:infohash).where("user = "+current_user.id.to_s+" AND infohash.htype = 1")
     #@publications = Publication.joins(:members).includes(:infohash).where("member.user_id = "+current_user.id.to_s).where("infohash.htype = 1")
     # TODO filter user in members of publication.infohash
+    
     #@publications = Publication.all
-    @publications = Publication.joins(:infohash_users).where("infohash_users.user_id = ?", current_user.id)
+    
+    #@publications = Publication.joins(:infohash_users).where("infohash_users.user_id = ?", current_user.id)
+    
+    @publications = Publication.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ?", current_user.id).or(
+                    Publication.joins(:infohash_users).joins(:infohash).where("infohashes.user_id = ?", current_user.id)
+    )
+    # SELECT "publications".* FROM "publications" INNER JOIN "infohashes" ON "infohashes"."id" = "publications"."infohash_id" 
+    # INNER JOIN "infohash_users" ON "infohash_users"."infohash_id" = "infohashes"."id" INNER JOIN "infohashes" "infohashes_publications" ON "infohashes_publications"."id" = "publications"."infohash_id" 
+    # WHERE ((infohash_users.user_id = 1) OR (infohashes.user_id = 1))
   end
 
   # GET /publications/1

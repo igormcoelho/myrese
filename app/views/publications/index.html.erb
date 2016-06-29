@@ -2,16 +2,14 @@
 
 <h1>Publications</h1>
 
-<table>
+<table border="1">
   <thead>
     <tr>
       <th>General title</th>
-      <th>General description</th>
       <th>Publication type</th>
       <th>Title</th>
       <th>Authors</th>
       <th>Year</th>
-      <th>Infohash code</th>
       <th>Owner</th>
       <th>Members</th>
       <th>Tags</th>
@@ -24,26 +22,27 @@
     <% @publications.each do |publication| %>
       <tr>
         <td><%= publication.infohash.gtitle %></td>
-        <td><%= publication.infohash.gdescription %></td>
         <td><%= publication.pubtype.name %></td>
         <td><%= publication.title %></td>
-        <td>
+        <td style="width: 250px">
           <% publication.publication_profiles.each do |pp| %>
+          <b>
             <% if pp.profile %>
               <%= link_to pp.profile.citation, pp.profile %>
             <% else %>
               <%= pp.author %>
             <% end %>
+          </b>
             <% if (current_user == publication.user) %>
               <%= link_to "(delete)", [publication, pp] ,method: :delete, data: { confirm: 'Are you sure?' } %>
             <% end %>
-            <% if current_user == publication.user #owner %>
-              <%= link_to "New author", new_publication_publication_profile_path(publication) %>
+          <br>
           <% end %>
+          <% if current_user == publication.user #owner %>
+            <%= link_to "New author", new_publication_publication_profile_path(publication) %>
           <% end %>
         </td>
         <td><%= publication.year %></td>
-        <td><%= publication.infohash.code %> </td>
         <td><%= publication.infohash.user.username %> </td>
         <td>
           <% publication.infohash.infohash_users.each do |u| %> 
