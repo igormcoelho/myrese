@@ -28,6 +28,7 @@ class Publication < ActiveRecord::Base
   #validates_presence_of :gdescription  , message: "General description is missing"
   #validates_presence_of :visibility    , message: "Visibility is missing"
   
+  validates_associated  :infohash      , message: "Failed to validate general information"
   validates_presence_of :infohash      , message: "Infohash reference is missing"
   validates_presence_of :pubtype       , message: "Publication type is missing"
   validates_presence_of :title         , message: "Publication title is missing"
