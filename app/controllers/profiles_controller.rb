@@ -35,7 +35,7 @@ class ProfilesController < ApplicationController
       if index == 0
         cite += v.upcase + ", "
       else
-        cite += v.upcase + "."
+        cite += v.upcase[0] + "."
       end
     end
     

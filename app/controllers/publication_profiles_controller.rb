@@ -28,8 +28,27 @@ class PublicationProfilesController < ApplicationController
   def create
     #@publication_profile = PublicationProfile.new(publication_profile_params)
     @publication_profile = @publication.publication_profiles.build(publication_profile_params)
-    if (@publication_profile.profile_id != 0) and (@publication_profile.author == "")
+    if (@publication_profile.profile_id > 0)
        @publication_profile.author = Profile.find(@publication_profile.profile_id).citation
+    elsif (@publication_profile.profile_id == 0) and (@publication_profile.author != "")
+       @publication_profile.author
+       @publication_profile.profile = nil # maybe redundant...
+    elsif (@publication_profile.profile_id == -1) and (@publication_profile.author != "")
+      clist = @publication_profile.author.split(/\s*[.,]\s*/)
+      cite = ""
+      clist.each_with_index do |v,index|
+        if index == 0
+          cite += v.upcase + ", "
+        else
+          cite += v.upcase[0] + "."
+        end
+      end
+      @publication_profile.profile = Profile.new(:fullname => cite, :shortbio => "no story...", :visibility_id => 1, :citation => cite)
+      @publication_profile.profile.save
+      @publication_profile.author = cite
+    else # crazy!
+      @publication_profile.profile = nil
+      @publication_profile.author = ""
     end
 
     respond_to do |format|
