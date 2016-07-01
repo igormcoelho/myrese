@@ -7,8 +7,7 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <th>Size</th>
-      <th>Infohash</th>
+      <th>Get file</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +15,9 @@
   <tbody>
     <% @gfiles.each do |gfile| %>
       <tr>
-        <td><%= gfile.name %></td>
-        <td><%= gfile.description %></td>
-        <td><%= gfile.size %></td>
-        <td><%= gfile.infohash %></td>
+        <td><%= gfile.gtitle %></td>
+        <td><%= gfile.gdescription %></td>
+        <td><%= link_to "Download", gfile.filename.url %></td>
         <td><%= link_to 'Show', gfile %></td>
         <td><%= link_to 'Edit', edit_gfile_path(gfile) %></td>
         <td><%= link_to 'Destroy', gfile, method: :delete, data: { confirm: 'Are you sure?' } %></td>

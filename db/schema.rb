@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160629195633) do
+ActiveRecord::Schema.define(version: 20160701195603) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "title"
@@ -38,8 +38,12 @@ ActiveRecord::Schema.define(version: 20160629195633) do
     t.string   "name"
     t.integer  "size"
     t.integer  "infohash_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "filename_file_name"
+    t.string   "filename_content_type"
+    t.integer  "filename_file_size"
+    t.datetime "filename_updated_at"
   end
 
   add_index "gfiles", ["infohash_id"], name: "index_gfiles_on_infohash_id"

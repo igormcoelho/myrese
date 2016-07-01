@@ -2,23 +2,19 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @gfile.name %>
+  <%= @gfile.gtitle %>
 </p>
 
 <p>
   <strong>Description:</strong>
-  <%= @gfile.description %>
+  <%= @gfile.gdescription %>
 </p>
 
 <p>
-  <strong>Size:</strong>
-  <%= @gfile.size %>
+  <strong>File:</strong>
+  <%= @gfile.filename.url %>
 </p>
 
-<p>
-  <strong>Infohash:</strong>
-  <%= @gfile.infohash %>
-</p>
 
 <%= link_to 'Edit', edit_gfile_path(@gfile) %> |
 <%= link_to 'Back', gfiles_path %>

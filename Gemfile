@@ -5,6 +5,8 @@ gem 'where-or' # backport from Rails 5 to Rails 4.2
 
 gem 'bootstrap-sass', '~> 3.3.6'
 
+gem "paperclip", "~> 5.0.0.beta1"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 

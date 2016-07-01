@@ -1,4 +1,36 @@
 <%= form_for(@gfile) do |f| %>
+
+  <h2>General information</h2>
+  <% if @infohash.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@infohash.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% @infohash.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :visibility %><br />
+    <%= f.select :visibility_id, options_for_select(Visibility.all.map{|p|[p.vtype, p.id]}) %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "General title (allows #hashtags)" %><br>
+    <%= f.text_field(:gtitle) %>
+  </div>
+
+  <div class="field">
+    <%= f.label "General description (allows #hashtags)" %><br>
+    <%= f.text_area :gdescription %>
+  </div>
+
+  <h2>File information</h2>
+
+
   <% if @gfile.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@gfile.errors.count, "error") %> prohibited this gfile from being saved:</h2>
@@ -10,23 +42,14 @@
       </ul>
     </div>
   <% end %>
+  
+  <p>(*) Mandatory fields</p>
 
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.label "File (*) -- BUG: Some files will only attach in Chrome, but not in Firefox..." %><br>
+    <%= f.file_field :filename, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :size %><br>
-    <%= f.number_field :size %>
-  </div>
-  <div class="field">
-    <%= f.label :infohash_id %><br>
-    <%= f.text_field :infohash_id %>
-  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
