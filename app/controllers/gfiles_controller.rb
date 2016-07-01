@@ -65,6 +65,7 @@ class GfilesController < ApplicationController
         format.json { render :show, status: :created, location: @publication }
       else
         format.html { render :new }
+        #flash[:error] = "PROBLEMAS! BUG NO FIREFOX??"
         format.json { render json: @gfile.errors, status: :unprocessable_entity }
       end
     end

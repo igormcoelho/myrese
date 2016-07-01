@@ -20,6 +20,9 @@ class Gfile < ActiveRecord::Base
   #validates :filename, attachment_presence: true, validate_media_type: false
   
   do_not_validate_attachment_file_type :filename
+  # ALSO DISABLED SPOOF CHECK IN config/initializers/paperclip.rb
+  # STILL NEEDING A WORKAROUND FOR FIREFOX AND PDF FILES :(
+  
   #validates_attachment_content_type :filename, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/force-download", "application/xls", "application/xlsx", "application/doc", "application/docx", "application/ppt", "application/pptx"]
   
   validates_with AttachmentSizeValidator, attributes: :filename, less_than: 20.megabytes
