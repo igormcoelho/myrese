@@ -11,7 +11,7 @@ class Publication < ActiveRecord::Base
   delegate :visibility   , to: :infohash
   delegate :visibility_id, to: :infohash
   
-  has_many :publication_profiles
+  has_many :publication_profiles                   , dependent: :destroy
   has_many :authors, through: :publication_profiles, source: :profile
   
   #attr_reader(:mainauthor)

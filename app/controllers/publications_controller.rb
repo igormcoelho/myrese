@@ -98,7 +98,7 @@ class PublicationsController < ApplicationController
   # DELETE /publications/1
   # DELETE /publications/1.json
   def destroy
-    @publication.destroy
+    @publication.infohash.destroy
     respond_to do |format|
       format.html { redirect_to publications_url, notice: 'Publication was successfully destroyed.' }
       format.json { head :no_content }
