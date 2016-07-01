@@ -12,6 +12,13 @@ class Infohash < ActiveRecord::Base
   has_many :members           , through: :infohash_users, source: :user
   has_many :tags              , dependent: :delete_all
   
+  after_update :recreate_tags
+  
+  def recreate_tags
+    tags.destroy
+    # recreate tags
+  end
+  
   validates_presence_of :gtitle       , message: "General Title is missing"
   validates_presence_of :gdescription , message: "General Description is missing"
   
