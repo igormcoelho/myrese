@@ -11,14 +11,23 @@
 </p>
 
 <p>
+  <strong>Citation:</strong>
+  <%= @profile.citation %>
+</p>
+
+<p>
   <strong>Username</strong>
-  <%= @profile.user.username %>
+  <% if @profile %>
+    <%= @profile.user.username %>
+  <% end %>
 </p>
 
 <p>
   <strong>Email</strong>
-  <%= @profile.user.email %>
+  <% if @profile %>
+    <%= @profile.user.email %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+<%= link_to 'Back', root_path %>

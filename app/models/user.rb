@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   }
   
   # Only allow letter, number, underscore and punctuation.
-  validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+  validates_format_of :username, with: /^[a-z0-9_\.]*$/, :multiline => true
   
 =begin
   def self.find_for_database_authentication(warden_conditions)
@@ -49,12 +49,12 @@ class User < ActiveRecord::Base
     end
   end
   
-  has_one :profile
+  has_one :profile  # accepts nil
   
-  after_create :create_bars
-  def create_bars 
-    self.profile = Profile.create(:fullname => :username, :citation => :username, :visibility_id => 3, :user => self)
-  end
+  #after_create :create_bars
+  #def create_bars 
+  #  self.profile = Profile.create(:fullname => :username, :citation => :username, :visibility_id => 3, :user => self)
+  #end
   
   #has_many :groupmembers
   #has_many :groups      , through: :groupmembers

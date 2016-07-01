@@ -18,9 +18,15 @@
     <%= "(*) Short Biography" %><br>
     <%= f.text_area :shortbio %>
   </div>
-
+  <div class="field">
+    <%= "(**) Citation name (format example, full name: João Arlindo Silva -> SILVA, J. A.)" %><br>
+    <%= f.text_field :citation %>
+  </div>
+  
   <p>(*) Mandatory fields</p>
-
+  <p>(**) If this citation name is already registered in the system (without a linked user),<br> 
+  your profile will be automatically linked to it.</p>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

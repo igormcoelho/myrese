@@ -12,32 +12,35 @@
       <div class="container ">
         <div id="logo" class="navbar-brand"><%= link_to "Myrese -- A distributed research management system", root_path %></div>
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
-          <% if user_signed_in? %>
-        <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "config groups", groups_path %></li>
-          <li><%# link_to "infohashes", infohashes_path %></li>
-          <li><%= link_to "publications", publications_path %></li>
-          <li><%= link_to "projects", projects_path %></li>
-          <li><%= link_to "tags", tags_path %></li>
-          <li><%= link_to "posts", posts_path %></li>
-          <li><%= link_to "profiles", profiles_path %></li>
-          <li><%= link_to "weblinks", weblinks_path %></li>
-          <li><%= link_to "supervisions", supervisions_path %></li>
-          <li><%= link_to "evaluations", evaluations_path %></li>
-          <li><%= link_to "evaluations qualis plugin", qualis_evaluate_journals_path %></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Edit Account", edit_user_registration_path %>
-          </li>
-          <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
-          <li class="round-image-50"><%= image_tag(avatar_url(current_user))%>
-        </ul>
-      <% else %>
-        <ul class="nav navbar-nav pull-right">
-          <li><%= link_to 'Sign up', new_user_registration_path %></li>
-          <li><%= link_to 'Sign in', new_user_session_path %></li>
-        </ul>
-      <% end %>
+        <% if user_signed_in? %>
+          <ul class="nav navbar-nav navbar-left">
+            <% if !current_user.profile %>
+              <li>You don't have an instance profile yet! Please <%= link_to "create or claim an existing one", new_profile_path %></li>
+            <% else %>
+              <li><%= link_to "config groups", groups_path %></li>
+              <li><%# link_to "infohashes", infohashes_path %></li>
+              <li><%= link_to "publications", publications_path %></li>
+              <li><%= link_to "projects", projects_path %></li>
+              <li><%= link_to "tags", tags_path %></li>
+              <li><%= link_to "posts", posts_path %></li>
+              <li><%= link_to "profiles", profiles_path %></li>
+              <li><%= link_to "weblinks", weblinks_path %></li>
+              <li><%= link_to "supervisions", supervisions_path %></li>
+              <li><%= link_to "evaluations", evaluations_path %></li>
+              <li><%= link_to "evaluations qualis plugin", qualis_evaluate_journals_path %></li>
+            <% end %>
+          </ul>
+          <ul class="nav navbar-nav pull-right">
+            <li><%= link_to "Edit Account", edit_user_registration_path %></li>
+            <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
+            <li class="round-image-50"><%= image_tag(avatar_url(current_user))%>
+          </ul>
+        <% else %>
+          <ul class="nav navbar-nav pull-right">
+            <li><%= link_to 'Sign up', new_user_registration_path %></li>
+            <li><%= link_to 'Sign in', new_user_session_path %></li>
+          </ul>
+        <% end %>
         </nav>
       </div>
     </div>
@@ -56,7 +59,7 @@
   <hr>
 
   <center>
-    Copyleft 2016 - AGPLv3 - <%= link_to "Contribute", "https://github.com/igormcoelho/myrese", :target => '_blank' %>
+    Copyleft 2012-2016 - AGPLv3 - <%= link_to "Contribute", "https://github.com/igormcoelho/myrese", :target => '_blank' %>
   </center>
 </body>
 </html>

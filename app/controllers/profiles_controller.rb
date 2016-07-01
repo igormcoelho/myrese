@@ -25,10 +25,34 @@ class ProfilesController < ApplicationController
   # POST /profiles.json
   def create
     @profile = Profile.new(profile_params)
+    @profile.user_id = current_user.id
+    @profile.visibility_id = 1 # private
+    
+    clist = @profile.citation.split(/\s*[.,]\s*/)
+    
+    cite = ""
+    clist.each_with_index do |v,index|
+      if index == 0
+        cite += v.upcase + ", "
+      else
+        cite += v.upcase + "."
+      end
+    end
+    
+    @findprofile = Profile.where(:citation => cite, :user => nil).first
 
     respond_to do |format|
-      if @profile.save
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
+      if (!current_user.profile) and @findprofile
+        @findprofile.user_id = current_user.id
+        @findprofile.save
+        current_user.profile = @findprofile
+        current_user.save
+        format.html { redirect_to @findprofile, notice: 'Profile ' + cite + ' was found and linked to your user.' }
+        format.json { render :show, status: :created, location: @findprofile }  
+      elsif (!current_user.profile) and @profile.save
+        current_user.profile = @profile
+        current_user.save
+        format.html { redirect_to @profile, notice: 'Profile ' + cite + ' was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else
         format.html { render :new }
@@ -41,7 +65,7 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1.json
   def update
     respond_to do |format|
-      if @profile.update(profile_params)
+      if @profile.update(profile_update_params)
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @profile }
       else
@@ -71,4 +95,9 @@ class ProfilesController < ApplicationController
     def profile_params
       params.require(:profile).permit(:fullname, :shortbio, :citation)
     end
+
+    def profile_update_params
+      params.require(:profile).permit(:fullname, :shortbio)
+    end
+
 end
