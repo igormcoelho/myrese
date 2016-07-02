@@ -1,4 +1,6 @@
 class Gfile < ActiveRecord::Base
+  HTYPE = 2
+  
   belongs_to :infohash
   
   delegate :user         , to: :infohash

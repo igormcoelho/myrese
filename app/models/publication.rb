@@ -1,4 +1,6 @@
 class Publication < ActiveRecord::Base
+  HTYPE = 1
+  
   belongs_to :infohash   , autosave: true
   
   delegate :user         , to: :infohash # belongs_to through (doesn't exist!)

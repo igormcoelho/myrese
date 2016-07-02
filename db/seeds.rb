@@ -15,12 +15,12 @@ Visibility.create :vtype => "public"                , :id => 3
 
 ##Htype.create :name => "Pkeyword"
 ##Htype.create :name => "Tag"
-Htype.create :name => "Publication", :shortname => "pub"   , :id => 1
-Htype.create :name => "File"       , :shortname => "file"  , :id => 2
-Htype.create :name => "Project"    , :shortname => "proj"  , :id => 3
-Htype.create :name => "Post"       , :shortname => "post"  , :id => 4
-Htype.create :name => "Reminder"   , :shortname => "rem"   , :id => 5
-Htype.create :name => "Weblink"    , :shortname => "link"  , :id => 6
+Htype.create :name => "Publication", :shortname => "pub"   , Publication::HTYPE #:id => 1
+Htype.create :name => "File"       , :shortname => "file"  , Gfile::HTYPE       #:id => 2
+Htype.create :name => "Project"    , :shortname => "proj"  , Project::HTYPE     #:id => 3
+Htype.create :name => "Post"       , :shortname => "post"  , Post::HTYPE        #:id => 4
+Htype.create :name => "Reminder"   , :shortname => "rem"   , Reminder::HTYPE    #:id => 5
+Htype.create :name => "Weblink"    , :shortname => "link"  , Weblink::HTYPE     #:id => 6
 
 
 Pubtype.create :name => "article"        , :id => 1 

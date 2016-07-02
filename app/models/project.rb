@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  HTYPE = 3
+  
   belongs_to :infohash
   
   validates_presence_of :infohash    #infohash_id

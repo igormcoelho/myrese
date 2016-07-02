@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :folder_infohashes
+  resources :folders
   root to: "mainpage#index"
   
   devise_for :users
@@ -6,7 +8,7 @@ Rails.application.routes.draw do
   resources :supervisions
   
   resources :evaluations do
-      resources :qualis_evaluate_journals
+      resources :qualis_evaluate_journasl
   end
   resources :weblinks
   resources :grants
