@@ -1,8 +1,7 @@
 class Gfile < ActiveRecord::Base
-  belongs_to :infohash   #, dependent: :destroy
-  ##after_destroy :destroy_infohash
+  belongs_to :infohash
   
-  delegate :user         , to: :infohash # belongs_to through (doesn't exist!)
+  delegate :user         , to: :infohash
   delegate :members      , to: :infohash
   has_many :infohash_users  , through: :infohash
   
@@ -10,6 +9,8 @@ class Gfile < ActiveRecord::Base
   delegate :gdescription , to: :infohash
   delegate :visibility   , to: :infohash
   delegate :visibility_id, to: :infohash
+  
+  validates_associated  :infohash      , message: "Failed to validate general information"
 
   #validates_presence_of :name
   #validates_presence_of :size

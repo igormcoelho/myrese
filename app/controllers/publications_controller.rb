@@ -4,20 +4,21 @@ class PublicationsController < ApplicationController
   # GET /publications
   # GET /publications.json
   def index
-    #ms = Member.includes(:infohash).where("user = "+current_user.id.to_s+" AND infohash.htype = 1")
-    #@publications = Publication.joins(:members).includes(:infohash).where("member.user_id = "+current_user.id.to_s).where("infohash.htype = 1")
-    # TODO filter user in members of publication.infohash
-    
     #@publications = Publication.all
     
-    #@publications = Publication.joins(:infohash_users).where("infohash_users.user_id = ?", current_user.id)
-    
-    @publications = Publication.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ?", current_user.id).or(
-                    Publication.joins(:infohash_users).joins(:infohash).where("infohashes.user_id = ?", current_user.id)
-    ).uniq
+    # AUTOMATIC JOIN
+    #@publications = Publication.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ?", current_user.id).or(
+    #                Publication.joins(:infohash_users).joins(:infohash).where("infohashes.user_id = ?", current_user.id)
+    #).uniq
     # SELECT "publications".* FROM "publications" INNER JOIN "infohashes" ON "infohashes"."id" = "publications"."infohash_id" 
     # INNER JOIN "infohash_users" ON "infohash_users"."infohash_id" = "infohashes"."id" INNER JOIN "infohashes" "infohashes_publications" ON "infohashes_publications"."id" = "publications"."infohash_id" 
     # WHERE ((infohash_users.user_id = 1) OR (infohashes.user_id = 1))
+    
+    #MANUAL JOIN
+    @publications  = Publication.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ?", current_user.id)
+    @publications += Publication.joins(:infohash).where("infohashes.user_id = ?", current_user.id)
+    #@publications.uniq!
+    
   end
 
   # GET /publications/1
@@ -51,26 +52,13 @@ class PublicationsController < ApplicationController
     @infohash.code     = "pub" + Publication.count.to_s
           
     respond_to do |format|
-      if !@infohash.valid?
-        @publication.valid?
-        format.html { render :new }
-        format.json { render json: @infohash.errors, status: :unprocessable_entity }
-      elsif @publication.save
-        @infohash.save
-        InfohashUser.create(:user => current_user, :infohash => @infohash)
+      #if !@publication.valid?
+      #  format.html { render :new }
+      #  format.json { render json: @infohash.errors, status: :unprocessable_entity }
+      #elsif @publication.save
+      if @publication.save
+        #@infohash.save
         PublicationProfile.create(:profile => current_user.profile, :author => current_user.profile.citation, :publication => @publication)
-        
-        # get hashtags
-        lhash  = @infohash.gtitle.scan(/\B#\w+/) #scan(/#\S+/)
-        lhash += @infohash.gdescription.scan(/\B#\w+/) #scan(/#\S+/)
-        lhash = lhash.uniq     # remove repetitions
-        
-        # insert only unique
-        ActiveRecord::Base.transaction do
-          lhash.each do |h|
-            Tag.create(:tagname => h.downcase, :infohash => @infohash)
-          end
-        end
         
         format.html { redirect_to @publication, notice: 'Publication was successfully created.' }
         format.json { render :show, status: :created, location: @publication }

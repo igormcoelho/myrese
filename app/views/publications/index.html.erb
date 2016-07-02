@@ -11,7 +11,6 @@
       <th>Title</th>
       <th>Authors</th>
       <th>Year</th>
-      <th>Owner</th>
       <th>Members</th>
       <th>Tags</th>
       <th>Visibility</th>
@@ -45,11 +44,11 @@
           <% end %>
         </td>
         <td><%= publication.year %></td>
-        <td><%= publication.infohash.user.username %> </td>
         <td>
+          <%= publication.infohash.user.username %> (owner) <br>
           <% publication.infohash.infohash_users.each do |u| %> 
             <%= u.user.username %>
-            <% if (current_user == publication.user) and (current_user != u.user) %>
+            <% if current_user == publication.user%>
               <%= link_to "(delete)", [publication.infohash, u] ,method: :delete, data: { confirm: 'Are you sure?' } %>
             <% end %>
             <br>

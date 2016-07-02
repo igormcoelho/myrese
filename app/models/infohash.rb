@@ -1,7 +1,7 @@
 class Infohash < ActiveRecord::Base
   belongs_to :visibility
   belongs_to :user          #owner
-  #belongs_to :group
+
   #has_and_belongs_to_many :groups   # deprecated
   has_many :group_infohashes  , dependent: :delete_all
   has_many :groups            , through: :group_infohashes   #HMT is more flexible!
@@ -13,10 +13,23 @@ class Infohash < ActiveRecord::Base
   has_many :tags              , dependent: :delete_all
   
   after_update :recreate_tags
+  after_create :create_tags
   
   def recreate_tags
     tags.destroy
-    # recreate tags
+    create_tags
+  end
+  
+  def create_tags
+    lhash = self.gdescription.scan(/\B#\w+/) #scan(/#\S+/)
+    lhash = lhash.uniq     # remove repetitions
+        
+    # insert only unique
+    ActiveRecord::Base.transaction do
+      lhash.each do |h|
+        Tag.create(:tagname => h.downcase, :infohash => self)
+      end
+    end
   end
   
   validates_presence_of :gtitle       , message: "General Title is missing"

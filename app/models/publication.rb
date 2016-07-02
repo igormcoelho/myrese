@@ -1,6 +1,5 @@
 class Publication < ActiveRecord::Base
-  belongs_to :infohash   #, dependent: :destroy
-  ##after_destroy :destroy_infohash
+  belongs_to :infohash   , autosave: true
   
   delegate :user         , to: :infohash # belongs_to through (doesn't exist!)
   delegate :members      , to: :infohash
@@ -29,6 +28,7 @@ class Publication < ActiveRecord::Base
   #validates_presence_of :visibility    , message: "Visibility is missing"
   
   validates_associated  :infohash      , message: "Failed to validate general information"
+  
   validates_presence_of :infohash      , message: "Infohash reference is missing"
   validates_presence_of :pubtype       , message: "Publication type is missing"
   validates_presence_of :title         , message: "Publication title is missing"
