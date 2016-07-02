@@ -3,4 +3,6 @@ class Evaluation < ActiveRecord::Base
   
   validates_presence_of :user
   validates_presence_of :name
+  
+  has_many :qualis_evaluate_journals
 end

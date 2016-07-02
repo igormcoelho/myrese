@@ -15,7 +15,7 @@
     <% @evaluations.each do |evaluation| %>
       <tr>
         <td><%= evaluation.user.username %></td>
-        <td><%= evaluation.name %></td>
+        <td><%= link_to evaluation.name, evaluation %></td>
         <td><%= link_to 'Show', evaluation %></td>
         <td><%= link_to 'Edit', edit_evaluation_path(evaluation) %></td>
         <td><%= link_to 'Destroy', evaluation, method: :delete, data: { confirm: 'Are you sure?' } %></td>

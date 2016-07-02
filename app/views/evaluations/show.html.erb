@@ -1,13 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User:</strong>
-  <%= @evaluation.user %>
+  <strong>Owner:</strong>
+  <%= @evaluation.user.username%>
 </p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Evaluation Name:</strong>
   <%= @evaluation.name %>
+</p>
+
+<p>
+    <strong>QUALIS Evaluations:</strong> <br>
+<% @evaluation.qualis_evaluate_journals.each do |qej| %>
+  <%= link_to "QUALIS "+qej.target_qualis+"("+qej.profile.citation+")", evaluation_qualis_evaluate_journal_path(@evaluation, qej) %><br>
+<% end %>
 </p>
 
 <%= link_to 'Edit', edit_evaluation_path(@evaluation) %> |

@@ -1,19 +1,25 @@
 Rails.application.routes.draw do
-  resources :supervisions
-  resources :qualis_evaluate_journals
-  resources :evaluations
-  resources :weblinks
-  resources :grants
-  resources :activities
-  resources :positions
-  resources :institutions
   root to: "mainpage#index"
   
   devise_for :users
+  
+  resources :supervisions
+  
+  resources :evaluations do
+      resources :qualis_evaluate_journals
+  end
+  resources :weblinks
+  resources :grants
+
+  resources :institutions
 
   #resources :publication_profiles
   #resources :infohash_users
-  resources :profiles
+  resources :profiles do
+    resources :positions do
+      resources :activities
+    end
+  end
   resources :reminders
   resources :posts
   #resources :htypes
