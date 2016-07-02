@@ -9,18 +9,20 @@
 ##Visibility.create :vtype => "private" 
 ##Visibility.create :vtype => "group"
 
-Visibility.create :vtype => "private (for members)" , :id => 1 # the first three now are 'members' (private, group, and members)
-Visibility.create :vtype => "instance"              , :id => 2
-Visibility.create :vtype => "public"                , :id => 3
+# the first three now are 'private (for members)' (private, group, and members)
+Visibility.create :vtype => "private (for members)" , :id => Visibility::VCODES.vprivate  # => 1 
+Visibility.create :vtype => "instance"              , :id => Visibility::VCODES.vinstance # => 2
+Visibility.create :vtype => "public"                , :id => Visibility::VCODES.vpublic   # => 3
 
 ##Htype.create :name => "Pkeyword"
 ##Htype.create :name => "Tag"
-Htype.create :name => "Publication", :shortname => "pub"   , Publication::HTYPE #:id => 1
-Htype.create :name => "File"       , :shortname => "file"  , Gfile::HTYPE       #:id => 2
-Htype.create :name => "Project"    , :shortname => "proj"  , Project::HTYPE     #:id => 3
-Htype.create :name => "Post"       , :shortname => "post"  , Post::HTYPE        #:id => 4
-Htype.create :name => "Reminder"   , :shortname => "rem"   , Reminder::HTYPE    #:id => 5
-Htype.create :name => "Weblink"    , :shortname => "link"  , Weblink::HTYPE     #:id => 6
+Htype.create :name => "Publication", :shortname => "pub"   , :id => Publication::HTYPE #:id => 1
+Htype.create :name => "File"       , :shortname => "file"  , :id => Gfile::HTYPE       #:id => 2
+Htype.create :name => "Project"    , :shortname => "proj"  , :id => Project::HTYPE     #:id => 3
+Htype.create :name => "Post"       , :shortname => "post"  , :id => Post::HTYPE        #:id => 4
+Htype.create :name => "Reminder"   , :shortname => "rem"   , :id => Reminder::HTYPE    #:id => 5
+Htype.create :name => "Weblink"    , :shortname => "link"  , :id => Weblink::HTYPE     #:id => 6
+Htype.create :name => "Folder"     , :shortname => "fold"  , :id => Folder::HTYPE      #:id => 7
 
 
 Pubtype.create :name => "article"        , :id => 1 
