@@ -1,0 +1,22 @@
+<%= form_for([@group, @group_user]) do |f| %>
+  <% if @group_user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@group_user.errors.count, "error") %> prohibited this group_user from being saved:</h2>
+
+      <ul>
+      <% @group_user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user %><br />
+    <%= f.select :user_id, options_for_select(User.all.map{|p|[p.username, p.id]}) %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

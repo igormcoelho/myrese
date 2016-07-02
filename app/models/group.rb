@@ -5,11 +5,11 @@ class Group < ActiveRecord::Base
     validates_presence_of :user
     
     #has_and_belongs_to_many :infohashes, dependent: :destroy #HABTM
-    has_many :group_infohashes, dependent: :destroy 
+    has_many :group_infohashes ###, dependent: :delete_all  ### NEVER DELETE INFOHASHES BECAUSE OF GROUPS...
     has_many :infohashes, through: :group_infohashes          #HMT (through) is more flexible than HABTM
     
     ##has_many :groupmembers #=> replaced by group_users
-    has_many :group_users, dependent: :destroy 
+    has_many :group_users, dependent: :delete_all
     has_many :users, through: :group_users                    #HMT (through) is more flexible than HABTM
     #has_and_belongs_to_many :users, dependent: :destroy      #HABTM
     

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  folder_id: 
+  infohash_id: 
+
+two:
+  folder_id: 
+  infohash_id: 

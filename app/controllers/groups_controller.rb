@@ -6,7 +6,9 @@ class GroupsController < ApplicationController
   # GET /groups.json
   def index
     #@groups = Group.all
-    @groups = Group.joins(:group_users).where("group_users.user_id = ?", current_user.id)
+    @groups  = Group.joins(:group_users).where("group_users.user_id = ?", current_user.id)
+    @groups += Group.where("user_id = ?", current_user.id) # owner
+    @groups.uniq!
   end
 
   # GET /groups/1

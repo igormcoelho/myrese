@@ -8,9 +8,8 @@
       <th>Name</th>
       <th>Title</th>
       <th>Description</th>
-      <th>Owner</th>
       <th>Group Members</th>
-      <th colspan="3"></th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -20,23 +19,28 @@
         <td><%= group.name %></td>
         <td><%= group.title %></td>
         <td><%= group.description %></td>
-        <td><%= group.user.username %></td>
         <td>
-          <% group.users.each do |u| %>
-          <%= u.email+" " %>
+          <%= link_to group.user.username, group.user.profile %> (owner) <br>
+          <% group.group_users.each do |gu| %>
+            <%= link_to gu.user.username, gu.user.profile %>
+            <% if current_user == group.user%>
+              <%= link_to "(delete)", [group, gu] ,method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+            <br>
+          <% end %>
+          <% if current_user == group.user #owner %>
+              <%= link_to "New member", new_group_group_user_path(group) %>
           <% end %>
         </td>
-        <td><%= link_to 'Show', group %></td>
-        
-        <% if current_user == group.user %>
         <td>
-          <%= link_to 'Edit', edit_group_path(group) %>
+          <div class="btn-group" role="group" aria-label="...">
+            <%= link_to 'Show', group , class: 'btn btn-default' %>
+            <% if current_user == group.user %>
+              <%= link_to 'Edit', edit_group_path(group), class: 'btn'  %>
+              <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn'  %>
+            <% end %>
+          </div>
         </td>
-        <td>
-          <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
-        <% end %>
-          
       </tr>
     <% end %>
   </tbody>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Folder:</strong>
+  <%= @folder_infohash.folder %>
+</p>
+
+<p>
+  <strong>Infohash:</strong>
+  <%= @folder_infohash.infohash %>
+</p>
+
+<%= link_to 'Edit', edit_folder_infohash_path(@folder_infohash) %> |
+<%= link_to 'Back', folder_infohashes_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Folder Infohashes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Folder</th>
+      <th>Infohash</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @folder_infohashes.each do |folder_infohash| %>
+      <tr>
+        <td><%= folder_infohash.folder %></td>
+        <td><%= folder_infohash.infohash %></td>
+        <td><%= link_to 'Show', folder_infohash %></td>
+        <td><%= link_to 'Edit', edit_folder_infohash_path(folder_infohash) %></td>
+        <td><%= link_to 'Destroy', folder_infohash, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Folder infohash', new_folder_infohash_path %>

@@ -1,0 +1,25 @@
+<%= form_for(@folder_infohash) do |f| %>
+  <% if @folder_infohash.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@folder_infohash.errors.count, "error") %> prohibited this folder_infohash from being saved:</h2>
+
+      <ul>
+      <% @folder_infohash.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :folder_id %><br>
+    <%= f.text_field :folder_id %>
+  </div>
+  <div class="field">
+    <%= f.label :infohash_id %><br>
+    <%= f.text_field :infohash_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

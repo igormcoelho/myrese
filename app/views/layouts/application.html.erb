@@ -17,9 +17,9 @@
             <% if !current_user.profile %>
               <li>You don't have an instance profile yet! Please <%= link_to "create or claim an existing one", new_profile_path %></li>
             <% else %>
-              <li><%= link_to "config groups", groups_path %></li>
+              <li><%= link_to "Groups", groups_path %></li>
               <li><%# link_to "infohashes", infohashes_path %></li>
-              <li><%= link_to "publications", publications_path %></li>
+              <li><%= link_to "Publications", publications_path %></li>
               <li><%= link_to "files", gfiles_path %></li>
               <li><%= link_to "projects", projects_path %></li>
               <li><%= link_to "tags", tags_path %></li>
