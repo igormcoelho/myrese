@@ -73,6 +73,7 @@ class PublicationsController < ApplicationController
   # PATCH/PUT /publications/1.json
   def update
     respond_to do |format|
+      @publication.infohash.assign_attributes(infohash_params)
       if @publication.update(publication_params)
         format.html { redirect_to @publication, notice: 'Publication was successfully updated.' }
         format.json { render :show, status: :ok, location: @publication }

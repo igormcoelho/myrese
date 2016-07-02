@@ -12,22 +12,19 @@ class Infohash < ActiveRecord::Base
   has_many :members           , through: :infohash_users, source: :user
   has_many :tags              , dependent: :delete_all
   
-  after_update :recreate_tags
-  after_create :create_tags
+  after_save :recreate_tags
+  #after_create :create_tags
   
   def recreate_tags
-    tags.destroy
-    create_tags
-  end
-  
-  def create_tags
+    self.tags.destroy_all
+
     lhash = self.gdescription.scan(/\B#\w+/) #scan(/#\S+/)
     lhash = lhash.uniq     # remove repetitions
         
     # insert only unique
     ActiveRecord::Base.transaction do
       lhash.each do |h|
-        Tag.create(:tagname => h.downcase, :infohash => self)
+        Tag.create(:tagname => h, :infohash => self) # h.downcase
       end
     end
   end
