@@ -1,11 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Tags</h1>
+<h1>Tagged Items</h1>
 
 <table>
   <thead>
     <tr>
-      <th>User</th>
+      <th>Usertag?</th>
       <th>Tagname</th>
       <th>Infohash</th>
       <th colspan="3"></th>
@@ -15,12 +15,15 @@
   <tbody>
     <% @tags.each do |tag| %>
       <tr>
-        <td><%= tag.user %></td>
+        <td> 
+          <% if tag.user %>
+            <%= tag.user.username %>
+          <% else %>
+            No user
+          <% end %>
+        </td>
         <td><%= tag.tagname %></td>
-        <td><%= tag.infohash %></td>
-        <td><%= link_to 'Show', tag %></td>
-        <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
-        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= tag.infohash.htype.name + ": " + tag.infohash.gtitle %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +31,4 @@
 
 <br>
 
-<%= link_to 'New Tag', new_tag_path %>
+<%= link_to 'Back', root_path %>

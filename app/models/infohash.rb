@@ -10,7 +10,6 @@ class Infohash < ActiveRecord::Base
   
   has_many :infohash_users    , dependent: :delete_all
   has_many :members           , through: :infohash_users, source: :user
-  has_many :tags              , dependent: :delete_all
   
   after_save :recreate_tags
   #after_create :create_tags
@@ -40,6 +39,7 @@ class Infohash < ActiveRecord::Base
   has_one :post         , dependent: :destroy # one or zero: creates Post.infohash_id
   has_one :reminder     , dependent: :destroy # one or zero: creates Reminder.infohash_id
   has_one :weblink      , dependent: :destroy # one or zero: creates Weblink.infohash_id
+  has_many :tags        , dependent: :delete_all
   
   validates_presence_of :visibility
   validates_presence_of :user
