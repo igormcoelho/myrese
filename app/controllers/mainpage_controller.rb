@@ -10,6 +10,10 @@ class MainpageController < ApplicationController
     @publications += Publication.joins(:infohash).where("infohashes.user_id = ?", current_user.id)
     @publications.uniq!
     
+    @projects  = Project.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ?", current_user.id)
+    @projects += Project.joins(:infohash).where("infohashes.user_id = ?", current_user.id)
+    @projects.uniq!
+    
   end
   
 end

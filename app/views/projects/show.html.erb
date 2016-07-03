@@ -1,18 +1,38 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @project.title %>
+  <strong>General title:</strong>
+  <%= @project.infohash.gtitle %>
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @project.description %>
+  <strong>General description:</strong>
+  <%= @project.infohash.gdescription %>
 </p>
 
 <p>
-  <strong>Infohash:</strong>
-  <%= @project.infohash %>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Abstract:</strong>
+  <%= @project.abstract %>
+</p>
+
+<p>
+  <strong>Project Manager:</strong>
+  <% if @project.profile %>
+    <%= link_to @project.profile.citation, @project.profile %>
+  <% else %>
+    No profile was set as Project Manager.
+  <% end %>
+</p>
+
+
+<p>
+  <strong>Visibility:</strong>
+  <%= @project.infohash.visibility.vtype %>
 </p>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |

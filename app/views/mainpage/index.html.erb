@@ -17,6 +17,12 @@
         <%= f.infohash.gtitle %> <%= link_to "Download", f.filename.url %><br>
     <% end %>
     
+    <b>Projects:</b><br>
+    <% @projects.each do |p| %>
+        <%= "#" + p.id.to_s %>
+        <%= p.infohash.gtitle %> - <%= p.name %><br>
+    <% end %>
+    
 <% else %>
    <%= "No authenticated user!" %>
 <% end %>

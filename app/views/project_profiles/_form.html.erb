@@ -1,0 +1,22 @@
+<%= form_for([@project, @project_profile]) do |f| %>
+  <% if @project_profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project_profile.errors.count, "error") %> prohibited this project_profile from being saved:</h2>
+
+      <ul>
+      <% @project_profile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :profile %><br />
+    <%= f.select :profile_id, options_for_select(Profile.all.order(:citation).map{|p|[p.citation, p.id]} ) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

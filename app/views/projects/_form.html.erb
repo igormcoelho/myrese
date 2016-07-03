@@ -1,4 +1,35 @@
 <%= form_for(@project) do |f| %>
+
+  <h2>General information</h2>
+  <% if @infohash.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@infohash.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% @infohash.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :visibility %><br />
+    <%= f.select :visibility_id, options_for_select(Visibility.all.map{|p|[p.vtype, p.id]}, :visibility_id) %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "General title" %><br>
+    <%= f.text_field(:gtitle) %>
+  </div>
+
+  <div class="field">
+    <%= f.label "General description (allows #hashtags, @user-refs, @group-refs and :resource-refs)" %><br>
+    <%= f.text_area :gdescription %>
+  </div>
+
+  <h2>Project information</h2>
+
   <% if @project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -10,19 +41,32 @@
       </ul>
     </div>
   <% end %>
+  
+  <p>(*) Mandatory fields</p>
+
+  <p>You will be added as the first member, the others can be added later</p>
 
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.label "Name (*)" %><br>
+    <%= f.text_field :name %>
   </div>
+  
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.label "Abstract (*)" %><br>
+    <%= f.text_area :abstract %>
   </div>
+
   <div class="field">
-    <%= f.label :infohash_id %><br>
-    <%= f.text_field :infohash_id %>
+    <%= f.label "Keywords (*)" %><br>
+    <%= f.text_field :keywords %>
   </div>
+  
+  <div class="field">
+    <%= "Project Manager" %><br />
+    <% plist = [["Do not add a manager", 0]] %>
+    <%= f.select :profile_id, options_for_select(plist + Profile.all.order(:citation).map{|p|[p.citation, p.id]}, 0) %>
+  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

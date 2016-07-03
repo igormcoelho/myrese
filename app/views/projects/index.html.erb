@@ -1,26 +1,78 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Projects</h1>
+<h1>Projects</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Infohash</th>
-      <th colspan="3"></th>
+      <th style="min-width:80px">Title</th>
+      <th style="min-width:180px">Description</th>
+      <th style="min-width:80px">Name</th>
+      <th style="min-width:180px">Abstract</th>
+      <th style="min-width:80px">Project Manager</th>
+      <th style="min-width:100px">Project Authors</th>
+      <th style="min-width:100px">Members</th>
+      <th style="min-width:100px">Tags</th>
+      <th>Visibility</th>
+      <th style="min-width:200px">Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= project.title %></td>
-        <td><%= project.description %></td>
-        <td><%= project.infohash %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= project.gtitle %></td>
+        <td><%= project.gdescription %></td>
+        <td><%= project.name %></td>
+        <td><%= project.abstract %></td>
+        <td>
+          <% if project.profile %>
+            <%= link_to project.profile.citation, project.profile %>
+          <% end %>
+        </td>
+        <td style="width: 250px">
+          <% project.project_profiles.each do |pp| %>
+          <b> <%= link_to pp.profile.citation, pp.profile %> </b>
+            <% if (current_user == project.user) %>
+              <%= link_to "(delete)", [project, pp] ,method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          <br>
+          <% end %>
+          <% if current_user == project.user #owner %>
+            <%= link_to "New author", new_project_project_profile_path(project) %>
+          <% end %>
+        </td>
+        
+        <td>
+          <b><%= project.infohash.user.username %> (owner)</b> <br>
+          <% project.infohash.infohash_users.each do |u| %> 
+            <%= u.user.username %>
+            <% if current_user == project.user%>
+              <%= link_to "(delete)", [project.infohash, u] ,method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+            <br>
+          <% end %>
+          <% if current_user == project.user #owner %>
+              <%= link_to "New member", new_infohash_infohash_user_path(project.infohash) %>
+          <% end %>
+        </td>
+        <td>
+          <% project.infohash.tags.each do |t| %> 
+            <%= t.tagname %>
+          <% end %>
+        </td>
+        <td><%= project.visibility.vtype %></td>
+        
+        <td>
+          <div class="btn-group" role="group" aria-label="...">
+            <%= link_to 'Show', project, class: 'btn btn-default' %>
+            <% if current_user == project.user %>
+              <%= link_to 'Edit', edit_project_path(project), class: 'btn' %>
+              <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn' %>
+            <% end %>
+          </div>
+        </td>
+        
       </tr>
     <% end %>
   </tbody>
