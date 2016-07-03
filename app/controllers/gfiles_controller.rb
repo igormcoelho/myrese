@@ -37,7 +37,7 @@ class GfilesController < ApplicationController
     #@mainauthor = params.require(:publication).permit(:mainauthor)
 
     @infohash.user = current_user
-    @infohash.htype_id = 2           # GFILE
+    @infohash.htype_id = Gfile::HTYPE    # GFILE
     @infohash.code     = "file" + Gfile.count.to_s
 
    respond_to do |format|
@@ -75,8 +75,9 @@ class GfilesController < ApplicationController
   # PATCH/PUT /gfiles/1.json
   def update
     respond_to do |format|
+      @gfile.infohash.assign_attributes(infohash_params)
       if @gfile.update(gfile_params)
-        format.html { redirect_to @gfile, notice: 'Gfile was successfully updated.' }
+        format.html { redirect_to @gfile, notice: 'File was successfully updated.' }
         format.json { render :show, status: :ok, location: @gfile }
       else
         format.html { render :edit }
@@ -90,7 +91,7 @@ class GfilesController < ApplicationController
   def destroy
     @gfile.infohash.destroy
     respond_to do |format|
-      format.html { redirect_to gfiles_url, notice: 'Gfile was successfully destroyed.' }
+      format.html { redirect_to gfiles_url, notice: 'File was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

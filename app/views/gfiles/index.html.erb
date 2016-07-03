@@ -1,14 +1,17 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Gfiles</h1>
+<h1>Files</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Get file</th>
-      <th colspan="3"></th>
+      <th style="min-width:100px">Name</th>
+      <th style="min-width:200px">Description</th>
+      <th style="min-width:100px">Members</th>
+      <th style="min-width:100px">Tags</th>
+      <td>Visibility</td>
+      <th style="min-width:100px">Get file</th>
+      <th style="min-width:200px">Actions</th>
     </tr>
   </thead>
 
@@ -17,10 +20,37 @@
       <tr>
         <td><%= gfile.gtitle %></td>
         <td><%= gfile.gdescription %></td>
+        <td>
+          <b><%= gfile.infohash.user.username %> (owner)</b> <br>
+          <% gfile.infohash.infohash_users.each do |u| %> 
+            <%= u.user.username %>
+            <% if current_user == gfile.user%>
+              <%= link_to "(delete)", [gfile.infohash, u] ,method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+            <br>
+          <% end %>
+          <% if current_user == gfile.user #owner %>
+              <%= link_to "New member", new_infohash_infohash_user_path(gfile.infohash) %>
+          <% end %>
+        </td>
+        <td>
+          <% gfile.infohash.tags.each do |t| %> 
+            <%= t.tagname %>
+          <% end %>
+        </td>
+        <td><%= gfile.visibility.vtype %></td>
         <td><%= link_to "Download", gfile.filename.url %></td>
-        <td><%= link_to 'Show', gfile %></td>
-        <td><%= link_to 'Edit', edit_gfile_path(gfile) %></td>
-        <td><%= link_to 'Destroy', gfile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        
+        <td>
+          <div class="btn-group" role="group" aria-label="...">
+            <%= link_to 'Show', gfile, class: 'btn btn-default' %>
+            <% if current_user == gfile.user %>
+              <%= link_to 'Edit', edit_gfile_path(gfile), class: 'btn' %>
+              <%= link_to 'Destroy', gfile, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn' %>
+            <% end %>
+          </div>
+        </td>
+        
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +58,4 @@
 
 <br>
 
-<%= link_to 'New Gfile', new_gfile_path %>
+<%= link_to 'New File', new_gfile_path %>

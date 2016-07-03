@@ -15,11 +15,11 @@
 
   <div class="field">
     <%= f.label :visibility %><br />
-    <%= f.select :visibility_id, options_for_select(Visibility.all.map{|p|[p.vtype, p.id]}) %>
+    <%= f.select :visibility_id, options_for_select(Visibility.all.map{|p|[p.vtype, p.id]}, :visibility_id) %>
   </div>
   
   <div class="field">
-    <%= f.label "General title (allows #hashtags)" %><br>
+    <%= f.label "General title" %><br>
     <%= f.text_field(:gtitle) %>
   </div>
 

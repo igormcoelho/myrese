@@ -1,7 +1,7 @@
 class Gfile < ActiveRecord::Base
   HTYPE = 2
   
-  belongs_to :infohash
+  belongs_to :infohash   , autosave: true
   
   delegate :user         , to: :infohash
   delegate :members      , to: :infohash
@@ -14,8 +14,7 @@ class Gfile < ActiveRecord::Base
   
   validates_associated  :infohash      , message: "Failed to validate general information"
 
-  #validates_presence_of :name
-  #validates_presence_of :size
+  validates_presence_of :filename
   
   has_attached_file :filename #, styles: { medium: "600x400>", thumb: "150x100>" }, default_url: "/images/:style/missing.png"
   #validates_attachment_content_type :filename, content_type: /\Aimage\/.*\Z/

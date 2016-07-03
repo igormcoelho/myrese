@@ -15,6 +15,17 @@
   <%= @gfile.filename.url %>
 </p>
 
+<p>
+  <strong>Owner:</strong>
+  <%= @gfile.infohash.user.username %>
+</p>
+
+<p>
+  <strong>Members:</strong>
+  <% @gfile.infohash.members.each do |u| %>
+    <%= u.username %><br>
+  <% end %>
+</p>
 
 <%= link_to 'Edit', edit_gfile_path(@gfile) %> |
 <%= link_to 'Back', gfiles_path %>

@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
   HTYPE = 4
   
-  belongs_to :infohash  , dependent: :destroy
+  belongs_to :infohash  , autosave: true ###, dependent: :destroy #NEVER DESTROY FROM HERE!
   
   delegate :user        , to: :infohash # belongs_to through (doesn't exist!)
   delegate :members     , to: :infohash

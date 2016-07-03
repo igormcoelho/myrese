@@ -17,14 +17,14 @@
 
 <p>
   <strong>Username</strong>
-  <% if @profile %>
+  <% if @profile.user %>
     <%= @profile.user.username %>
   <% end %>
 </p>
 
 <p>
   <strong>Email</strong>
-  <% if @profile %>
+  <% if @profile.user %>
     <%= @profile.user.email %>
   <% end %>
 </p>
