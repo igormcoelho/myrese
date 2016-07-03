@@ -10,13 +10,28 @@
       </ul>
     </div>
   <% end %>
+  
+  <% if @profile.user %>
+    <h3>Profile for <%= @profile.user.username %> <emph> <%= @profile.user.email %> </emph> </h3>
+  <% else %>
+    <h3>No user is linked to this profile</h3>
+  <% end %>
+  
+  <h3>Citation: <emph><%= @profile.citation %></emph></h3>
+  
   <div class="field">
     <%= "(*) Fullname" %><br>
     <%= f.text_field :fullname %>
   </div>
+
   <div class="field">
     <%= "(*) Short Biography" %><br>
     <%= f.text_area :shortbio %>
+  </div>
+  
+  <div class="field">
+    <%= "(*) Visibility" %><br />
+    <%= f.select :visibility_id, options_for_select(Visibility.all.map{|p|[p.vtype, p.id]}, @profile.visibility_id) %>
   </div>
 
   <p>(*) Mandatory fields</p>

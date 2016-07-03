@@ -10,14 +10,22 @@
       </ul>
     </div>
   <% end %>
+  
+  <div class="field">
+    <%= "(*) Visibility" %><br />
+    <%= f.select :visibility_id, options_for_select(Visibility.all.map{|p|[p.vtype, p.id]}) %>
+  </div>
+  
   <div class="field">
     <%= "(*) Fullname" %><br>
     <%= f.text_field :fullname %>
   </div>
+  
   <div class="field">
     <%= "(*) Short Biography" %><br>
     <%= f.text_area :shortbio %>
   </div>
+  
   <div class="field">
     <%= "(**) Citation name (format example, full name: João Arlindo Silva -> SILVA, J. A.)" %><br>
     <%= f.text_field :citation %>

@@ -29,5 +29,10 @@
   <% end %>
 </p>
 
+<p>
+  <strong>Visibility:</strong>
+  <%= @profile.visibility.vtype %>
+</p>
+
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Back', root_path %>

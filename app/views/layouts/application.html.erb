@@ -23,7 +23,7 @@
               <li><%= link_to "Publications", publications_path %></li>
               <li><%= link_to "files", gfiles_path %></li>
               <li><%= link_to "projects", projects_path %></li>
-              <li><%= link_to "tags", tags_path %></li>
+              <li><%= link_to "tags", projects_path %></li>
               <li><%= link_to "posts", posts_path %></li>
               <li><%= link_to "weblinks", weblinks_path %></li>
               <li><%= link_to "folders", folders_path %></li>
@@ -32,9 +32,22 @@
             <% end %>
           </ul>
           <ul class="nav navbar-nav pull-right">
-            <li><%= link_to "Edit Account", edit_user_registration_path %></li>
-            <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
-            <li class="round-image-50"><%= image_tag(avatar_url(current_user))%>
+            <li>
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <%= current_user.username %>
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><%= link_to "Profile", current_user.profile %></li>
+                <li><%= link_to "Edit Account", edit_user_registration_path %></li>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
+              </ul>
+            </div>
+            </li>
+            <li>&nbsp;&nbsp;</li>
+            <li class="round-image-50"><%= image_tag(avatar_url(current_user)) %></li>
           </ul>
         <% else %>
           <ul class="nav navbar-nav pull-right">
