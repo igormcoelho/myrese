@@ -34,5 +34,13 @@
   <%= @profile.visibility.vtype %>
 </p>
 
+<p>
+  <strong>Positions:</strong>
+  <br>
+  <%= link_to "Add Position", new_profile_position_path(@profile) %>
+</p>
+
+<br>
+
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Back', root_path %>

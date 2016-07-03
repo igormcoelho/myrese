@@ -5,11 +5,16 @@
 <% if user_signed_in? %>
     Welcome <% c = User.find(current_user) %>
     <%= c.email %><br>
+    
+    <br>
+    
     <b>Publications:</b><br>
     <% @publications.each do |p| %>
         <%= "#" + p.id.to_s + " t=" + p.pubtype.name %>
         <%= p.title %><br>
     <% end %>
+    
+    <br>
 
     <b>Files:</b><br>
     <% @gfiles.each do |f| %>
@@ -17,11 +22,15 @@
         <%= f.infohash.gtitle %> <%= link_to "Download", f.filename.url %><br>
     <% end %>
     
+    <br>
+    
     <b>Projects:</b><br>
     <% @projects.each do |p| %>
         <%= "#" + p.id.to_s %>
         <%= p.infohash.gtitle %> - <%= p.name %><br>
     <% end %>
+    
+    <br>
     
 <% else %>
    <%= "No authenticated user!" %>
