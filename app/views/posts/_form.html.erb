@@ -15,7 +15,7 @@
 
   <div class="field">
     <%= f.label :visibility %><br />
-    <%= f.select :visibility_id, options_for_select(Visibility.all.map{|p|[p.vtype, p.id]}, :visibility_id) %>
+    <%= f.select :visibility_id, options_for_select(Visibility.all.map{|p|[p.vtype, p.id]}, @infohash.visibility_id) %>
   </div>
   
   <div class="field">
@@ -24,7 +24,7 @@
   </div>
 
   <div class="field">
-    <%= f.label "General description (allows #hashtags)" %><br>
+    <%= f.label "General description (allows #hashtags, @user-refs, @group-refs and :resource-refs)" %><br>
     <%= f.text_area :gdescription %>
   </div>
 
@@ -47,7 +47,7 @@
     <%= f.text_field :subject %>
   </div>
   <div class="field">
-    <%= f.label :message %><br>
+    <%= f.label "Message (allows #hashtags, @user-refs, @group-refs and :resource-refs)" %><br>
     <%= f.text_area :message %>
   </div>
 

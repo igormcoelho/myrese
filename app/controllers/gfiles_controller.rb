@@ -41,26 +41,7 @@ class GfilesController < ApplicationController
     @infohash.code     = "file" + Gfile.count.to_s
 
    respond_to do |format|
-      if !@infohash.valid?
-        @gfile.valid?
-        format.html { render :new }
-        format.json { render json: @infohash.errors, status: :unprocessable_entity }
-      elsif @gfile.save
-        @infohash.save
-        InfohashUser.create(:user => current_user, :infohash => @infohash)
-
-        # get hashtags
-        lhash  = @infohash.gtitle.scan(/\B#\w+/) #scan(/#\S+/)
-        lhash += @infohash.gdescription.scan(/\B#\w+/) #scan(/#\S+/)
-        lhash = lhash.uniq     # remove repetitions
-        
-        # insert only unique
-        ActiveRecord::Base.transaction do
-          lhash.each do |h|
-            Tag.create(:tagname => h.downcase, :infohash => @infohash)
-          end
-        end
-        
+      if @gfile.save
         format.html { redirect_to @gfile, notice: 'File was successfully created.' }
         format.json { render :show, status: :created, location: @publication }
       else

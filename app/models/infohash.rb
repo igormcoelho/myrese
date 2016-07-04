@@ -12,7 +12,6 @@ class Infohash < ActiveRecord::Base
   has_many :members           , through: :infohash_users, source: :user
   
   after_save :recreate_tags
-  #after_create :create_tags
   
   def recreate_tags
     self.tags.destroy_all

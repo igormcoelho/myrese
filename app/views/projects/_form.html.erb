@@ -15,7 +15,7 @@
 
   <div class="field">
     <%= f.label :visibility %><br />
-    <%= f.select :visibility_id, options_for_select(Visibility.all.map{|p|[p.vtype, p.id]}, :visibility_id) %>
+    <%= f.select :visibility_id, options_for_select(Visibility.all.map{|p|[p.vtype, p.id]}, @infohash.visibility_id) %>
   </div>
   
   <div class="field">
