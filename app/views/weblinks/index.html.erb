@@ -1,25 +1,58 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Weblinks</h1>
+<h1>Weblinks</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Infohash</th>
-      <th>Link</th>
-      <th colspan="3"></th>
+      <th style="min-width:300px">General Information</th>
+      <th style="min-width:200px">Link</th>
+      <th>Members</th>
+      <th>Tags</th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @weblinks.each do |weblink| %>
       <tr>
-        <td><%= weblink.infohash %></td>
-        <td><%= weblink.link %></td>
-        <td><%= link_to 'Show', weblink %></td>
-        <td><%= link_to 'Edit', edit_weblink_path(weblink) %></td>
-        <td><%= link_to 'Destroy', weblink, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= weblink.infohash.gdescription %><br><br>
+          <i>Code: <%= weblink.infohash.code %></i><br><br>
+          <i>Visibility: <%= weblink.visibility.vtype %></i>
+        </td>
+        <td>
+          <i><%= link_to weblink.infohash.gtitle, weblink.link, target: "_blank" %></i><br>
+        </td>
+        <td>
+          <b><%= weblink.infohash.user.username %> (owner)</b><br>
+          <% weblink.infohash.infohash_users.each do |u| %> 
+            <%= u.user.username %>
+            <% if current_user == weblink.user and (current_user != u.user) %>
+              <%= link_to "(delete)", [weblink.infohash, u] ,method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+            <br>
+          <% end %>
+          <% if current_user == weblink.user #owner %>
+              <%= link_to "New member", new_infohash_infohash_user_path(weblink.infohash) %>
+          <% end %>
+        </td>
+        <td>
+          <% weblink.infohash.tags.each do |t| %> 
+          <%= t.tagname %>
+          <% end %>
+        </td>
+        <td>
+          <div class="btn-group" role="group" aria-label="...">
+            <%= link_to 'Show', weblink, class: 'btn btn-default' %>
+            <% if current_user == weblink.user %>
+              <%= link_to 'Edit', edit_weblink_path(weblink), class: 'btn' %>
+              <%= link_to 'Destroy', weblink, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn' %>
+            <% end %>
+          </div>
+        </td>
       </tr>
+
     <% end %>
   </tbody>
 </table>

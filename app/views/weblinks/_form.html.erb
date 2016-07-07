@@ -1,4 +1,18 @@
 <%= form_for(@weblink) do |f| %>
+
+  <h2>General information</h2>
+  <% if @infohash.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@infohash.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% @infohash.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <% if @weblink.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@weblink.errors.count, "error") %> prohibited this weblink from being saved:</h2>
@@ -12,13 +26,25 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :infohash_id %><br>
-    <%= f.text_field :infohash_id %>
+    <%= f.label :visibility %><br />
+    <%= f.select :visibility_id, options_for_select(Visibility.all.map{|p|[p.vtype, p.id]}, @infohash.visibility_id) %>
   </div>
+  
+  <div class="field">
+    <%= f.label "Title" %><br>
+    <%= f.text_field(:gtitle) %>
+  </div>
+  
   <div class="field">
     <%= f.label :link %><br>
     <%= f.text_field :link %>
   </div>
+
+  <div class="field">
+    <%= f.label "General description (allows #hashtags, @user-refs, @group-refs and :resource-refs)" %><br>
+    <%= f.text_area :gdescription %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
