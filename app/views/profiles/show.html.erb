@@ -35,6 +35,19 @@
 </p>
 
 <p>
+  <strong>Quota Usage</strong>
+  <br>
+  Using
+  <% if @profile.quota_usage < 1 %>
+    <%= (@profile.quota_usage*1024).round(2) %> KB 
+  <% else %>
+    <%= @profile.quota_usage.round(2) %> KB 
+  <% end %>
+  of <%= @profile.quota %> MB
+  (<%= (@profile.quota_usage / @profile.quota).round(2) %>%)
+</p>
+
+<p>
   <strong>Positions:</strong>
   <br>
   <%= link_to "Add Position", new_profile_position_path(@profile) %>

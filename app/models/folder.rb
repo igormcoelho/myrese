@@ -14,5 +14,5 @@ class Folder < ActiveRecord::Base
   
   validates_presence_of :filter_pattern
   
-  has_many :folder_infohashes
+  has_many :folder_infohashes , dependent: :delete_all
 end
