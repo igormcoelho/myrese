@@ -31,6 +31,7 @@ class Infohash < ActiveRecord::Base
   validates_presence_of :gdescription , message: "General Description is missing"
   
   validates_presence_of :htype_id
+  validates_presence_of :htype
   
   has_one :publication  , dependent: :destroy # one or zero: creates Publication.infohash_id
   has_one :gfile        , dependent: :destroy # one or zero: creates Gfile.infohash_id
@@ -38,7 +39,10 @@ class Infohash < ActiveRecord::Base
   has_one :post         , dependent: :destroy # one or zero: creates Post.infohash_id
   has_one :reminder     , dependent: :destroy # one or zero: creates Reminder.infohash_id
   has_one :weblink      , dependent: :destroy # one or zero: creates Weblink.infohash_id
+  has_one :folder       , dependent: :destroy # one or zero: creates Folder.infohash_id
   has_many :tags        , dependent: :delete_all
+  
+  has_many :folder_infohashes
   
   validates_presence_of :visibility
   validates_presence_of :user

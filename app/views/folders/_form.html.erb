@@ -1,4 +1,18 @@
 <%= form_for(@folder) do |f| %>
+
+  <h2>General information</h2>
+  <% if @infohash.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@infohash.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% @infohash.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
   <% if @folder.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
@@ -10,15 +24,30 @@
       </ul>
     </div>
   <% end %>
+  
+  
+  <div class="field">
+    <%= f.label :visibility %><br />
+    <%= f.select :visibility_id, options_for_select(Visibility.all.map{|p|[p.vtype, p.id]}, @infohash.visibility_id) %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "General description (allows #hashtags, @user-refs, @group-refs and :resource-refs)" %><br>
+    <%= f.text_area :gdescription %>
+  </div>
+  
+  <h2>Folder Information</h2>
+  
+  <div class="field">
+    <%= f.label "Folder Name" %><br>
+    <%= f.text_field(:gtitle) %>
+  </div>
 
   <div class="field">
-    <%= f.label :filter_pattern %><br>
+    <%= f.label "Folder Pattern (semi-comma separated hashtags)" %><br>
     <%= f.text_field :filter_pattern %>
   </div>
-  <div class="field">
-    <%= f.label :infohash_id %><br>
-    <%= f.text_field :infohash_id %>
-  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

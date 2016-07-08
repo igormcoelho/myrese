@@ -48,7 +48,7 @@ class PublicationsController < ApplicationController
     #@mainauthor = params.require(:publication).permit(:mainauthor)
 
     @infohash.user = current_user
-    @infohash.htype_id = 1           # PUBLICATION
+    @infohash.htype_id = Publication::HTYPE  # PUBLICATION
     @infohash.code     = "pub" + Publication.count.to_s
           
     respond_to do |format|
@@ -74,6 +74,7 @@ class PublicationsController < ApplicationController
   def update
     respond_to do |format|
       @publication.infohash.assign_attributes(infohash_params)
+      @infohash = @publication.infohash
       if @publication.update(publication_params)
         format.html { redirect_to @publication, notice: 'Publication was successfully updated.' }
         format.json { render :show, status: :ok, location: @publication }

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  resources :folder_infohashes
-  resources :folders
+
   root to: "mainpage#index"
   
   devise_for :users
@@ -30,6 +29,10 @@ Rails.application.routes.draw do
   #resources :inforelations
   resources :gfiles
   #resources :pubtypes
+
+  resources :folders do
+      resources :folder_infohashes
+  end
   
   resources :projects do
     resources :project_profiles

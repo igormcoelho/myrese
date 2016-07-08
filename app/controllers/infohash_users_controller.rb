@@ -31,10 +31,10 @@ class InfohashUsersController < ApplicationController
 
     respond_to do |format|
       if @infohash_user.save
-        if @infohash.htype_id == 1
-          format.html { redirect_to @infohash.publication, notice: 'Infohash user was successfully created.' }
-        elsif @infohash.htype_id == 4
-          format.html { redirect_to @infohash.post, notice: 'Infohash user was successfully created.' }
+        if @infohash.htype_id == Publication::HTYPE
+          format.html { redirect_to @infohash.publication, notice: 'Publication user was successfully created.' }
+        elsif @infohash.htype_id == Post::HTYPE
+          format.html { redirect_to @infohash.post, notice: 'Post user was successfully created.' }
         elsif  
           format.html { redirect_to @infohash, notice: 'Infohash user was successfully created.' }
         end
