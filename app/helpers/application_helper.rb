@@ -12,9 +12,17 @@ module ApplicationHelper
     def instanceUserPath(userref)
       return link_to(userref, instanceName+"/u/"+userref[1..-1])
     end
+
+    def instanceItemPath(itemref)
+      item = Infohash.where(:code => itemref[1..-1]).first
+      title = item.gtitle
+      return link_to(title, instanceName+"/h/"+itemref[1..-1])
+    end
     
     def getGoodLinks(text)
-      sanitize findReplaceUserRef(text).html_safe, :tags => %w(a)
+      text2 = findReplaceUserRef(text)
+      text3 = findReplaceItemRef(text2)
+      return sanitize text3.html_safe, :tags => %w(a)
     end
     
     def verifyList(list, value)
@@ -28,6 +36,15 @@ module ApplicationHelper
         userlist << "@"+u.username
       end
       return text.gsub(/[@][a-zA-Z][\w]+/) { |m| verifyList(userlist,m) ? instanceUserPath(m).html_safe : m } 
+    end
+    
+    def findReplaceItemRef(text)
+      uall = Infohash.all
+      ilist = []
+      uall.each do |u|
+        ilist << ":"+u.code
+      end
+      return text.gsub(/[:][a-zA-Z][\w]+/) { |m| verifyList(ilist,m) ? instanceItemPath(m).html_safe : m } 
     end
     
 end
