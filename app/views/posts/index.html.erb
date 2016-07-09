@@ -18,13 +18,13 @@
       <tr>
         <td>
           <b><%= post.infohash.gtitle %></b><br>
-          <%= post.infohash.gdescription %><br><br>
+          <%= getGoodLinks post.infohash.gdescription %><br><br>
           <i>Code: <%= post.infohash.code %></i><br><br>
           <i>Visibility: <%= post.visibility.vtype %></i>
         </td>
         <td>
           <b><%= post.subject %></b><br>
-          <%= post.message %>
+          <%= getGoodLinks post.message %>
         </td>
         <td>
           <b><%= post.infohash.user.username %> (owner)</b><br>
