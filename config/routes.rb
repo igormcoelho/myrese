@@ -16,11 +16,17 @@ Rails.application.routes.draw do
 
   #resources :publication_profiles
   #resources :infohash_users
+  
+  get '/u/:username' => 'profiles#username', as: 'username' #creates username_path
+  
   resources :profiles do
     resources :positions do
       resources :activities
     end
   end
+  
+  get '/h/:code' => 'infohashes#code', as: 'code' #creates code_path
+  
   resources :reminders
   resources :posts
   #resources :htypes

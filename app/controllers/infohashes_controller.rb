@@ -1,5 +1,22 @@
 class InfohashesController < ApplicationController
   before_action :set_infohash, only: [:show, :edit, :update, :destroy]
+  
+  include InfohashesHelper
+
+  def code
+    hcode = params[:code]
+    ih = Infohash.where(:code => hcode).first
+    if(ih)
+      p = get_item_path(ih)
+      if(p != "")
+        redirect_to p
+      else
+        redirect_to root_path, alert: "Item '"+hcode+"' not found!"
+      end
+    else
+      redirect_to root_path, alert: "Item '"+hcode+"' not found!"
+    end
+  end
 
   # GET /infohashes
   # GET /infohashes.json

@@ -1,6 +1,16 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
+  def username
+    uname = params[:username]
+    user = User.where(:username => uname).first
+    if(user and user.profile)
+      redirect_to profile_url(user.profile)
+    else
+      redirect_to root_path, alert: "User profile '"+uname+"' not found!"
+    end
+  end
+
   # GET /profiles
   # GET /profiles.json
   def index

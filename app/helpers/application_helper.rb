@@ -29,4 +29,5 @@ module ApplicationHelper
       end
       return text.gsub(/[@][a-zA-Z][\w]+/) { |m| verifyList(userlist,m) ? instanceUserPath(m).html_safe : m } 
     end
+    
 end
