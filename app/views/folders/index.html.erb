@@ -26,6 +26,27 @@
         <td>
           <i><%= folder.infohash.gtitle %></i><br>
         </td>
+        <%
+  def get_link(item)
+    if    item.htype_id == Publication::HTYPE
+      return link_to item.htype.name+": x"+item.gtitle, publication_path(item.publication)
+    elsif item.htype_id == Gfile::HTYPE
+      return link_to item.htype.name+": x"+item.gtitle, gfile_path(item.gfile)
+    elsif item.htype_id == Project::HTYPE
+      return link_to item.htype.name+": x"+item.gtitle, project_path(item.project)
+    elsif item.htype_id == Post::HTYPE
+      return link_to item.htype.name+": x"+item.gtitle, post_path(item.post)
+    elsif item.htype_id == Reminder::HTYPE
+      return link_to item.htype.name+": x"+item.gtitle, reminder_path(item.reminder)
+    elsif item.htype_id == Weblink::HTYPE
+      return link_to item.htype.name+": x"+item.gtitle, weblink_path(item.weblink)
+    elsif item.htype_id == Folder::HTYPE
+      return link_to "UNKOWN::"+item.htype.name+": x"+item.gtitle, folder_path(item.folder)
+    else
+      return item.htype.name+": xx"+item.gtitle
+    end
+  end
+        %>
         <td>
           <i><%= folder.filter_pattern %></i><br>
             <% lhash = folder.filter_pattern.scan(/\B#\w+/) #scan(/#\S+/) %>
@@ -35,13 +56,13 @@
             
             <b><%= hlist.count %> Items</b><br>
             <% hlist.each do |i| %>
-              <%= i.htype.name+": "+i.gtitle %><br>
+              <%= get_link(i) %><br>
             <% end %>
         </td>
         <td>
           <% folder.folder_infohashes.each do |fi| %>
           <b>
-            <%= fi.infohash.htype.name+": "+fi.infohash.gtitle %>
+            <%= get_link(fi.infohash) %>
           </b>
             <% if (current_user == folder.user) %>
               <%= link_to "(delete)", [folder, fi] ,method: :delete, data: { confirm: 'Are you sure?' } %>

@@ -5,9 +5,9 @@ class GfilesController < ApplicationController
   # GET /gfiles.json
   def index
     #@gfiles = Gfile.all
-    @gfiles       = Gfile.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ?", current_user.id).or(
-                    Gfile.joins(:infohash_users).joins(:infohash).where("infohashes.user_id = ?", current_user.id)
-    ).uniq
+    @gfiles  = Gfile.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ?", current_user.id)
+    @gfiles += Gfile.joins(:infohash).where("infohashes.user_id = ?", current_user.id)
+    @gfiles.uniq!
   end
 
   # GET /gfiles/1
@@ -41,7 +41,11 @@ class GfilesController < ApplicationController
     @infohash.code     = "file" + Gfile.count.to_s
 
    respond_to do |format|
-      if @gfile.save
+      if current_user.profile.quota_usage+(@gfile.filename_file_size/(1024*1024)) > current_user.profile.quota
+        flash[:error] = "User quota is exceeded! "+current_user.profile.quota_usage.to_s+" MB > "+current_user.profile.quota.to_s+" MB"
+        format.html { render :new }
+        format.json { render json: @gfile.errors, status: :unprocessable_entity }
+      elsif @gfile.save
         format.html { redirect_to @gfile, notice: 'File was successfully created.' }
         format.json { render :show, status: :created, location: @publication }
       else

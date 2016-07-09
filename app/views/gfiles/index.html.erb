@@ -9,8 +9,9 @@
       <th style="min-width:200px">Description</th>
       <th style="min-width:100px">Members</th>
       <th style="min-width:100px">Tags</th>
-      <td>Visibility</td>
+      <th>Visibility</th>
       <th style="min-width:100px">Get file</th>
+      <th style="min-width:100px">Size</th>
       <th style="min-width:200px">Actions</th>
     </tr>
   </thead>
@@ -40,6 +41,13 @@
         </td>
         <td><%= gfile.visibility.vtype %></td>
         <td><%= link_to "Download", gfile.filename.url %></td>
+        <td>
+          <% if gfile.filename_file_size/(1024.0*1024.0) < 1 %>
+            <%= (gfile.filename_file_size/1024.0).round(2) %> KB
+          <% else %>
+            <%= (gfile.filename_file_size/(1024.0*1024.0)).round(2) %> MB
+          <% end %>
+        </td>
         
         <td>
           <div class="btn-group" role="group" aria-label="...">

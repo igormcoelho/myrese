@@ -41,7 +41,7 @@
   <% if @profile.quota_usage < 1 %>
     <%= (@profile.quota_usage*1024).round(2) %> KB 
   <% else %>
-    <%= @profile.quota_usage.round(2) %> KB 
+    <%= @profile.quota_usage.round(2) %> MB 
   <% end %>
   of <%= @profile.quota %> MB
   (<%= (@profile.quota_usage / @profile.quota).round(2) %>%)

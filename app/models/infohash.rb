@@ -30,7 +30,6 @@ class Infohash < ActiveRecord::Base
   validates_presence_of :gtitle       , message: "General Title is missing"
   validates_presence_of :gdescription , message: "General Description is missing"
   
-  validates_presence_of :htype_id
   validates_presence_of :htype
   
   has_one :publication  , dependent: :destroy # one or zero: creates Publication.infohash_id
