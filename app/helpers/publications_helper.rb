@@ -6,6 +6,8 @@ module PublicationsHelper
     elsif pub.ptype.name == "chapter"
       return plain_chapter(pub)
   # elsif book ...
+    else
+      return "No plain text for this type of publication =("
     end
   end
   
@@ -57,6 +59,8 @@ module PublicationsHelper
     elsif pub.ptype.name == "chapter"
       return bibtex_chapter(pub)
   # elsif book ...
+    else
+      return "No bibtex for this type of publication =("
     end
   end
 

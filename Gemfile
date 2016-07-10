@@ -5,7 +5,7 @@ gem 'where-or' # backport from Rails 5 to Rails 4.2
 
 gem 'bootstrap-sass', '~> 3.3.6'
 
-gem "paperclip", "~> 5.0.0"
+gem "paperclip", '4.3.7' #"~> 5.0.0"
 #gem "paperclip", "~> 5.0.0.beta1"
 #gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
