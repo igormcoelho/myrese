@@ -40,6 +40,16 @@
   <%= @publication.infohash.code %>
 </p>
 
+<p>
+  <strong>Plain text:</strong>
+  <%= plain_pub(@publication) %>
+</p>
+
+<p>
+  <strong>Bibtex:</strong>
+  <%= bibtex_pub(@publication) %>
+</p>
+
 
 <%= link_to 'Edit', edit_publication_path(@publication) %> |
 <%= link_to 'Back', publications_path %>
