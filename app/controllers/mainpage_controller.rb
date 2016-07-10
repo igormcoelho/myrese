@@ -3,10 +3,13 @@ class MainpageController < ApplicationController
   
   def index
     if user_signed_in?
-      @gfiles       = Gfile.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ?", current_user.id).or(
-                      Gfile.joins(:infohash_users).joins(:infohash).where("infohashes.user_id = ?", current_user.id)
-      ).uniq
-    
+      #@gfiles       = Gfile.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ?", current_user.id).or(
+      #                Gfile.joins(:infohash_users).joins(:infohash).where("infohashes.user_id = ?", current_user.id)
+      #).uniq
+      @gfiles  = Gfile.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ?", current_user.id)
+      @gfiles += Gfile.joins(:infohash).where("infohashes.user_id = ?", current_user.id)
+      @gfiles.uniq!
+        
       @publications  = Publication.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ?", current_user.id)
       @publications += Publication.joins(:infohash).where("infohashes.user_id = ?", current_user.id)
       @publications.uniq!

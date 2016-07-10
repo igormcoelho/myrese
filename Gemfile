@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # https://github.com/Eric-Guo/where-or
-gem 'where-or' # backport from Rails 5 to Rails 4.2
+#gem 'where-or' # backport from Rails 5 to Rails 4.2
 
 gem 'bootstrap-sass', '~> 3.3.6'
 
