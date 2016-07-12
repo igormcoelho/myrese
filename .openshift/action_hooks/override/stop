@@ -1,0 +1,8 @@
+#!/bin/bash -e
+
+PUMA_PID_FILE="$OPENSHIFT_RUBY_DIR/run/puma.pid"
+
+echo "Stopping Puma"
+if [ -s "$PUMA_PID_FILE" ]; then
+	pgrep -f puma -u $UID | grep -q $(<"$PUMA_PID_FILE") && kill $(<"$PUMA_PID_FILE") || rm -f "$PUMA_PID_FILE"
+fi

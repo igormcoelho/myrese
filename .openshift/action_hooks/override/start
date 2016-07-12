@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+source "${OPENSHIFT_RUBY_DIR}/lib/ruby_context"
+PUMA_PID_FILE="$OPENSHIFT_RUBY_DIR/run/puma.pid"
+
+echo "Starting Puma"
+pushd "${OPENSHIFT_REPO_DIR}" > /dev/null
+set -m
+ruby_context "umask 002 &>/dev/null ; RAILS_ENV=${RAILS_ENV:-production} nohup /usr/bin/bundle exec ./vendor/bundle/ruby/bin/puma -C config/puma.rb -b tcp://${OPENSHIFT_RUBY_IP}:${OPENSHIFT_RUBY_PORT} --pidfile $PUMA_PID_FILE |& /usr/bin/logshifter -tag ruby &"
+set +m
+popd > /dev/null
