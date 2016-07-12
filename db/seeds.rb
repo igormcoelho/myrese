@@ -10,9 +10,9 @@
 ##Visibility.create :vtype => "group"
 
 # the first three now are 'private (for members)' (private, group, and members)
-Visibility.create :vtype => "private (for members)" , :id => Visibility::VCODES.vprivate  # => 1 
-Visibility.create :vtype => "instance"              , :id => Visibility::VCODES.vinstance # => 2
-Visibility.create :vtype => "public"                , :id => Visibility::VCODES.vpublic   # => 3
+Visibility.create :vtype => "private (for members)" , :id => 1 #Visibility::VCODES.vprivate  # => 1 
+Visibility.create :vtype => "instance"              , :id => 2 #Visibility::VCODES.vinstance # => 2
+Visibility.create :vtype => "public"                , :id => 3 #Visibility::VCODES.vpublic   # => 3
 
 ##Htype.create :name => "Pkeyword"
 ##Htype.create :name => "Tag"
