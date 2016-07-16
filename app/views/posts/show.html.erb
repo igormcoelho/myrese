@@ -1,8 +1,23 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Code:</strong>
+  <%= @post.infohash.code %>
+</p>
+
+<p>
   <strong>Owner:</strong>
   <%= @post.user.username %>
+</p>
+
+<p>
+  <strong>General title:</strong>
+  <%= @post.infohash.gtitle %>
+</p>
+
+<p>
+  <strong>General description:</strong>
+  <%= @post.infohash.gdescription %>
 </p>
 
 <p>

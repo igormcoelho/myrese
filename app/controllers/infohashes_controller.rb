@@ -6,10 +6,14 @@ class InfohashesController < ApplicationController
   def code
     hcode = params[:code]
     ih = Infohash.where(:code => hcode).first
+    @infohash = ih
     if(ih)
       p = get_item_path(ih)
       if(p != "")
-        redirect_to p
+        respond_to do |format|
+          format.html { redirect_to p }
+          format.json { render :show, location: p }
+        end
       else
         redirect_to root_path, alert: "Item '"+hcode+"' not found!"
       end

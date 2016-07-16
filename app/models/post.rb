@@ -9,6 +9,7 @@ class Post < ActiveRecord::Base
   delegate :members     , to: :infohash
   has_many :infohash_users  , through: :infohash
   
+  delegate :code         , to: :infohash
   delegate :gtitle       , to: :infohash
   delegate :gdescription , to: :infohash
   delegate :visibility   , to: :infohash

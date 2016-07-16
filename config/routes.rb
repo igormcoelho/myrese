@@ -25,7 +25,13 @@ Rails.application.routes.draw do
     end
   end
   
-  get '/h/:code' => 'infohashes#code', as: 'code' #creates code_path
+  get '/g/:groupname' => 'groups#groupname', as: 'groupname' #creates groupname_path
+    
+  resources :groups do
+      resources :group_users
+  end
+  
+  get '/h/:code' => 'infohashes#code'
   
   resources :reminders
   resources :posts
@@ -50,10 +56,6 @@ Rails.application.routes.draw do
   
   resources :infohashes do
     resources :infohash_users
-  end
-  
-  resources :groups do
-      resources :group_users
   end
   
   
