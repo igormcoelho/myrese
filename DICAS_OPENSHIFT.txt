@@ -15,5 +15,9 @@ TIVE QUE EDITAR config/environments/production.rb
   config.assets.compile = true #false
   config.serve_static_files = true #ENV['RAILS_SERVE_STATIC_FILES'].present?
 
+===============
+DICA CLOUD9
+Para evitar o Puma e manter o WEBrick: bundle install --without production
+
 FIM TUTORIAL
 
