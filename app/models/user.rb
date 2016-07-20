@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable
          
   # Virtual attribute for authenticating by either username or email
   # This is in addition to a real persisted field like 'username'
@@ -49,7 +50,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  has_one :profile  # accepts nil
+  has_one :profile  # accepts nil # no destroy
   
   #after_create :create_bars
   #def create_bars 
