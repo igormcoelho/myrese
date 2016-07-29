@@ -2,24 +2,39 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # mailer configuration!
-  #config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'myrese.org', port: 80 }
+
+
+  #require 'tlsmail'    
+  #Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
   
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
-
-  host = 'localhost'#'myrese-imcoelho.c9.io'#'my_app.c9.io'
-  config.action_mailer.default_url_options = { host: host }
-
-  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address        => 'smtp.mailgun.org',
-    :port           => '2525',
-    :authentication => :plain, #
-    :user_name      => 'postmaster@sandboxffe25c7e90eb4f5a83002148d5470ade.mailgun.org',
-    :password       => 'xxxxxxxxxxxxxxxxxxx',
-    :domain         => 'sandboxffe25c7e90eb4f5a83002148d5470ade.mailgun.org',
-    :enable_starttls_auto => true  
+    :enable_starttls_auto => true,  
+    :address            => 'smtp.gmail.com',
+    :port               => 587,
+    #:tls                  => true,
+    #:domain             => 'gmail.com', #you can also use google.com
+    # FOR GMAIL, YOU HAVE TO ALLOW 'LESS SECURE' APPLICATIONS IN YOUR PROFILE...
+    :authentication     => :plain,
+    :user_name          => ENV['GMAIL_USER'],
+    :password           => ENV['GMAIL_PWD']
   }
+
+  #host = 'localhost'#'myrese-imcoelho.c9.io'#'my_app.c9.io'
+  #config.action_mailer.default_url_options = { host: host }
+  #config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.smtp_settings = {
+  #  :address        => 'smtp.mailgun.org',
+  #  :port           => '2525',
+  #  :authentication => :plain, #
+  #  :user_name      => 'postmaster@sandboxffe25c7e90eb4f5a83002148d5470ade.mailgun.org',
+  #  :password       => 'xxxxxxxxxxxxxxxxxxx',
+  #  :domain         => 'sandboxffe25c7e90eb4f5a83002148d5470ade.mailgun.org',
+  #  :enable_starttls_auto => true  
+  #}
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
