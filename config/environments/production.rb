@@ -1,5 +1,22 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  
+  # begin mailer configuration
+  config.action_mailer.default_url_options = { host: 'myrese.org', port: 80 }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,  
+    :address            => ENV['PRODUCTION_MAIL_HOST'],
+    :port               => ENV['PRODUCTION_MAIL_PORT'],
+    :authentication     => :plain,
+    :user_name          => ENV['PRODUCTION_MAIL_USER'],
+    :password           => ENV['PRODUCTION_MAIL_PWD']
+  }
+  # end mailer configuration
+  
 
   # Code is not reloaded between requests.
   config.cache_classes = true
