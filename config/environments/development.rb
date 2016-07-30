@@ -4,10 +4,6 @@ Rails.application.configure do
   # mailer configuration!
   config.action_mailer.default_url_options = { host: 'myrese.org', port: 80 }
 
-
-  #require 'tlsmail'    
-  #Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
-  
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
