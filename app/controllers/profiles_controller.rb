@@ -37,6 +37,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.new(profile_params)
     @profile.user_id = current_user.id
     @profile.visibility_id = 1 # private
+    @profile.quota = 30 # 30MB is the default
     
     clist = @profile.citation.split(/\s*[.,]\s*/)
     
