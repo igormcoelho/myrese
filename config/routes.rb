@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :infohash_members
   root to: "mainpage#index"
   
   devise_for :users
