@@ -1,0 +1,29 @@
+<%= form_for(@infohash_member) do |f| %>
+  <% if @infohash_member.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@infohash_member.errors.count, "error") %> prohibited this infohash_member from being saved:</h2>
+
+      <ul>
+      <% @infohash_member.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :infohash_id %><br>
+    <%= f.text_field :infohash_id %>
+  </div>
+  <div class="field">
+    <%= f.label :author %><br>
+    <%= f.text_field :author %>
+  </div>
+  <div class="field">
+    <%= f.label :identification %><br>
+    <%= f.text_field :identification %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

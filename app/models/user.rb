@@ -5,6 +5,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
          
+  before_save :ensure_auth_token
+
+  def ensure_auth_token
+    if auth_token.blank?
+      self.auth_token = generate_auth_token
+    end
+  end
+         
   # Virtual attribute for authenticating by either username or email
   # This is in addition to a real persisted field like 'username'
   attr_accessor :login
@@ -25,6 +33,9 @@ class User < ActiveRecord::Base
   
   # Only allow letter, number, underscore and punctuation.
   validates_format_of :username, with: /^[a-z0-9_\.]*$/, :multiline => true
+  
+
+
   
 =begin
   def self.find_for_database_authentication(warden_conditions)
@@ -68,4 +79,15 @@ class User < ActiveRecord::Base
   has_many :infohashes, through: :infohash_users
   
   has_many :owner_tags       , dependent: :destroy, source: :tag
+  
+  
+  private
+
+  def generate_auth_token
+    loop do
+      token = Devise.friendly_token
+      break token unless User.where(auth_token: token).first
+    end
+  end
+
 end

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Infohash Members</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Infohash</th>
+      <th>Author</th>
+      <th>Identification</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @infohash_members.each do |infohash_member| %>
+      <tr>
+        <td><%= infohash_member.infohash %></td>
+        <td><%= infohash_member.author %></td>
+        <td><%= infohash_member.identification %></td>
+        <td><%= link_to 'Show', infohash_member %></td>
+        <td><%= link_to 'Edit', edit_infohash_member_path(infohash_member) %></td>
+        <td><%= link_to 'Destroy', infohash_member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Infohash member', new_infohash_member_path %>

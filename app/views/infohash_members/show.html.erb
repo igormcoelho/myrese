@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Infohash:</strong>
+  <%= @infohash_member.infohash %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @infohash_member.author %>
+</p>
+
+<p>
+  <strong>Identification:</strong>
+  <%= @infohash_member.identification %>
+</p>
+
+<%= link_to 'Edit', edit_infohash_member_path(@infohash_member) %> |
+<%= link_to 'Back', infohash_members_path %>
