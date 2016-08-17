@@ -2,10 +2,10 @@
 
 one:
   infohash_id: 
-  author: MyString
-  identification: MyString
+  member: MyString
+  identification_id: 
 
 two:
   infohash_id: 
-  author: MyString
-  identification: MyString
+  member: MyString
+  identification_id: 

@@ -69,6 +69,6 @@ class InfohashMembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def infohash_member_params
-      params.require(:infohash_member).permit(:infohash_id, :author, :identification)
+      params.require(:infohash_member).permit(:infohash_id, :member, :identification_id)
     end
 end

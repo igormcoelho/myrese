@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @identification.title %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @identification.service %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @identification.location %>
+</p>
+
+<%= link_to 'Edit', edit_identification_path(@identification) %> |
+<%= link_to 'Back', identifications_path %>

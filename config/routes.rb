@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :infohash_members
   root to: "mainpage#index"
   
   devise_for :users
 
-  namespace :api, defaults: {format: 'json'} do
+  #namespace :api, defaults: {format: 'json'} do
+  namespace :api do
     namespace :v1 do
       resources :publications
       #get 'publications/show', to: 'publications#show', defaults: { format: :json }, as: :job
@@ -12,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :infohash_members
+  resources :identifications  
   
   resources :supervisions
   

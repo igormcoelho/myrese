@@ -18,7 +18,7 @@ class InfohashMembersControllerTest < ActionController::TestCase
 
   test "should create infohash_member" do
     assert_difference('InfohashMember.count') do
-      post :create, infohash_member: { author: @infohash_member.author, identification: @infohash_member.identification, infohash_id: @infohash_member.infohash_id }
+      post :create, infohash_member: { identification_id: @infohash_member.identification_id, infohash_id: @infohash_member.infohash_id, member: @infohash_member.member }
     end
 
     assert_redirected_to infohash_member_path(assigns(:infohash_member))
@@ -35,7 +35,7 @@ class InfohashMembersControllerTest < ActionController::TestCase
   end
 
   test "should update infohash_member" do
-    patch :update, id: @infohash_member, infohash_member: { author: @infohash_member.author, identification: @infohash_member.identification, infohash_id: @infohash_member.infohash_id }
+    patch :update, id: @infohash_member, infohash_member: { identification_id: @infohash_member.identification_id, infohash_id: @infohash_member.infohash_id, member: @infohash_member.member }
     assert_redirected_to infohash_member_path(assigns(:infohash_member))
   end
 

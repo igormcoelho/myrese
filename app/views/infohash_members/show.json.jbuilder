@@ -1,1 +1,1 @@
-json.extract! @infohash_member, :id, :infohash_id, :author, :identification, :created_at, :updated_at
+json.extract! @infohash_member, :id, :infohash_id, :member, :identification_id, :created_at, :updated_at

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160811150342) do
+ActiveRecord::Schema.define(version: 20160817034214) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "title"
@@ -129,14 +129,23 @@ ActiveRecord::Schema.define(version: 20160811150342) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "infohash_members", force: :cascade do |t|
-    t.integer  "infohash_id"
-    t.string   "author"
-    t.string   "identification"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+  create_table "identifications", force: :cascade do |t|
+    t.string   "title"
+    t.string   "service"
+    t.string   "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
+  create_table "infohash_members", force: :cascade do |t|
+    t.integer  "infohash_id"
+    t.string   "member"
+    t.integer  "identification_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "infohash_members", ["identification_id"], name: "index_infohash_members_on_identification_id"
   add_index "infohash_members", ["infohash_id"], name: "index_infohash_members_on_infohash_id"
 
   create_table "infohash_users", force: :cascade do |t|

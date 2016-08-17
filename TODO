@@ -1,0 +1,8 @@
+For future versions of Myrese
+
+* Use AngularJS in API. There was strange errors with "Template is Missing" and the .jbuilder was never called.
+* Create table profile_identities with text field and a type that can be: email, citation, social network id, ...
+* Allow OAuth2 login for social networks.
+* Replace Myrese API token authentication with Doorkeeper (provider) and OmniAuth (OAuth2 client) gems.
+* Merge User and Profile models (?). After some changes using infohash_members for external identities
+this separation may not be necessary anymore.

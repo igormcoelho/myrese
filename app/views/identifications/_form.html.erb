@@ -1,0 +1,29 @@
+<%= form_for(@identification) do |f| %>
+  <% if @identification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@identification.errors.count, "error") %> prohibited this identification from being saved:</h2>
+
+      <ul>
+      <% @identification.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :service %><br>
+    <%= f.text_field :service %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br>
+    <%= f.text_field :location %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

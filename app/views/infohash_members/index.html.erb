@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Infohash</th>
-      <th>Author</th>
+      <th>Member</th>
       <th>Identification</th>
       <th colspan="3"></th>
     </tr>
@@ -16,7 +16,7 @@
     <% @infohash_members.each do |infohash_member| %>
       <tr>
         <td><%= infohash_member.infohash %></td>
-        <td><%= infohash_member.author %></td>
+        <td><%= infohash_member.member %></td>
         <td><%= infohash_member.identification %></td>
         <td><%= link_to 'Show', infohash_member %></td>
         <td><%= link_to 'Edit', edit_infohash_member_path(infohash_member) %></td>
