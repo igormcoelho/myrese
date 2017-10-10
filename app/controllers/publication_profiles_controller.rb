@@ -31,8 +31,19 @@ class PublicationProfilesController < ApplicationController
     if (@publication_profile.profile_id > 0)
        @publication_profile.author = Profile.find(@publication_profile.profile_id).citation
     elsif (@publication_profile.profile_id == 0) and (@publication_profile.author != "")
-       @publication_profile.author
+       #@publication_profile.author
+       clist = @publication_profile.author.split(/\s*[.,]\s*/)
+       cite = ""
+       clist.each_with_index do |v,index|
+        if index == 0
+          cite += v.upcase + ", "
+        else
+          cite += v.upcase[0] + "."
+        end
+       end
+       @publication_profile.author = cite
        @publication_profile.profile = nil # maybe redundant...
+=begin
     elsif (@publication_profile.profile_id == -1) and (@publication_profile.author != "")
       clist = @publication_profile.author.split(/\s*[.,]\s*/)
       cite = ""
@@ -46,6 +57,7 @@ class PublicationProfilesController < ApplicationController
       @publication_profile.profile = Profile.new(:fullname => cite, :shortbio => "no story...", :visibility_id => 1, :citation => cite)
       @publication_profile.profile.save
       @publication_profile.author = cite
+=end
     else # crazy!
       @publication_profile.profile = nil
       @publication_profile.author = ""
@@ -87,6 +99,6 @@ class PublicationProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def publication_profile_params
-      params.require(:publication_profile).permit(:author, :profile_id) #ignoring :publication_id
+      params.require(:publication_profile).permit(:author, :profile_id, :orderv) #ignoring :publication_id
     end
 end

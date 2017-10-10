@@ -26,7 +26,7 @@
         <td><%= publication.issn %></td>
         <td><%= publication.title %></td>
         <td style="width: 250px">
-          <% publication.publication_profiles.each do |pp| %>
+          <% publication.publication_profiles.order(:orderv).each do |pp| %>
           <b>
             <% if pp.profile %>
               <%= link_to pp.profile.citation, pp.profile %>

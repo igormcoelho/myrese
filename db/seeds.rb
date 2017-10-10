@@ -14,9 +14,10 @@ Visibility.create :vtype => "private (for members)" , :id => 1 #Visibility::VCOD
 Visibility.create :vtype => "instance"              , :id => 2 #Visibility::VCODES.vinstance # => 2
 Visibility.create :vtype => "public"                , :id => 3 #Visibility::VCODES.vpublic   # => 3
 
-Identification.create :service => "myrese"   , :title => "Local user"     , :location => "local",  :id => 1
+Identification.create :service => "username" , :title => "Myrese user"     , :location => "local/external",  :id => 1
 Identification.create :service => "email"    , :title => "User email"     , :location => "local",  :id => 2
 Identification.create :service => "citation" , :title => "Citation name"  , :location => "local",  :id => 3
+Identification.create :service => "other"    , :title => "Other"          , :location => "external",  :id => 4
 
 ##Htype.create :name => "Pkeyword"
 ##Htype.create :name => "Tag"

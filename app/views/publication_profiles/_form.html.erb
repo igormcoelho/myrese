@@ -14,11 +14,12 @@
   <div class="field">
     <%= f.label :author %><br>
     <%= f.text_field :author %>
+    <%= f.hidden_field :orderv, :value => if @publication.publication_profiles.length > 0 then @publication.publication_profiles.order(:orderv).last.orderv + 1.0 else 0.0 end%>
   </div>
 
   <div class="field">
     <%= f.label :profile %><br />
-    <% plist = [["Do not link with profile", 0], ["Create a new profile", -1]] %>
+    <% plist = [ ["Do not link with profile", 0] ] %>
     <%= f.select :profile_id, options_for_select(plist + Profile.all.order(:citation).map{|p|[p.citation, p.id]}, 0) %>
   </div>
 

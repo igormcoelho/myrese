@@ -28,7 +28,7 @@ class Infohash < ActiveRecord::Base
   end
   
   validates_presence_of :gtitle       , message: "General Title is missing"
-  validates_presence_of :gdescription , message: "General Description is missing"
+  #validates_presence_of :gdescription , message: "General Description is missing"
   
   validates_presence_of :htype
   

@@ -1,1 +1,1 @@
-json.extract! @publication, :id, :ptype, :title, :journal, :year, :doi, :infohash_id, :created_at, :updated_at
+json.extract! @publication, :id, :pubtype, :infohash, :title, :ctitle, :year, :doi, :infohash_id, :created_at, :updated_at

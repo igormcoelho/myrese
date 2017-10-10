@@ -1,9 +1,9 @@
 module PublicationsHelper
 
   def plain_pub(pub)
-    if pub.ptype.name == "article"
+    if pub.pubtype.name == "article"
       return plain_article(pub)
-    elsif pub.ptype.name == "chapter"
+    elsif pub.pubtype.name == "chapter"
       return plain_chapter(pub)
   # elsif book ...
     else
@@ -54,9 +54,9 @@ module PublicationsHelper
   
   
   def bibtex_pub(pub)
-    if pub.ptype.name == "article"
+    if pub.pubtype.name == "article"
       return bibtex_article(pub)
-    elsif pub.ptype.name == "chapter"
+    elsif pub.pubtype.name == "chapter"
       return bibtex_chapter(pub)
   # elsif book ...
     else
@@ -93,9 +93,9 @@ module PublicationsHelper
     if !pub.doi.blank?
       ret += "doi={ "+pub.doi.to_s + " }\n"
     end
-    if !pub.url.blank?
-      ret += "url={ "+pub.url.to_s + " }\n"
-    end
+    #if !pub.url.blank?
+    #  ret += "url={ "+pub.url.to_s + " }\n"
+    #end
     ret += "year={ "+pub.year.to_s + " }\n"
     ret += "}"
   end
@@ -119,7 +119,7 @@ module PublicationsHelper
   end
 
   def bibtex_chapter(pub)
-    ret  = "@article "
+    ret  = "@chapter "
     ret += bibtex_common_begin(pub)
     ret += "book={ "+pub.ctitle + " },\n"
     if !pub.volume.blank?

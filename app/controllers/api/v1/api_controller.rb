@@ -29,8 +29,13 @@ module Api::V1
     private
 
     def authenticate_user_from_token!
-      user_email = params[:user_email].presence
-      user = user_email && User.find_by_email(user_email)
+      #user_email = params[:user_email].presence
+      #user = user_email && User.find_by_email(user_email)
+      #puts user_email
+      username = params[:username].presence
+      user = username && User.find_by_username(username)
+      puts username
+      puts user.email
 
       if user && Devise.secure_compare(user.auth_token, params[:user_token])
         sign_in user, store: false

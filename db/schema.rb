@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817034214) do
+ActiveRecord::Schema.define(version: 20171009161514) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "title"
@@ -300,6 +300,7 @@ ActiveRecord::Schema.define(version: 20160817034214) do
     t.integer  "profile_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.float    "orderv"
   end
 
   add_index "publication_profiles", ["profile_id"], name: "index_publication_profiles_on_profile_id"
