@@ -32,12 +32,20 @@ module Api::V1
       #user_email = params[:user_email].presence
       #user = user_email && User.find_by_email(user_email)
       #puts user_email
+      logger.info "info username: "
+      logger.info params[:username]
       username = params[:username].presence
       user = username && User.find_by_username(username)
-      puts username
-      puts user.email
+      logger.info "teste"
+      logger.info user
+      logger.info username
+      logger.info "teste denovo"
+      logger.info user.email
+      logger.info params[:user_token]
+      logger.info "fim"
 
       if user && Devise.secure_compare(user.auth_token, params[:user_token])
+        logger.info "autenticado!"
         sign_in user, store: false
       end
     end

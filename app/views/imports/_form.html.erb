@@ -1,0 +1,25 @@
+<%= form_for(@import) do |f| %>
+  <% if @import.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@import.errors.count, "error") %> prohibited this import from being saved:</h2>
+
+      <ul>
+      <% @import.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Url" %><br>
+    <%= f.text_field :url %>
+  </div>
+  <div class="field">
+    <%= f.label "JSON Data" %><br>
+    <%= f.text_area :jsondata %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

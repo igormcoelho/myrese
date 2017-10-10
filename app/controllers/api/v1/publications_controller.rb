@@ -10,6 +10,7 @@ module Api::V1
     end
 
     def show
+    logger.info "here we go!"
     #  respond_to do |format|
     #    format.json { render :show }
     #  end
@@ -22,8 +23,9 @@ module Api::V1
     #respond_to do |format|
     #  format.json
     #end
+    output = @publication.as_json
     #render json: @publication.as_json(only: [:id, :title, :year, :code])
-    render json: @publication.as_json(only: [:title, :year], include: [:authors, {infohash: {only:[:code]}}] )
+    render json: output #json.extract! json.myrese "v1.0", @publication #@publication.as_json(only: [:title, :year], include: [:authors, {infohash: {only:[:code]}}] )
     
     end
 

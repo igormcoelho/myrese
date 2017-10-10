@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :imports
   resources :infohash_members
   root to: "mainpage#index"
   
@@ -72,6 +73,11 @@ Rails.application.routes.draw do
   
   
   resources :visibilities
+
+  #get 'imports/' => 'imports#new'  
+  #get 'imports/:url' => 'imports#view'
+
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

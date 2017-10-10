@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @import.url %>
+</p>
+
+<p>
+  <strong>Jsondata:</strong>
+  <%= @import.jsondata %>
+</p>
+
+<%= link_to 'Edit', edit_import_path(@import) %> |
+<%= link_to 'Back', imports_path %>

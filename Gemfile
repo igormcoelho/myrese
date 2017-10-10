@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 # https://github.com/Eric-Guo/where-or
 #gem 'where-or' # backport from Rails 5 to Rails 4.2
 
+gem 'httparty'
+
 gem 'bootstrap-sass', '~> 3.3.6'
 
 gem "paperclip", '4.3.7' #"~> 5.0.0"
