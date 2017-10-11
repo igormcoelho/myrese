@@ -3,8 +3,8 @@ module Api::V1
   class ApiController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, :with => :request_not_found
 
-    before_filter :authenticate_user_from_token!
     before_filter :authenticate_user!
+    before_filter :authenticate_user_from_token!
 
     def invalid_request
       @response = Hash.new
@@ -32,20 +32,16 @@ module Api::V1
       #user_email = params[:user_email].presence
       #user = user_email && User.find_by_email(user_email)
       #puts user_email
-      logger.info "info username: "
-      logger.info params[:username]
-      username = params[:username].presence
+      if current_user
+        username = current_user.username
+      else
+        username = params[:username].presence        
+      end
       user = username && User.find_by_username(username)
-      logger.info "teste"
-      logger.info user
-      logger.info username
-      logger.info "teste denovo"
-      logger.info user.email
-      logger.info params[:user_token]
-      logger.info "fim"
 
       if user && Devise.secure_compare(user.auth_token, params[:user_token])
-        logger.info "autenticado!"
+        logger.info "autenticado via token!"
+        logger.info user.email
         sign_in user, store: false
       end
     end

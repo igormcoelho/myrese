@@ -1,3 +1,6 @@
+  <b>Url</b> (type Enter to load JSON data)<div class="div_loading" style="visibility: hidden;">loading...</div>
+  <input type="text" class="url_field" size=100></input>
+ <!-- https://myrese-imcoelho.c9users.io/api/v1/publications/1.json?username=igormcoelho -->
 <%= form_for(@import) do |f| %>
   <% if @import.errors.any? %>
     <div id="error_explanation">
@@ -11,15 +14,39 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label "Url" %><br>
-    <%= f.text_field :url %>
+ <!-- 
+  <div class="field" onChange="javascript:$('import_jsondata').innerHTML='oi';">
+    <%#= f.label "Url" %><br>
+    <%#= f.text_field :url, :class => 'url_field' %>
   </div>
+  -->
+  
   <div class="field">
     <%= f.label "JSON Data" %><br>
-    <%= f.text_area :jsondata %>
+    <%= f.text_area :jsondata, :class => 'jsondata_area' %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<script>
+  $(".url_field").keyup(function(e){ 
+    var code = e.which; // recommended to use e.which, it's normalized across browsers
+    //if(code==13)e.preventDefault();
+    //if(code==32||code==13||code==188||code==186){
+    if(code==13){
+        //$(".jsondata_area").val($('.url_field').val());
+        $('.div_loading').css("visibility","visible");
+        $.get( $('.url_field').val(), function( data ) {
+           $( ".jsondata_area" ).val( JSON.stringify(data) );
+        }).fail(function() {
+          $( ".jsondata_area" ).val( "Failed to load resource" );
+           //alert( "error loading resource." );
+        }).always(function(){
+          $('.div_loading').css("visibility","hidden");   
+        })
+        e.preventDefault();
+    } // missing closing if brace
+});
+</script>

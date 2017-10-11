@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # https://github.com/Eric-Guo/where-or
 #gem 'where-or' # backport from Rails 5 to Rails 4.2
 
-gem 'httparty'
+#gem 'httparty'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 
@@ -62,6 +62,8 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
+  #gem 'puma', '2.11.1'
+  #gem 'passenger'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'

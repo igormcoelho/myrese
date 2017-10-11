@@ -2,9 +2,7 @@ class ImportsController < ApplicationController
   before_action :set_import, only: [:show, :edit, :update, :destroy]
   
   require 'json'
-  require 'open-uri'
-  require 'httparty'
-
+  
   # GET /imports
   # GET /imports.json
   def index
@@ -28,23 +26,20 @@ class ImportsController < ApplicationController
   # POST /imports
   # POST /imports.json
   def create
+    logger.info "================= imports#create"
     @import = Import.new(import_params)
     @import.user_id = current_user.id;
     
-    logger.info "loading..."
-    logger.info @import.url
-    #@import.jsondata = JSON.load(open(URI.parse(@import.url), "User-Agent" => "Headless", :proxy => nil ))
-    logger.info URI.parse(@import.url)
-    resp = HTTParty.get(URI.parse(@import.url), headers: {"User-Agent" => "Headless"})
-    resp = HTTParty.get(URI.parse(var), headers: {"User-Agent" => "Headless"})
-    user_data = JSON.parse(resp.response)
-    logger.info user_data
+    logger.info @import.jsondata
+    infohash_data = JSON.parse(@import.jsondata)
+    logger.info infohash_data
+    logger.info infohash_data["pubtype_id"]
 
 #https://myrese-imcoelho.c9users.io/api/v1/publications/12.json?username=igormcoelho&user_token=BePvn2hitUsHptpYPqMz
 
 
     respond_to do |format|
-      if @import.save
+      if false #&& @import.save
         format.html { redirect_to @import, notice: 'Import was successfully created.' }
         format.json { render :show, status: :created, location: @import }
       else
@@ -86,6 +81,6 @@ class ImportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def import_params
-      params.require(:import).permit(:url, :jsondata)
+      params.require(:import).permit(:jsondata)  #do not use :url
     end
 end

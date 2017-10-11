@@ -35,7 +35,7 @@
             <% end %>
           </b>
             <% if (current_user == publication.user) %>
-              <%= link_to "(delete)", [publication, pp] ,method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to "(delete)", [publication, pp] ,method: :delete,  remote:true, data: { confirm: 'Are you sure?' } %>
             <% end %>
           <br>
           <% end %>
