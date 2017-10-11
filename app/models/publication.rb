@@ -1,9 +1,6 @@
 class Publication < ActiveRecord::Base
   HTYPE = 1
-  def getHTYPE
-    return HTYPE
-  end
-  
+
   belongs_to :infohash   , autosave: true
   
   delegate :user         , to: :infohash # belongs_to through (doesn't exist!)
@@ -15,7 +12,7 @@ class Publication < ActiveRecord::Base
   delegate :visibility   , to: :infohash
   delegate :visibility_id, to: :infohash
   
-  has_many :publication_profiles                   , dependent: :destroy
+  has_many :publication_profiles  , dependent: :destroy, autosave: true
   has_many :authors, through: :publication_profiles, source: :profile
   
   #attr_reader(:mainauthor)
@@ -25,6 +22,7 @@ class Publication < ActiveRecord::Base
   #end
   
   belongs_to :pubtype
+  validates_presence_of :pubtype        , message: "Publication type is missing"
   #has_many :pauthors
   #has_many :pkeywords
   
@@ -33,6 +31,7 @@ class Publication < ActiveRecord::Base
   #validates_presence_of :visibility    , message: "Visibility is missing"
   
   validates_associated  :infohash      , message: "Failed to validate general information"
+  validates_associated  :publication_profiles      , message: "Failed to validate publication_profiles"
   
   validates_presence_of :infohash      , message: "Infohash reference is missing"
   validates_presence_of :pubtype       , message: "Publication type is missing"

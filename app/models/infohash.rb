@@ -33,20 +33,32 @@ class Infohash < ActiveRecord::Base
   validates_presence_of :htype
   
   def specification
-    if :htype == Publication.HTYPE
-      return :publication
-    end 
-    if :htype == Gfile.HTYPE
-      return :gfile
-    end 
-    return nil
+    if htype_id == Publication::HTYPE
+      return publication
+    elsif htype_id == Gfile::HTYPE
+      return gfile
+    elsif htype_id == Project::HTYPE
+      return project
+    elsif htype_id == Post::HTYPE
+      return post
+    elsif htype_id == Reminder::HTYPE
+      return reminder
+    elsif htype_id == Weblink::HTYPE
+      return weblink
+    elsif htype_id == Folder::HTYPE
+      return folder
+    else
+      return nil
+    end  
   end
-  
-  validates :publication, presence: true, if: :htype == Publication.HTYPE
-  validates :gfile, presence: true,       if: :htype == Gfile.HTYPE
-  validates :post, presence: true,        if: :htype == Post.HTYPE
-  validates :project, presence: true,     if: :htype == Project.HTYPE
-  
+#  validates :publication, presence: true, if: :htype == Publication::HTYPE
+#  validates :gfile, presence: true,       if: :htype == Gfile::HTYPE
+#  validates :project, presence: true,     if: :htype == Project::HTYPE
+#  validates :post, presence: true,        if: :htype == Post::HTYPE
+#  validates :reminder, presence: true,    if: :htype == Reminder::HTYPE
+#  validates :weblink, presence: true,     if: :htype == Weblink::HTYPE
+#  validates :folder, presence: true,      if: :htype == Folder::HTYPE
+
   has_one :publication  , dependent: :destroy # one or zero: creates Publication.infohash_id
   has_one :gfile        , dependent: :destroy # one or zero: creates Gfile.infohash_id
   has_one :project      , dependent: :destroy # one or zero: creates Project.infohash_id
@@ -54,6 +66,7 @@ class Infohash < ActiveRecord::Base
   has_one :reminder     , dependent: :destroy # one or zero: creates Reminder.infohash_id
   has_one :weblink      , dependent: :destroy # one or zero: creates Weblink.infohash_id
   has_one :folder       , dependent: :destroy # one or zero: creates Folder.infohash_id
+
   has_many :tags        , dependent: :delete_all
   
   has_many :folder_infohashes

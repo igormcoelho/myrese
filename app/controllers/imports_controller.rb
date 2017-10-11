@@ -23,12 +23,42 @@ class ImportsController < ApplicationController
   def edit
   end
   
+  def build_infohash(object, jsonhash)
+    object.infohash = Infohash.new
+    object.infohash.user           = current_user
+    object.infohash.gtitle         = jsonhash["gtitle"]
+    object.infohash.gdescription   = jsonhash["gdescription"]    
+    object.infohash.htype_id       = jsonhash["htype_id"]   
+    object.infohash.visibility_id  = jsonhash["visibility_id"] 
+  end
+  
   def build_publication(jsonhash)
     logger.info "building publication"
     object = Publication.new
-    object.title=jsonhash["title"]
-    object.ctitle=jsonhash["ctitle"]
+    object.title      = jsonhash["title"]
+    object.ctitle     = jsonhash["ctitle"]
+    object.pubtype_id = jsonhash["pubtype_id"]
+    object.year       = jsonhash["year"]
     
+    authorlist = jsonhash["publication_profiles"]
+    logger.info authorlist
+    logger.info jsonhash["publication_profiles"][0]
+    alist = []
+    authorlist.each do |a|
+      pp = PublicationProfile.new
+      pp.author = a["author"]
+      pp.orderv = a["orderv"]
+      pp.publication = object
+      alist.push(pp)
+    end
+    logger.info alist
+    object.publication_profiles = alist
+    
+
+
+    build_infohash(object, jsonhash)
+    object.infohash.publication = object
+
     return object
   end
 
@@ -47,26 +77,27 @@ class ImportsController < ApplicationController
     object = nil
 
     if (infohash_data["myrese"]=="v1.0")
+        logger.info "myrese version 1.0"
         if (infohash_data["htype_id"] == Publication::HTYPE)
            object = build_publication(infohash_data)
         end
         
         if object
-          object.infohash = Infohash.new
-          object.infohash.user = current_user
-          object.infohash.gtitle = infohash_data["gtitle"]
-          object.infohash.gdescription = infohash_data["gdescription"]
+          logger.info "will save object!"
           @import.infohash = object.infohash
+
+          if not object.save
+            logger.info "after save:"
+            logger.info object.errors.messages.as_json
+          end
         end
     end
-    
-    logger.info object
 
     respond_to do |format|
-      if @import.infohash && @import.infohash.save && object.save #&& @import.save
-        logger.info infohash_data
-        logger.info infohash_data["pubtype_id"]
-
+      if not object.errors.any? #&& @import.save
+        logger.info object
+        logger.info object.as_json
+        
         format.html { redirect_to @import, notice: 'Import was successfully created.' }
         format.json { render :show, status: :created, location: @import }
       else
