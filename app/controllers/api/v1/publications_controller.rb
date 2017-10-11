@@ -3,6 +3,7 @@ module Api::V1
   class PublicationsController < ApiController
     before_action :set_publication, only: [:show]
 
+    require 'active_support/all'
     #respond_to :json
     
     def index
@@ -23,7 +24,9 @@ module Api::V1
     #respond_to do |format|
     #  format.json
     #end
-    output = @publication.as_json
+    output = @publication.infohash.as_json.merge(@publication.as_json)
+    output["publication_profiles"] = @publication.publication_profiles.as_json
+    output["myrese"] = "v1.0"
     #render json: @publication.as_json(only: [:id, :title, :year, :code])
     render json: output #json.extract! json.myrese "v1.0", @publication #@publication.as_json(only: [:title, :year], include: [:authors, {infohash: {only:[:code]}}] )
     

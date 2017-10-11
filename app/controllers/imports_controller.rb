@@ -22,6 +22,15 @@ class ImportsController < ApplicationController
   # GET /imports/1/edit
   def edit
   end
+  
+  def build_publication(jsonhash)
+    logger.info "building publication"
+    object = Publication.new
+    object.title=jsonhash["title"]
+    object.ctitle=jsonhash["ctitle"]
+    
+    return object
+  end
 
   # POST /imports
   # POST /imports.json
@@ -32,19 +41,37 @@ class ImportsController < ApplicationController
     
     logger.info @import.jsondata
     infohash_data = JSON.parse(@import.jsondata)
-    logger.info infohash_data
-    logger.info infohash_data["pubtype_id"]
-
+    
 #https://myrese-imcoelho.c9users.io/api/v1/publications/12.json?username=igormcoelho&user_token=BePvn2hitUsHptpYPqMz
 
+    object = nil
+
+    if (infohash_data["myrese"]=="v1.0")
+        if (infohash_data["htype_id"] == Publication::HTYPE)
+           object = build_publication(infohash_data)
+        end
+        
+        if object
+          object.infohash = Infohash.new
+          object.infohash.user = current_user
+          object.infohash.gtitle = infohash_data["gtitle"]
+          object.infohash.gdescription = infohash_data["gdescription"]
+          @import.infohash = object.infohash
+        end
+    end
+    
+    logger.info object
 
     respond_to do |format|
-      if false #&& @import.save
+      if @import.infohash && @import.infohash.save && object.save #&& @import.save
+        logger.info infohash_data
+        logger.info infohash_data["pubtype_id"]
+
         format.html { redirect_to @import, notice: 'Import was successfully created.' }
         format.json { render :show, status: :created, location: @import }
       else
         format.html { render :new }
-        format.json { render json: @import.errors, status: :unprocessable_entity }
+        format.json { render json: object.errors, status: :unprocessable_entity }
       end
     end
   end

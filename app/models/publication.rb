@@ -1,5 +1,8 @@
 class Publication < ActiveRecord::Base
   HTYPE = 1
+  def getHTYPE
+    return HTYPE
+  end
   
   belongs_to :infohash   , autosave: true
   

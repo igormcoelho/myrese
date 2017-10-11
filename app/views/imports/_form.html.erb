@@ -2,12 +2,12 @@
   <input type="text" class="url_field" size=100></input>
  <!-- https://myrese-imcoelho.c9users.io/api/v1/publications/1.json?username=igormcoelho -->
 <%= form_for(@import) do |f| %>
-  <% if @import.errors.any? %>
+  <% if @import && @import.infohash && @import.infohash.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@import.errors.count, "error") %> prohibited this import from being saved:</h2>
+      <h2><%= pluralize(@import.infohash.errors.count, "error") %> prohibited this import from being saved:</h2>
 
       <ul>
-      <% @import.errors.full_messages.each do |message| %>
+      <% @import.infohash.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>

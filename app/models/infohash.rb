@@ -32,6 +32,21 @@ class Infohash < ActiveRecord::Base
   
   validates_presence_of :htype
   
+  def specification
+    if :htype == Publication.HTYPE
+      return :publication
+    end 
+    if :htype == Gfile.HTYPE
+      return :gfile
+    end 
+    return nil
+  end
+  
+  validates :publication, presence: true, if: :htype == Publication.HTYPE
+  validates :gfile, presence: true,       if: :htype == Gfile.HTYPE
+  validates :post, presence: true,        if: :htype == Post.HTYPE
+  validates :project, presence: true,     if: :htype == Project.HTYPE
+  
   has_one :publication  , dependent: :destroy # one or zero: creates Publication.infohash_id
   has_one :gfile        , dependent: :destroy # one or zero: creates Gfile.infohash_id
   has_one :project      , dependent: :destroy # one or zero: creates Project.infohash_id

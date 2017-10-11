@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171010181443) do
+ActiveRecord::Schema.define(version: 20171011020514) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "title"
@@ -141,10 +141,12 @@ ActiveRecord::Schema.define(version: 20171010181443) do
     t.integer  "user_id"
     t.string   "url"
     t.text     "jsondata"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "infohash_id"
   end
 
+  add_index "imports", ["infohash_id"], name: "index_imports_on_infohash_id"
   add_index "imports", ["user_id"], name: "index_imports_on_user_id"
 
   create_table "infohash_members", force: :cascade do |t|
