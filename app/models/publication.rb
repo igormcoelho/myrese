@@ -13,7 +13,7 @@ class Publication < ActiveRecord::Base
   delegate :visibility_id, to: :infohash
   
   has_many :publication_profiles  , dependent: :destroy, autosave: true
-  has_many :authors, through: :publication_profiles, source: :profile
+  #has_many :authors, through: :publication_profiles , source: :profile
   
   #attr_reader(:mainauthor)
   #validates_presence_of :mainauthor, message: "At least one author must be provided"

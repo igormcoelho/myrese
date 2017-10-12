@@ -13,9 +13,10 @@ module PublicationsHelper
   
   def plain_authors(pub)
     ret = ""
-    pub.authors.each_with_index do |a, index|
-      ret += a.citation
-      if index == pub.authors.size - 1
+    #pub.authors.each_with_index do |a, index|
+    pub.publication_profiles.order(:orderv).each_with_index do |pp, index|
+      ret += pp.author
+      if index == pub.publication_profiles.size - 1#pub.authors.size - 1
         ret += " "
       else
         ret += "; "
@@ -66,9 +67,10 @@ module PublicationsHelper
 
   def bibtex_authors(pub)
     ret = "authors={"
-    pub.authors.each_with_index do |a, index|
-      ret += a.citation
-      if index == pub.authors.size - 1
+    #pub.authors.each_with_index do |a, index|
+    pub.publication_profiles.order(:orderv).each_with_index do |pp, index|
+      ret += pp.author
+      if index == pub.publication_profiles.size - 1#pub.authors.size - 1
         ret += " "
       else
         ret += " and "
