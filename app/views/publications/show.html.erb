@@ -6,6 +6,11 @@
 </p>
 
 <p>
+  <strong>Import path:</strong>
+  <%= "api/v1/publications/" + @publication.id.to_s + ".json"%>
+</p>
+
+<p>
   <strong>Publication Type:</strong>
   <%= @publication.pubtype.name %>
 </p>

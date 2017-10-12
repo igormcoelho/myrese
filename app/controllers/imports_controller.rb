@@ -35,14 +35,28 @@ class ImportsController < ApplicationController
   def build_publication(jsonhash)
     logger.info "building publication"
     object = Publication.new
-    object.title      = jsonhash["title"]
-    object.ctitle     = jsonhash["ctitle"]
-    object.pubtype_id = jsonhash["pubtype_id"]
-    object.year       = jsonhash["year"]
-    
+    object.title        = jsonhash["title"]
+    object.ctitle       = jsonhash["ctitle"]
+    object.pubtype_id   = jsonhash["pubtype_id"]
+    object.year         = jsonhash["year"]
+    object.issn         = jsonhash["issn"]
+    object.isbn         = jsonhash["isbn"]
+    object.editor       = jsonhash["editor"]
+    object.publisher    = jsonhash["publisher"]
+    object.organization = jsonhash["organization"]
+    object.address      = jsonhash["address"]
+    object.month        = jsonhash["month"]
+    object.volume       = jsonhash["volume"]
+    object.number       = jsonhash["number"]
+    object.series       = jsonhash["series"]
+    object.page_begin   = jsonhash["page_begin"]
+    object.page_end     = jsonhash["page_end"]
+    object.howpublished = jsonhash["howpublished"]
+    object.doi          = jsonhash["doi"]
+    object.keywords     = jsonhash["keywords"]
+    object.other        = jsonhash["other"]
+
     authorlist = jsonhash["publication_profiles"]
-    logger.info authorlist
-    logger.info jsonhash["publication_profiles"][0]
     alist = []
     authorlist.each do |a|
       pp = PublicationProfile.new
@@ -51,10 +65,7 @@ class ImportsController < ApplicationController
       pp.publication = object
       alist.push(pp)
     end
-    logger.info alist
     object.publication_profiles = alist
-    
-
 
     build_infohash(object, jsonhash)
     object.infohash.publication = object
@@ -70,6 +81,9 @@ class ImportsController < ApplicationController
     @import.user_id = current_user.id;
     
     logger.info @import.jsondata
+    if (@import.jsondata == "") || (@import.jsondata[0]!='{')
+      @import.jsondata = "{}"
+    end
     infohash_data = JSON.parse(@import.jsondata)
     
 #https://myrese-imcoelho.c9users.io/api/v1/publications/12.json?username=igormcoelho&user_token=BePvn2hitUsHptpYPqMz
@@ -94,7 +108,7 @@ class ImportsController < ApplicationController
     end
 
     respond_to do |format|
-      if not object.errors.any? #&& @import.save
+      if (object && (not object.errors.any?)) #&& @import.save
         logger.info object
         logger.info object.as_json
         
@@ -102,7 +116,11 @@ class ImportsController < ApplicationController
         format.json { render :show, status: :created, location: @import }
       else
         format.html { render :new }
-        format.json { render json: object.errors, status: :unprocessable_entity }
+        jsontext = nil
+        if object
+          jsontext = object.errors
+        end
+        format.json { render json: jsontext, status: :unprocessable_entity }
       end
     end
   end
