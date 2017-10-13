@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :publications
+      resources :gfiles
       #get 'publications/show', to: 'publications#show', defaults: { format: :json }, as: :job
     end
   end

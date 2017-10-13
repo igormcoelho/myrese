@@ -1,4 +1,5 @@
   <b>Url</b> (type Enter to load JSON data)<div class="div_loading" style="visibility: hidden;">loading...</div>
+  <div class="div_download" style="visibility: hidden;">downloading external file...</div>
   <input type="text" class="url_field" size=100 value="<%=@import.url%>"></input>
  <!-- https://myrese-imcoelho.c9users.io/api/v1/publications/1.json?username=igormcoelho -->
 <%= form_for(@import) do |f| %>
@@ -14,13 +15,11 @@
       </ul>
     </div>
   <% end %>
-
- <!-- 
-  <div class="field" onChange="javascript:$('import_jsondata').innerHTML='oi';">
-    <%#= f.label "Url" %><br>
-    <%#= f.text_field :url, :class => 'url_field' %>
+  
+  <div class="field">
+    <!-- using this field as payload for file data -->
+    <%= f.hidden_field :url, :class => 'file_field' %>
   </div>
-  -->
   
   <div class="field">
     <%= f.label "JSON Data" %><br>
@@ -32,6 +31,24 @@
 <% end %>
 
 <script>
+
+// http://www.henryalgus.com/reading-binary-files-using-jquery-ajax/
+function fetchBlob(uri, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', uri, true);
+  xhr.responseType = 'arraybuffer';
+
+  xhr.onload = function(e) {
+    if (this.status == 200) {
+      var blob = this.response;
+      if (callback) {
+        callback(blob);
+      }
+    }
+  };
+  xhr.send();
+};
+
   $(".url_field").keyup(function(e){ 
     var code = e.which; // recommended to use e.which, it's normalized across browsers
     //if(code==13)e.preventDefault();
@@ -39,8 +56,47 @@
     if(code==13){
         //$(".jsondata_area").val($('.url_field').val());
         $('.div_loading').css("visibility","visible");
-        $.get( $('.url_field').val(), function( data ) {
-           $( ".jsondata_area" ).val( JSON.stringify(data) );
+        var fullurl = $('.url_field').val();
+        
+        $.get( fullurl, function( data ) {
+           console.log(data);
+           console.log(data.htype_id);
+           if( data.htype_id == 2) {
+              $('.div_download').html("downloading file... ("+data.filename_file_size+" bytes)");   
+              $('.div_download').css("visibility","visible");
+               
+              var link = document.createElement('a');
+              link.setAttribute('href', fullurl);
+              var filelink = link.protocol+"//"+link.host+"/"+data.url;
+              console.log(filelink);
+
+              fetchBlob(filelink, function(blob) {
+                // Array buffer to Base64:
+                var str = btoa(String.fromCharCode.apply(null, new Uint8Array(blob)));
+                $( ".file_field" ).val(btoa(str));
+                $( ".jsondata_area" ).val( JSON.stringify(data) );
+                $('.div_download').html("file attached successfully! ("+data.filename_file_size+" bytes)");
+                //console.log(str);
+              });
+              
+              /*               
+               $.get( filelink, function( filedata ) {
+                 console.log("GOT FILEDATA!");
+                 console.log("computing x");
+                 var x = String.fromCharCode.apply(null, new Uint8Array(filedata));
+                 console.log("x computed");
+                 $( ".file_field" ).val(btoa(x));
+                $( ".jsondata_area" ).val( JSON.stringify(data) );
+                $('.div_download').html("file attached successfully! ("+data.filename_file_size+" bytes)");
+               }).fail(function() {
+                $( ".div_download" ).html( "Failed to download resource." );
+              }).always(function(){
+                  //$('.div_download').css("visibility","hidden");   
+              })
+              */
+              
+           }
+
         }).fail(function() {
           $( ".jsondata_area" ).val( "Failed to load resource" );
            //alert( "error loading resource." );

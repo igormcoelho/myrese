@@ -33,6 +33,7 @@ class GfilesController < ApplicationController
     #@publication = Publication.new(publication_params)
     @infohash  = Infohash.new(infohash_params)
     @gfile     = @infohash.build_gfile(gfile_params)
+    logger.info(gfile_params)
     
     #@mainauthor = params.require(:publication).permit(:mainauthor)
 

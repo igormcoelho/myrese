@@ -32,6 +32,10 @@ class ImportsController < ApplicationController
     object.infohash.visibility_id  = jsonhash["visibility_id"] 
   end
   
+  
+  
+
+  
   def build_publication(jsonhash)
     logger.info "building publication"
     object = Publication.new
@@ -73,10 +77,53 @@ class ImportsController < ApplicationController
     return object
   end
 
+
+  # http://paoloibarra.com/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip/
+  # This part is actually taken from http://blag.7tonlnu.pl/blog/2014/01/22/uploading-images-to-a-rails-app-via-json-api. I tweaked it a bit by manually setting the tempfile's content type because somehow putting it in a hash during initialization didn't work for me.
+  def parse_file_data(file_data_b64, file_name, content_type)
+    @tempfile = Tempfile.new('gfile_tmp')
+    @tempfile.binmode
+    @tempfile.write Base64.decode64(Base64.decode64(file_data_b64))
+    @tempfile.rewind
+
+    uploaded_file = ActionDispatch::Http::UploadedFile.new(
+      tempfile: @tempfile,
+      filename: file_name
+    )
+
+    uploaded_file.content_type = content_type
+    uploaded_file
+  end
+  
+  # http://paoloibarra.com/2014/09/27/Image-Upload-Using-Rails-API-And-Paperclip/
+  def clean_tempfile
+    if @tempfile
+      @tempfile.close
+      @tempfile.unlink
+    end
+  end
+  
+  
+  def build_gfile(jsonhash)
+    logger.info "building gfile"
+    fileobject = parse_file_data(import_params["url"], jsonhash["filename_file_name"], jsonhash["filename_content_type"])
+    
+    gfile = Gfile.new
+    gfile.filename = fileobject
+    
+    build_infohash(gfile, jsonhash)
+    gfile.infohash.gfile = gfile
+
+    return gfile
+  ensure
+    clean_tempfile
+  end
+
+
+
   # POST /imports
   # POST /imports.json
   def create
-    logger.info "================= imports#create"
     @import = Import.new(import_params)
     @import.user_id = current_user.id;
     
@@ -86,8 +133,6 @@ class ImportsController < ApplicationController
     end
     infohash_data = JSON.parse(@import.jsondata)
     
-#https://myrese-imcoelho.c9users.io/api/v1/publications/12.json?username=igormcoelho&user_token=BePvn2hitUsHptpYPqMz
-
     object = nil
 
     if (infohash_data["myrese"]=="v1.0")
@@ -96,8 +141,11 @@ class ImportsController < ApplicationController
            object = build_publication(infohash_data)
         end
         
+        if (infohash_data["htype_id"] == Gfile::HTYPE)
+          object = build_gfile(infohash_data)
+        end
+        
         if object
-          logger.info "will save object!"
           @import.infohash = object.infohash
 
           if not object.save
@@ -106,12 +154,11 @@ class ImportsController < ApplicationController
           end
         end
     end
+    
+    @import.url = "";
 
     respond_to do |format|
-      if (object && (not object.errors.any?)) #&& @import.save
-        logger.info object
-        logger.info object.as_json
-        
+      if (object && (not object.errors.any?))
         format.html { redirect_to @import, notice: 'Import was successfully created.' }
         format.json { render :show, status: :created, location: @import }
       else
@@ -157,6 +204,6 @@ class ImportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def import_params
-      params.require(:import).permit(:jsondata)  #do not use :url
+      params.require(:import).permit(:jsondata, :url)  #using :url to carry file data (TODO: fix)
     end
 end

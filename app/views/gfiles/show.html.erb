@@ -1,5 +1,14 @@
 <p id="notice"><%= notice %></p>
 
+  <strong>Code:</strong>
+  <%= @gfile.infohash.code %>
+</p>
+
+<p>
+  <strong>Import path:</strong>
+  <%= "/api/v1/gfiles/" + @gfile.id.to_s + ".json"%>
+</p>
+
 <p>
   <strong>Name:</strong>
   <%= @gfile.gtitle %>
@@ -12,7 +21,8 @@
 
 <p>
   <strong>File:</strong>
-  <%= @gfile.filename.url %>
+  <%= link_to "Download", @gfile.filename.url %>
+  <%#= @gfile.filename.url %>
 </p>
 
 <p>
