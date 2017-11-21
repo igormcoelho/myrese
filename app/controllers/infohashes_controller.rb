@@ -25,7 +25,8 @@ class InfohashesController < ApplicationController
   # GET /infohashes
   # GET /infohashes.json
   def index
-    @infohashes = Infohash.all
+    #@infohashes = Infohash.all
+    @infohashes = Infohash.where(:user => current_user)
   end
 
   # GET /infohashes/1

@@ -71,6 +71,8 @@ class Infohash < ActiveRecord::Base
   
   has_many :folder_infohashes
   
+  has_many :attachments
+  
   validates_presence_of :visibility
   validates_presence_of :user
   ###validates_presence_of :group_id

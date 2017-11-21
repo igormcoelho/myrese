@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   resources :imports
   resources :infohash_members
   root to: "mainpage#index"
@@ -70,6 +71,7 @@ Rails.application.routes.draw do
   
   resources :infohashes do
     resources :infohash_users
+    resources :attachments
   end
   
   

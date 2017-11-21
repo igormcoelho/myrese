@@ -16,6 +16,11 @@
 </p>
 
 <p>
+  <strong><%= @infohash.htype.name %>:</strong>
+  <%= link_to @infohash.gtitle, @infohash.specification %>
+</p>
+
+<p>
   <strong>Members:</strong>
   <% @infohash.infohash_users.each do |u| %> 
     <%= u.user.username %>

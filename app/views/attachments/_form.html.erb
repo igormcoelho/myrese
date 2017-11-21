@@ -1,0 +1,30 @@
+<%= form_for ([@infohash1, @attachment]) do |f| %>
+  <% if @attachment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@attachment.errors.count, "error") %> prohibited this attachment from being saved:</h2>
+
+      <ul>
+      <% @attachment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Description" %><br>
+    <%= f.text_field :name %>
+  </div>
+  <%= f.hidden_field :infohash_id, :value => @infohash1.id %>
+  <div class="field">
+    <%= f.label "Attachment for "+@infohash1.htype.name+": "+@infohash1.gtitle %><br>
+    <%#= f.text_field :infohash_id %>
+    <%#= f.select :infohash2_id, options_for_select(@infohashes, 0) %>
+    <% if @infohashes then %>
+    <%= f.select :infohash2_id, options_for_select(@infohashes.map{|i|[i.htype.name+": "+i.gtitle, i.id]}, 0) %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

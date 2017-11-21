@@ -14,6 +14,7 @@
       <th>Members</th>
       <th>Tags</th>
       <th style="min-width:80px">Visibility</th>
+      <th>Attachments</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -63,6 +64,15 @@
           <% end %>
         </td>
         <td><%= publication.visibility.vtype %></td>
+
+        <td>
+          <% publication.infohash.attachments.each do |t| %> 
+            <%= link_to t.name, t.infohash2 %>
+            <%= link_to "(delete)", [publication.infohash, t] ,method: :delete,  data: { confirm: 'Are you sure?' } %>
+          <br>
+          <% end %>
+          <%= link_to "New attachment", new_infohash_attachment_path(publication.infohash) %>
+        </td>
         
         <td>
           <div class="btn-group" role="group" aria-label="...">
