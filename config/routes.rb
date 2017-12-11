@@ -66,6 +66,7 @@ Rails.application.routes.draw do
   end
 
   get '/userpublications/:uname' => 'publications#indexbyuser', as: 'uname'
+  get '/f/:fcode' => 'gfiles#getfile', as: 'fcode'
   
   resources :publications do
     resources :publication_profiles
