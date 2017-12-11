@@ -64,6 +64,8 @@ Rails.application.routes.draw do
   resources :projects do
     resources :project_profiles
   end
+
+  get '/userpublications/:uname' => 'publications#indexbyuser', as: 'uname'
   
   resources :publications do
     resources :publication_profiles

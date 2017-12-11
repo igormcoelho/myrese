@@ -1,5 +1,6 @@
 class PublicationsController < ApplicationController
   before_action :set_publication, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :authenticate_user!, :only => [:indexbyuser, :show]
 
   # GET /publications
   # GET /publications.json
@@ -19,6 +20,27 @@ class PublicationsController < ApplicationController
     @publications += Publication.joins(:infohash).where("infohashes.user_id = ?", current_user.id)
     @publications.uniq!
     
+  end
+  
+  def indexbyuser
+    #@publications = Publication.all
+    
+    # AUTOMATIC JOIN
+    #@publications = Publication.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ?", current_user.id).or(
+    #                Publication.joins(:infohash_users).joins(:infohash).where("infohashes.user_id = ?", current_user.id)
+    #).uniq
+    # SELECT "publications".* FROM "publications" INNER JOIN "infohashes" ON "infohashes"."id" = "publications"."infohash_id" 
+    # INNER JOIN "infohash_users" ON "infohash_users"."infohash_id" = "infohashes"."id" INNER JOIN "infohashes" "infohashes_publications" ON "infohashes_publications"."id" = "publications"."infohash_id" 
+    # WHERE ((infohash_users.user_id = 1) OR (infohashes.user_id = 1))
+    
+    userid = User.where(:username => params['uname']).first
+    
+    #MANUAL JOIN
+    @publications  = Publication.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ?", userid.id)
+    @publications += Publication.joins(:infohash).where("infohashes.user_id = ?",  userid.id)
+    @publications.uniq!
+    
+    render action: "index", notice: 'Listing publications for '+params['uname']
   end
 
   # GET /publications/1

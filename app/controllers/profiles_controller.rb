@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :authenticate_user!, :only => [:show]
 
   def username
     uname = params[:username]

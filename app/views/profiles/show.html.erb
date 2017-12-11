@@ -15,6 +15,7 @@
   <%= @profile.citation %>
 </p>
 
+<% if current_user %>
 <p>
   <strong>Username</strong>
   <% if @profile.user %>
@@ -52,6 +53,8 @@
   <br>
   <%= link_to "Add Position", new_profile_position_path(@profile) %>
 </p>
+
+<% end %>
 
 <br>
 
