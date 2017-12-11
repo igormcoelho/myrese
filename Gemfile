@@ -22,7 +22,9 @@ gem 'devise', '3.5.10' # '4.2.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
-gem 'postgresql'
+gem 'postgresql' # why?
+
+gem "recaptcha", require: "recaptcha/rails"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

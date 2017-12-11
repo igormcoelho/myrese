@@ -135,6 +135,8 @@ GEM
     rake (11.1.2)
     rdoc (4.2.2)
       json (~> 1.4)
+    recaptcha (4.6.2)
+      json
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
     sass (3.4.22)
@@ -188,6 +190,7 @@ DEPENDENCIES
   postgresql
   puma (= 2.11.1)
   rails (= 4.2.5)
+  recaptcha
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

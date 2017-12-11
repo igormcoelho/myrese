@@ -2,6 +2,7 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
+  <%= flash[:recaptcha_error] %>
 
   <div class="field">
   <%= "username (only lowercase accepted with no special symbols)" %><br />
@@ -26,6 +27,8 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <%= recaptcha_tags %>
+  
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

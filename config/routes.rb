@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :infohash_members
   root to: "mainpage#index"
   
-  devise_for :users
+  devise_for :users, controllers: {registrations: "registrations", passwords: "passwords"}
 
   #namespace :api, defaults: {format: 'json'} do
   namespace :api do

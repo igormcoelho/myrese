@@ -1,6 +1,7 @@
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= flash[:recaptcha_error] %>
   <div class="field">
     <%= f.label :login %><br />
     <%= f.text_field :login, autofocus: true %>
@@ -17,6 +18,9 @@
       <%= f.label :remember_me %>
     </div>
   <% end -%>
+  
+  
+  <%= recaptcha_tags %>
 
   <div class="actions">
     <%= f.submit "Log in" %>
