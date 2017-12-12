@@ -1,6 +1,9 @@
 class GfilesController < ApplicationController
   before_action :set_gfile, only: [:show, :edit, :update, :destroy]
   skip_before_filter :authenticate_user!, :only => [:getfile, :show]
+  
+  #ssl_required :edit, :update, :destroy, :create
+  #ssl_allowed :show, :getfile
 
   # GET /gfiles
   # GET /gfiles.json

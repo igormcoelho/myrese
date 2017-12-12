@@ -26,6 +26,8 @@ gem 'postgresql' # why?
 
 gem "recaptcha", require: "recaptcha/rails"
 
+#gem 'ssl_requirement'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

@@ -1,5 +1,6 @@
 class MainpageController < ApplicationController
   before_action :authenticate_user!, except: [:index]
+  #ssl_allowed :index
   
   def index
     if user_signed_in?
