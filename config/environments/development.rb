@@ -9,14 +9,14 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {
     :enable_starttls_auto => true,  
-    :address            => 'smtp.gmail.com',
-    :port               => 587,
+    :address            => ENV['DEV_MAIL_HOST'], #smtp.gmail.com
+    :port               => ENV['DEV_MAIL_PORT'], #587
     #:tls                  => true,
     #:domain             => 'gmail.com', #you can also use google.com
     # FOR GMAIL, YOU HAVE TO ALLOW 'LESS SECURE' APPLICATIONS IN YOUR PROFILE...
     :authentication     => :plain,
-    :user_name          => ENV['GMAIL_USER'],
-    :password           => ENV['GMAIL_PWD']
+    :user_name          => ENV['DEV_MAIL_USER'],
+    :password           => ENV['DEV_MAIL_PWD']
   }
 
   #host = 'localhost'#'myrese-imcoelho.c9.io'#'my_app.c9.io'
