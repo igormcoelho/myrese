@@ -18,6 +18,8 @@ gem 'rails', '4.2.5'
 
 #gem 'tlsmail'
 
+gem 'mailgun_rails'
+
 gem 'devise', '3.5.10' # '4.2.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
