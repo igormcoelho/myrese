@@ -28,10 +28,9 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  database: <%= ENV['OPENSHIFT_APPNAME'] %>
-  host:     <%= ENV['$OPENSHIFT_POSTGRESQL_DB_HOST'] %>
-  port:     <%= ENV['$OPENSHIFT_POSTGRESQL_DB_PORT'] %>
-  username: <%= ENV['OPENSHIFT_POSTGRESQL_DB_USERNAME'] %>
-  password: <%= ENV['OPENSHIFT_POSTGRESQL_DB_PASSWORD'] %>
-
+  database: postgres 
+  host:     db          
+  port:     5432        
+  username: postgres 
+  password:  password
 
