@@ -14,13 +14,13 @@ gem "paperclip", '4.3.7' #"~> 5.0.0"
 #gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.7.1'
 
 #gem 'tlsmail'
 
 gem 'mailgun_rails'
 
-gem 'devise', '3.5.10' # '4.2.0'
+gem 'devise', '4.2.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 

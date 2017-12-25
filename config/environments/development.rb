@@ -1,5 +1,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  
+  config.web_console.whitelisted_ips = '187.1.51.157'
 
   # mailer configuration!
   config.action_mailer.default_url_options = { host: 'myrese.com' }
