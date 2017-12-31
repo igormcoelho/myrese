@@ -5,12 +5,12 @@ Rails.application.configure do
 
   # mailer configuration!
   config.action_mailer.default_url_options = { host: 'myrese.com' }
-  config.action_mailer.delivery_method = :mailgun
+  #config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
 		api_key: ENV['DEV_MAIL_MAILGUN_TOKEN'],
 		domain: ENV['DEV_MAIL_MAILGUN_HOST']
-}
-#  config.action_mailer.delivery_method = :smtp
+  }
+  config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
