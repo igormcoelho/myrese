@@ -57,14 +57,10 @@ Igor Machado e colegas desenvolvedores/pesquisadores.
 
 COPYLEFT 2012-2016
 
-`` _____ ``
-
-``| __  |``
-
-``|   | |``
-
-``| __| |``
-
+``&nbsp;_____&nbsp;``
+``|&nbsp;__&nbsp;&nbsp;|``
+``|&nbsp;&nbsp;&nbsp;|&nbsp;|``
+``|&nbsp;__|&nbsp;|``
 ``|_____|``
 
 # myrese
