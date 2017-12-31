@@ -56,11 +56,17 @@ Um forte abraco,
 Igor Machado e colegas desenvolvedores/pesquisadores.
 
 COPYLEFT 2012-2016
- _____
-| __  |
-|   | |
-| __| |
-|_____|
+
+`` _____ ``
+
+``| __  |``
+
+``|   | |``
+
+``| __| |``
+
+``|_____|``
+
 # myrese
 myrese is an open-source distributed research management system
 
