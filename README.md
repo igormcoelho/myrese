@@ -113,13 +113,3 @@ Um forte abraco,
 Igor Machado e colegas desenvolvedores/pesquisadores.
 
 COPYLEFT 2012-2018
-
-\_\_\_\_\_
-
-|&nbsp;\_\_&nbsp;&nbsp;|
-
-|&nbsp;&nbsp;&nbsp;|&nbsp;|
-
-|&nbsp;\_\_|&nbsp;|
-
-|\_\_\_\_\_|
