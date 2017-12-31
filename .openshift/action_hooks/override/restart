@@ -1,6 +1,0 @@
-#!/bin/bash -e
-
-pushd "$OPENSHIFT_REPO_DIR/.openshift/action_hooks/override" >/dev/null
-./stop
-./start
-popd >/dev/null

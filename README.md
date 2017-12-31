@@ -112,9 +112,13 @@ Por uma ciência livre, acessível e capaz de transformar (para melhor) a vida d
 Um forte abraco,
 Igor Machado e colegas desenvolvedores/pesquisadores.
 
-COPYLEFT 2012-2016
- _____
-| __  |
+COPYLEFT 2012-2018
+\_\_\_\_\_
+
+| \_\_  |
+
 |   | |
-| __| |
-|_____|
+
+| \_\_| |
+
+|\_\_\_\_\_|
