@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
 
   resources :imports
+  get '/imports/doimport/*ipath' => 'imports#doimport', as: 'ipath'
+  
   resources :infohash_members
   root to: "mainpage#index"
   

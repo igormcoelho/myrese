@@ -19,6 +19,14 @@ class ImportsController < ApplicationController
     @import = Import.new
   end
 
+  # GET /imports/doimport/*ipath (as ipath)
+  def doimport
+    @import = Import.new
+    @import.url = params[:ipath]
+    
+    render :new
+  end
+
   # GET /imports/1/edit
   def edit
   end

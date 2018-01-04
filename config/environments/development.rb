@@ -4,7 +4,7 @@ Rails.application.configure do
   config.web_console.whitelisted_ips = '187.1.51.157'
 
   # mailer configuration!
-  config.action_mailer.default_url_options = { host: 'myrese.com' }
+  config.action_mailer.default_url_options = { host: ENV['MYRESE_HOST'] } #'myrese.com'
   #config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
 		api_key: ENV['DEV_MAIL_MAILGUN_TOKEN'],

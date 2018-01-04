@@ -6,7 +6,7 @@ module ApplicationHelper
     end
     
     def instanceName
-      return "http://myrese.com"
+      return ENV['MYRESE_HOST'] #"http://myrese.com"
     end
     
     def instanceUserPath(userref)

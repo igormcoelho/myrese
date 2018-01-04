@@ -1,9 +1,16 @@
 <p id="notice"><%= notice %></p>
 
+<p>
   <strong>Code:</strong>
   <%= @gfile.infohash.code %>
-  <br>
+  
+</p>
+<p>
   <b>Permalink:</b> <%= instanceName+"/f/"+@gfile.infohash.code %>
+</p>
+
+<p>
+  <b>Import link:</b> <%= link_to "/imports/doimport/"+instanceName+"/api/v1/gfiles/" + @gfile.id.to_s, "/imports/doimport/"+instanceName+"/api/v1/gfiles/" + @gfile.id.to_s %>
 </p>
 
 <p>
