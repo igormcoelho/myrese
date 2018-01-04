@@ -6,6 +6,10 @@
 </p>
 
 <p>
+  <b>Import link:</b> <%= link_to "/imports/doimport/"+instanceName+"/api/v1/publications/" + @publication.id.to_s, "/imports/doimport/"+instanceName+"/api/v1/publications/" + @publication.id.to_s %>
+</p>
+
+<p>
   <strong>Import path:</strong>
   <%= "/api/v1/publications/" + @publication.id.to_s + ".json"%>
 </p>
