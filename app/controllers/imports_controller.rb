@@ -162,16 +162,27 @@ class ImportsController < ApplicationController
             logger.info object.errors.messages.as_json
           end
         end
-    end
-    
-    if (infohash_data["curriculo_lattes"])
-       logger.info "scriptLattes!"
+    elsif (infohash_data["curriculo_lattes"])
+      logger.info "scriptLattes!"
        
-       infohash_data["curriculo_lattes"]["pesquisador"].each do |pesq|
-         pesq["artigos_em_periodicos"]["artigo"].each do |paper|
+      infohash_data["curriculo_lattes"]["pesquisador"].each do |pesq|
+        pesq["artigos_em_periodicos"]["artigo"].each do |paper|
           logger.info pesq["identificacao"]["nome_inicial"] + " => " + paper["titulo"]
-          
+
+          pplist = []
+          orderv = 1
+          paper["autores"].split(";").each do |autor|
+            autor.strip!
+            pplist.push({'author' => autor, 'orderv' => orderv})
+            orderv+=1
+          end
+
+          #logger.info "pplist:"+pplist
           pubhash = {
+            'gtitle'      => paper["titulo"], # for infohash
+            'gdescription'  => paper["titulo"], # for infohash
+            'visibility_id' => 1, #PUBLIC # for infohash
+            'htype_id'      => 1, #PUBLICATION # for infohash
             'title'      => paper["titulo"],
             'ctitle'     => paper["revista"],
             'year'       => paper["ano"],
@@ -180,20 +191,33 @@ class ImportsController < ApplicationController
             'doi'        => paper["doi"],
             'page_begin' => paper["paginas"].split("-")[0],
             'page_end'   => paper["paginas"].split("-")[1],
-            'publication_profiles' => [], # TODO GET AUTHOR NAMES
+            'publication_profiles' => pplist, 
             'pubtype_id' => 1, # TODO CHECK
           }
           
-          logger.info JSON[pubhash]
+          #pubhash["publication_profiles"] = JSON[pubhash["publication_profiles"]]
           
-      #pp.author = a["author"]
-      #pp.orderv = a["orderv"]
+          if Publication.joins(:infohash).where("infohashes.user_id = ?", current_user.id).where(:title => paper["titulo"]).length > 0 then
+            #logger.info ""
+            logger.info "REPETIDO"
+            #logger.info JSON[pubhash]
+            #logger.info ""
+          else
+            object = build_publication(pubhash)
+            if object
+              @import.infohash = object.infohash
 
-          
-        end
-       end
-       
-    end
+              if not object.save
+                logger.info "after save:"
+                logger.info object.errors.messages.as_json
+              end
+            end
+            object = nil # start again
+          end
+
+        end  # artigo
+      end # pesquisador
+    end # scriptLattes
     
     @import.url = ""  # never store url
     respond_to do |format|

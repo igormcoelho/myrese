@@ -22,7 +22,9 @@
   <tbody>
     <% @publications.each do |publication| %>
       <tr>
-        <td><%= publication.infohash.gtitle %></td>
+        <td><%= publication.infohash.gtitle %>
+        <br/><br/><i><%= "Last update:"+publication.updated_at.to_s %></i>
+        </td>
         <td><%= publication.pubtype.name %></td>
         <td><%= publication.issn %></td>
         <td><%= publication.title %></td>
