@@ -134,6 +134,7 @@ class ImportsController < ApplicationController
   def create
     @import = Import.new(import_params)
     @import.user_id = current_user.id;
+    @import.url = ""  # never store url
     
     logger.info @import.jsondata
     if (@import.jsondata == "") || (@import.jsondata[0]!='{')
@@ -163,8 +164,38 @@ class ImportsController < ApplicationController
         end
     end
     
-    @import.url = "";
+    if (infohash_data["curriculo_lattes"])
+       logger.info "scriptLattes!"
+       
+       infohash_data["curriculo_lattes"]["pesquisador"].each do |pesq|
+         pesq["artigos_em_periodicos"]["artigo"].each do |paper|
+          logger.info pesq["identificacao"]["nome_inicial"] + " => " + paper["titulo"]
+          
+          pubhash = {
+            'title'      => paper["titulo"],
+            'ctitle'     => paper["revista"],
+            'year'       => paper["ano"],
+            'volume'     => paper["volume"],
+            'number'     => paper["numero"],
+            'doi'        => paper["doi"],
+            'page_begin' => paper["paginas"].split("-")[0],
+            'page_end'   => paper["paginas"].split("-")[1],
+            'publication_profiles' => [], # TODO GET AUTHOR NAMES
+            'pubtype_id' => 1, # TODO CHECK
+          }
+          
+          logger.info JSON[pubhash]
+          
+      #pp.author = a["author"]
+      #pp.orderv = a["orderv"]
 
+          
+        end
+       end
+       
+    end
+    
+    @import.url = ""  # never store url
     respond_to do |format|
       if (object && (not object.errors.any?))
         format.html { redirect_to @import, notice: 'Import was successfully created.' }
