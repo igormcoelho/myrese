@@ -1,6 +1,6 @@
   <b>Url</b> (type Enter to load JSON data)<div class="div_loading" style="visibility: hidden;">loading...</div>
   <div class="div_download" style="visibility: hidden;">downloading external file...</div>
-  <i>Type <b>enter</b> to load remote resource</i>
+  <div id="url_enter"><i>Type <b>enter</b> to load remote resource</i></div>
   <input type="text" class="url_field" size=100 value="<%=@import.url%>"></input>
  <!-- https://myrese-imcoelho.c9users.io/api/v1/publications/1.json?username=igormcoelho -->
 <%= form_for(@import) do |f| %>
@@ -77,6 +77,8 @@ function fetchBlob(uri, callback) {
                 $( ".file_field" ).val(btoa(str));
                 $( ".jsondata_area" ).val( JSON.stringify(data) );
                 $('.div_download').html("file attached successfully! ("+data.filename_file_size+" bytes)");
+                $('.url_field').css("visibility","hidden");
+                $('#url_enter').css("visibility","hidden");
                 //console.log(str);
               });
               
