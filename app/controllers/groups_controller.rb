@@ -15,6 +15,11 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
   end
+  
+  def groupname
+    @group = Group.where('lower(name) = ?', params[:groupname].downcase).first
+    render :show
+  end
 
   # GET /groups/new
   def new
