@@ -242,7 +242,7 @@ class ImportsController < ApplicationController
           paper["autores"].split(";").each do |autor|
             autor.strip!
             pplist.push({'author' => autor, 'orderv' => orderv})
-            orderv+=1
+            orderv+=1 
           end
 
           #logger.info "pplist:"+pplist
@@ -259,7 +259,7 @@ class ImportsController < ApplicationController
             'page_begin' => paper["paginas"].split("-")[0],
             'page_end'   => paper["paginas"].split("-")[1],
             'publication_profiles' => pplist, 
-            'pubtype_id' => 3, # proceedings
+            'pubtype_id' => 5, # inproceedings
           }
           
           #pubhash["publication_profiles"] = JSON[pubhash["publication_profiles"]]
