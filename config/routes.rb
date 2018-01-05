@@ -70,6 +70,7 @@ Rails.application.routes.draw do
   end
 
   get '/userpublications/:uname' => 'publications#indexbyuser', as: 'uname'
+  get '/grouppublications/:gname' => 'publications#indexbygroup', as: 'gname'
   get '/f/:fcode' => 'gfiles#getfile', as: 'fcode'
   
   resources :publications do

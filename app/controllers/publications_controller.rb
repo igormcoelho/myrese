@@ -1,6 +1,6 @@
 class PublicationsController < ApplicationController
   before_action :set_publication, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :authenticate_user!, :only => [:indexbyuser, :show]
+  skip_before_filter :authenticate_user!, :only => [:indexbyuser, :indexbygroup, :show]
 
   # GET /publications
   # GET /publications.json
@@ -45,6 +45,30 @@ class PublicationsController < ApplicationController
     
     render action: "index", notice: 'Listing publications for '+params['uname']
   end
+
+  def indexbygroup
+    groupid = Group.where('lower(name) = ?', params['gname'].downcase).first
+    logger.info "groupid ="+groupid.id.to_s
+    groupmembers = GroupUser.where(:group_id => groupid.id)
+    
+    uids = []
+    groupmembers.each do |gm|
+      uids.push gm.user_id
+    end
+    
+    logger.info "uids:"+uids.to_s
+    
+    logger.info "GROUP:"+groupmembers.to_s
+    #MANUAL JOIN
+    
+    @publications  = Publication.joins(:infohash).where("infohashes.user_id IN (?) AND infohashes.visibility_id = ?", uids, 3)
+    
+    @publications.uniq!
+    @publications.order(:year)
+    
+    render action: "index", notice: 'Listing publications for '+params['gname']
+  end
+
 
   # GET /publications/1
   # GET /publications/1.json
