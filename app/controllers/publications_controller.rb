@@ -38,8 +38,8 @@ class PublicationsController < ApplicationController
     userid = User.where(:username => params['uname']).first
     
     #MANUAL JOIN
-    @publications  = Publication.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ?", userid.id)
-    @publications += Publication.joins(:infohash).where("infohashes.user_id = ?",  userid.id)
+    @publications  = Publication.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ? AND infohashes.visibility_id = ?", userid.id, 3)
+    @publications += Publication.joins(:infohash).where("infohashes.user_id = ? AND infohashes.visibility_id = ?", userid.id, 3)
     @publications.uniq!
     
     render action: "index", notice: 'Listing publications for '+params['uname']

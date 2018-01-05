@@ -7,13 +7,15 @@
     <tr>
       <th style="min-width:200px">General title</th>
       <th>Publication type</th>
-      <th style="min-width:80px">ISSN</th>
+      <th style="min-width:80px">ISSN/ISBN</th>
       <th style="min-width:200px">Title</th>
       <th style="min-width:200px">Authors</th>
       <th style="min-width:50px">Year</th>
+      <% if current_user then %>
       <th>Members</th>
       <th>Tags</th>
       <th style="min-width:80px">Visibility</th>
+      <% end %>
       <th>Attachments</th>
       <th>Actions</th>
     </tr>
@@ -26,7 +28,7 @@
         <br/><br/><i><%= "Last update:"+publication.updated_at.to_s %></i>
         </td>
         <td><%= if publication.pubtype_id == 5 then "conference\n(inproceedings)" else publication.pubtype.name end %></td>
-        <td><%= publication.issn %></td>
+        <td><%= publication.issn %><br/><%= publication.isbn %></td>
         <td><%= publication.title %></td>
         <td style="width: 250px">
           <% publication.publication_profiles.order(:orderv).each do |pp| %>
@@ -47,6 +49,7 @@
           <% end %>
         </td>
         <td><%= publication.year %></td>
+        <% if current_user then %>
         <td>
           <b><%= publication.infohash.user.username %> (owner)</b> <br>
           <% publication.infohash.infohash_users.each do |u| %> 
@@ -66,14 +69,16 @@
           <% end %>
         </td>
         <td><%= publication.visibility.vtype %></td>
-
+        <% end %>
         <td>
           <% publication.infohash.attachments.each do |t| %> 
             <%= link_to t.name, t.infohash2 %>
             <%= link_to "(delete)", [publication.infohash, t] ,method: :delete,  data: { confirm: 'Are you sure?' } %>
           <br>
           <% end %>
+          <% if current_user then %>
           <%= link_to "New attachment", new_infohash_attachment_path(publication.infohash) %>
+          <% end %>
         </td>
         
         <td>
@@ -93,4 +98,7 @@
 
 <br>
 
+<% if current_user then %>
 <%= link_to 'New Publication', new_publication_path, class: 'btn btn-default' %>
+<% end %>
+
