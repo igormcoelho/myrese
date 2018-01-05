@@ -5,6 +5,8 @@ module PublicationsHelper
       return plain_article(pub)
     elsif pub.pubtype.name == "chapter"
       return plain_chapter(pub)
+    elsif pub.pubtype.name == "inproceedings"
+      return plain_inproceedings(pub)
   # elsif book ...
     else
       return "No plain text for this type of publication =("
@@ -39,6 +41,20 @@ module PublicationsHelper
     return ret
   end
   
+  def plain_inproceedings(pub)
+    ret = plain_authors(pub)
+    ret += pub.title + ". "
+    ret += pub.ctitle + ", "
+    if !pub.volume.blank?
+      ret += "v. " + pub.volume.to_s + ", "
+    end
+    if (!pub.page_begin.blank?) && (!pub.page_end.blank?)
+      ret += "p. " + pub.page_begin.to_s + "-" + pub.page_end.to_s + ", "
+    end
+    ret += pub.year.to_s + "."
+    return ret
+  end
+  
   def plain_chapter(pub)
     ret = plain_authors(pub)
     ret += pub.title + ". "
@@ -59,6 +75,8 @@ module PublicationsHelper
       return bibtex_article(pub)
     elsif pub.pubtype.name == "chapter"
       return bibtex_chapter(pub)
+    elsif pub.pubtype.name == "inproceedings"
+      return bibtex_inproceedings(pub)
   # elsif book ...
     else
       return "No bibtex for this type of publication =("
@@ -89,7 +107,7 @@ module PublicationsHelper
   
   def bibtex_common_end(pub)
     ret = ""
-      if (!pub.page_begin.blank?) && (!pub.page_end.blank?)
+    if (!pub.page_begin.blank?) && (!pub.page_end.blank?)
       ret += "pages={ " + pub.page_begin.to_s + "--" + pub.page_end.to_s + " },\n"
     end
     if !pub.doi.blank?
@@ -107,6 +125,23 @@ module PublicationsHelper
     ret  = "@article "
     ret += bibtex_common_begin(pub)
     ret += "journal={ "+pub.ctitle + " },\n"
+    if !pub.volume.blank?
+      ret += "volume={ " + pub.volume.to_s + " },\n"
+    end
+    if !pub.number.blank?
+      ret += "number={ " + pub.number.to_s + " },\n"
+    end
+    if !pub.issn.blank?
+      ret += "issn={ " + pub.issn + " },\n"
+    end
+    ret += bibtex_common_end(pub)
+    return ret
+  end
+
+  def bibtex_inproceedings(pub)
+    ret  = "@inproceedings "
+    ret += bibtex_common_begin(pub)
+    ret += "conference={ "+pub.ctitle + " },\n"
     if !pub.volume.blank?
       ret += "volume={ " + pub.volume.to_s + " },\n"
     end
