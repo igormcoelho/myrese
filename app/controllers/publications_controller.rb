@@ -41,6 +41,7 @@ class PublicationsController < ApplicationController
     @publications  = Publication.joins(:infohash_users).joins(:infohash).where("infohash_users.user_id = ? AND infohashes.visibility_id = ?", userid.id, 3)
     @publications += Publication.joins(:infohash).where("infohashes.user_id = ? AND infohashes.visibility_id = ?", userid.id, 3)
     @publications.uniq!
+    @publications.sort_by!{|pub| -pub[:year] }
     
     render action: "index", notice: 'Listing publications for '+params['uname']
   end
