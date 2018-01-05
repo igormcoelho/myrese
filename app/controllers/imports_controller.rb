@@ -165,8 +165,20 @@ class ImportsController < ApplicationController
     elsif (infohash_data["curriculo_lattes"])
       logger.info "scriptLattes!"
        
-      infohash_data["curriculo_lattes"]["pesquisador"].each do |pesq|
-        pesq["artigos_em_periodicos"]["artigo"].each do |paper|
+      pesqs = infohash_data["curriculo_lattes"]["pesquisador"]
+      if pesqs.class == Hash then
+        pesqs = []
+        pesqs.push infohash_data["curriculo_lattes"]["pesquisador"]
+      end
+      pesqs.each do |pesq|
+        
+        papers = pesq["artigos_em_periodicos"]["artigo"]
+        if papers.class == Hash then
+          papers = []
+          papers.push pesq["artigos_em_periodicos"]["artigo"]
+        end
+        papers.each do |paper|
+          
           logger.info pesq["identificacao"]["nome_inicial"] + " => " + paper["titulo"]
 
           pplist = []
@@ -181,7 +193,7 @@ class ImportsController < ApplicationController
           pubhash = {
             'gtitle'      => paper["titulo"], # for infohash
             'gdescription'  => paper["titulo"], # for infohash
-            'visibility_id' => 1, #PUBLIC # for infohash
+            'visibility_id' => 3, #PUBLIC # for infohash
             'htype_id'      => 1, #PUBLICATION # for infohash
             'title'      => paper["titulo"],
             'ctitle'     => paper["revista"],
@@ -192,7 +204,7 @@ class ImportsController < ApplicationController
             'page_begin' => paper["paginas"].split("-")[0],
             'page_end'   => paper["paginas"].split("-")[1],
             'publication_profiles' => pplist, 
-            'pubtype_id' => 1, # TODO CHECK
+            'pubtype_id' => 1, # article
           }
           
           #pubhash["publication_profiles"] = JSON[pubhash["publication_profiles"]]
@@ -215,7 +227,120 @@ class ImportsController < ApplicationController
             object = nil # start again
           end
 
-        end  # artigo
+        end  # artigos em periodicos
+
+        conferences = pesq["trabalho_completo_congresso"]["trabalho_completo"]
+        if conferences.class == Hash then
+          conferences = []
+          conferences.push pesq["trabalho_completo_congresso"]["trabalho_completo"]
+        end
+        conferences.each do |paper|
+          logger.info pesq["identificacao"]["nome_inicial"] + " => " + paper["titulo"]
+
+          pplist = []
+          orderv = 1
+          paper["autores"].split(";").each do |autor|
+            autor.strip!
+            pplist.push({'author' => autor, 'orderv' => orderv})
+            orderv+=1
+          end
+
+          #logger.info "pplist:"+pplist
+          pubhash = {
+            'gtitle'      => paper["titulo"], # for infohash
+            'gdescription'  => paper["titulo"], # for infohash
+            'visibility_id' => 3, #PUBLIC # for infohash
+            'htype_id'      => 1, #PUBLICATION # for infohash
+            'title'      => paper["titulo"],
+            'ctitle'     => paper["nome_evento"],
+            'year'       => paper["ano"],
+            'volume'     => paper["volume"],
+            'doi'        => paper["doi"],
+            'page_begin' => paper["paginas"].split("-")[0],
+            'page_end'   => paper["paginas"].split("-")[1],
+            'publication_profiles' => pplist, 
+            'pubtype_id' => 3, # proceedings
+          }
+          
+          #pubhash["publication_profiles"] = JSON[pubhash["publication_profiles"]]
+          
+          if Publication.joins(:infohash).where("infohashes.user_id = ?", current_user.id).where(:title => paper["titulo"]).length > 0 then
+            #logger.info ""
+            logger.info "REPETIDO"
+            #logger.info JSON[pubhash]
+            #logger.info ""
+          else
+            object = build_publication(pubhash)
+            if object
+              @import.infohash = object.infohash
+
+              if not object.save
+                logger.info "after save:"
+                logger.info object.errors.messages.as_json
+              end
+            end
+            object = nil # start again
+          end
+
+        end  # conferencias
+        
+        chapters = pesq["capitulos_livros"]["capitulo"]
+        if chapters.class == Hash then
+          chapters = []
+          chapters.push pesq["capitulos_livros"]["capitulo"]
+        end
+        chapters.each do |paper|
+          logger.info paper
+          logger.info pesq["identificacao"]["nome_inicial"] + " => " + paper["titulo"]
+
+          pplist = []
+          orderv = 1
+          paper["autores"].split(";").each do |autor|
+            autor.strip!
+            pplist.push({'author' => autor, 'orderv' => orderv})
+            orderv+=1
+          end
+
+          #logger.info "pplist:"+pplist
+          pubhash = {
+            'gtitle'      => paper["titulo"], # for infohash
+            'gdescription'  => paper["titulo"], # for infohash
+            'visibility_id' => 3, #PUBLIC # for infohash
+            'htype_id'      => 1, #PUBLICATION # for infohash
+            'title'      => paper["titulo"],
+            'ctitle'     => paper["livro"],
+            'year'       => paper["ano"],
+            'volume'     => paper["volume"],
+            'publisher'  => paper["editora"],
+            'series'     => paper["edicao"],
+            'page_begin' => paper["paginas"].split("-")[0],
+            'page_end'   => paper["paginas"].split("-")[1],
+            'publication_profiles' => pplist, 
+            'pubtype_id' => 4, # chapter
+          }
+          
+          #pubhash["publication_profiles"] = JSON[pubhash["publication_profiles"]]
+          
+          if Publication.joins(:infohash).where("infohashes.user_id = ?", current_user.id).where(:title => paper["titulo"]).length > 0 then
+            #logger.info ""
+            logger.info "REPETIDO"
+            #logger.info JSON[pubhash]
+            #logger.info ""
+          else
+            object = build_publication(pubhash)
+            if object
+              @import.infohash = object.infohash
+
+              if not object.save
+                logger.info "after save:"
+                logger.info object.errors.messages.as_json
+              end
+            end
+            object = nil # start again
+          end
+
+        end  # capitulo livro
+
       end # pesquisador
     end # scriptLattes
     
