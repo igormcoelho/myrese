@@ -98,6 +98,8 @@ function fetchBlob(uri, callback) {
               })
               */
               
+           } else {
+             $( ".jsondata_area" ).val( JSON.stringify(data) );
            }
 
         }).fail(function() {
