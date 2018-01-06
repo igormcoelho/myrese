@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th style="min-width:200px">General title</th>
-      <th>Publication type</th>
+      <th>Journal/Book/Collection</th>
       <th style="min-width:80px">ISSN/ISBN</th>
       <th style="min-width:200px">Title</th>
       <th style="min-width:200px">Authors</th>
@@ -27,7 +27,11 @@
         <td><%= publication.infohash.gtitle %>
         <br/><br/><i><%= "Last update:"+publication.updated_at.to_s %></i>
         </td>
-        <td><%= if publication.pubtype_id == 5 then "conference\n(inproceedings)" else publication.pubtype.name end %></td>
+        <td><%= publication.ctitle %><br/>
+        <i>Type:
+        <%= if publication.pubtype_id == 5 then "conference\n(inproceedings)" else publication.pubtype.name end %>
+        </i>
+        </td>
         <td><%= publication.issn %><br/><%= publication.isbn %></td>
         <td><%= publication.title %></td>
         <td style="width: 250px">
