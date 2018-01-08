@@ -5,7 +5,7 @@ Rails.application.configure do
 
   # begin mailer configuration
   # mailer configuration!
-  config.action_mailer.default_url_options = { host: ENV['MYRESE_HOST'] } #myrese.com
+  config.action_mailer.default_url_options = { :protocol => 'https', host: ENV['MYRESE_HOST'] } #myrese.com
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.mailgun_settings = {
 		api_key: ENV['PROD_MAIL_MAILGUN_TOKEN'],
