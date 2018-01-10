@@ -76,7 +76,11 @@
         <% end %>
         <td>
           <% publication.infohash.attachments.each do |t| %> 
-            <%= link_to t.name, t.infohash2 %>
+            <% if not t.name.empty? then %>
+               <%= link_to t.name, t.infohash2 %>
+            <% else %>
+               <%= link_to t.infohash2.gtitle, t.infohash2 %>
+            <% end %>   
             <%= link_to "(delete)", [publication.infohash, t] ,method: :delete,  data: { confirm: 'Are you sure?' } %>
           <br>
           <% end %>

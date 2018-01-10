@@ -4,5 +4,6 @@ class Attachment < ActiveRecord::Base
     belongs_to :infohash2, :class_name => 'Infohash'
     
     validates_presence_of :infohash
+    validates_presence_of :infohash
     validates_presence_of :infohash2
 end
