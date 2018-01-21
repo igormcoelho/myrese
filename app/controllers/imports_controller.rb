@@ -172,7 +172,10 @@ class ImportsController < ApplicationController
       end
       pesqs.each do |pesq|
         
-        papers = pesq["artigos_em_periodicos"]["artigo"]
+        papers = []
+        if pesq.has_value?("artigos_em_periodicos") then
+          papers = pesq["artigos_em_periodicos"]["artigo"]
+        end
         if papers.class == Hash then
           papers = []
           papers.push pesq["artigos_em_periodicos"]["artigo"]
@@ -229,7 +232,11 @@ class ImportsController < ApplicationController
 
         end  # artigos em periodicos
 
-        conferences = pesq["trabalho_completo_congresso"]["trabalho_completo"]
+
+        conferences = []
+        if pesq.has_value?("trabalho_completo_congresso") then
+          conferences = pesq["trabalho_completo_congresso"]["trabalho_completo"]
+        end
         if conferences.class == Hash then
           conferences = []
           conferences.push pesq["trabalho_completo_congresso"]["trabalho_completo"]
@@ -284,7 +291,10 @@ class ImportsController < ApplicationController
 
         end  # conferencias
         
-        chapters = pesq["capitulos_livros"]["capitulo"]
+        chapters = []
+        if pesq.has_value?("capitulos_livros") then
+          chapters = pesq["capitulos_livros"]["capitulo"]
+        end
         if chapters.class == Hash then
           chapters = []
           chapters.push pesq["capitulos_livros"]["capitulo"]
